@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (c) Matthias Wolf, Mawosoft.
+-->
+<Project>
+
+  <!-- Define file names (no extension) of runtime assemblies to copy to TargetDir, e.g.
+         <ItemGroup>
+           <CopyForCoverletFiles Include="System.Text.RegularExpressions" />
+         </ItemGroup>
+  -->
+
+  <Target Name="CopyForCoverlet"
+          AfterTargets="ResolveReferences">
+    <JoinItems Left="@(CopyForCoverletFiles)" Right="@(ReferencePath)" RightKey="FileName" RightMetadata="OriginalItemSpec">
+      <Output TaskParameter="JoinResult" ItemName="_CopyForCoverletRefFiles" />
+    </JoinItems>
+    <ItemGroup>
+      <_CopyForCoverletFiles Include="$(
+          [System.Text.RegularExpressions.Regex]::Replace(
+            $([System.Text.RegularExpressions.Regex]::Replace(
+              $([System.Text.RegularExpressions.Regex]::Replace(
+                %(_CopyForCoverletRefFiles.OriginalItemSpec),
+                '\bpacks\b', 'shared')),
+              '\.Ref(?=[\\/])', '')),
+            '[\\/]ref[\\/]net\d+\.\d+(?=[\\/])', '')
+      )" />
+    </ItemGroup>
+    <Copy SourceFiles="@(_CopyForCoverletFiles)" DestinationFolder="$(TargetDir)" SkipUnchangedFiles="true">
+      <Output TaskParameter="CopiedFiles" ItemName="FileWrites" />
+    </Copy>
+  </Target>
+
+</Project>

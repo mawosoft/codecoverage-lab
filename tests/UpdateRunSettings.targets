@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (c) Matthias Wolf, Mawosoft.
+-->
+<Project>
+
+  <Target Name="UpdateRunSettings"
+          AfterTargets="ResolvePackageAssets"
+          Condition="'$(RunSettingsFilePath)' != '' and Exists('$(RunSettingsFilePath)')">
+    <ItemGroup>
+      <_Adapters Include="@(_PackageDependenciesDesignTime)" Condition="'%(Path)' != '' and ('%(Name)' == 'coverlet.collector' or '%(Name)' == 'microsoft.codecoverage')" />
+      <_Adapters Update="@(_Adapters)" Path="$([MSBuild]::NormalizePath('%(Path)', 'build/netstandard2.0'))" />
+    </ItemGroup>
+    <PropertyGroup>
+      <_Adapters>@(_Adapters->'%(Path)', '%3b')</_Adapters>
+    </PropertyGroup>
+    <XmlPeek XmlInputPath="$(RunSettingsFilePath)"
+            Query="/RunSettings/RunConfiguration/TestAdaptersPaths/text()"
+            Condition="'$(_Adapters)' != ''">
+      <Output TaskParameter="Result" PropertyName="_value" />
+    </XmlPeek>
+    <XmlPoke XmlInputPath="$(RunSettingsFilePath)"
+            Query="/RunSettings/RunConfiguration/TestAdaptersPaths"
+            Value="$(_Adapters)"
+            Condition="'$(_Adapters)' != '' and '$(_value)' != '$(_Adapters)'" />
+  </Target>
+
+</Project>
