@@ -71,7 +71,7 @@ public class CoverageDemoTests
             try { demo.UnreachableCode(0); } catch { }
             try { demo.UnreachableCode(-1); } catch { }
             try { demo.UnreachableCodeIf(0); } catch { }
-            try { demo.UnreachableCodeIf(0); } catch { }
+            try { demo.UnreachableCodeIf(-1); } catch { }
         }
     }
 #pragma warning restore CA1031 // Do not catch general exception types

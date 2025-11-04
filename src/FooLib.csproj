@@ -5,6 +5,12 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <!-- <DefineConstants>$(DefineConstants);DISABLE_SOURCEGEN_JSONSERIALIZER</DefineConstants> -->
+    <!-- <DefineConstants>$(DefineConstants);DISABLE_SOURCEGEN_LIBRARYIMPORT</DefineConstants> -->
+    <!-- <DefineConstants>$(DefineConstants);DISABLE_SOURCEGEN_REGEX</DefineConstants> -->
+  </PropertyGroup>
+
   <ItemGroup>
   </ItemGroup>
 

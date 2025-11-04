@@ -21,6 +21,13 @@ public partial class SourceGenDemoRegex
         return -1;
     }
 
+#if DISABLE_SOURCEGEN_REGEX
+    private static Regex RegexBar() => s_regexBar;
+#pragma warning disable SYSLIB1045 // Convert to 'GeneratedRegexAttribute'.
+    private static readonly Regex s_regexBar = new(@"bar");
+#pragma warning restore SYSLIB1045 // Convert to 'GeneratedRegexAttribute'.
+#else
     [GeneratedRegex(@"bar")]
     private static partial Regex RegexBar();
+#endif
 }

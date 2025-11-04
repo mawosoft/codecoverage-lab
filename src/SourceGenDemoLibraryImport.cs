@@ -2,36 +2,49 @@
 
 using System;
 using System.Runtime.InteropServices;
+using System.Runtime.Versioning;
 
 namespace FooLib;
 
 public partial class SourceGenDemoLibraryImport
 {
     private const string Kernel32 = "kernel32.dll";
-
-#pragma warning disable CA1707 // Identifiers should not contain underscores
-    public const int STD_INPUT_HANDLE = -10;
-    public const int STD_OUTPUT_HANDLE = -11;
-#pragma warning restore CA1707 // Identifiers should not contain underscores
+    private const int StdOutputHandle = -11;
 
     public int AutoProp1 { get; set; }
 
     public int Method1(int value)
     {
-        var handle = GetStdHandle(value);
-        if (AutoProp1 == 0 && GetConsoleMode(handle, out uint mode))
-        {
-            return (int)mode;
-        }
-        return 0;
+        if (AutoProp1 < 0 || value < 0) return 0;
+        if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) return 0;
+        var handle = GetStdHandle(StdOutputHandle);
+        GetConsoleMode(handle, out uint mode);
+        return (int)mode;
     }
 
+#if DISABLE_SOURCEGEN_LIBRARYIMPORT
+#pragma warning disable SYSLIB1054 // Use 'LibraryImportAttribute' instead of 'DllImportAttribute' to generate P/Invoke marshalling code at compile time
+    [DllImport(Kernel32, SetLastError = true)]
+    [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
+    [SupportedOSPlatform("windows")]
+    private static extern IntPtr GetStdHandle(int nStdHandle);
+
+    [DllImport(Kernel32, SetLastError = true)]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
+    [SupportedOSPlatform("windows")]
+    private static extern bool GetConsoleMode(IntPtr handle, out uint mode);
+#pragma warning restore SYSLIB1054 // Use 'LibraryImportAttribute' instead of 'DllImportAttribute' to generate P/Invoke marshalling code at compile time
+#else
     [LibraryImport(Kernel32, SetLastError = true)]
     [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
-    internal static partial IntPtr GetStdHandle(int nStdHandle);
+    [SupportedOSPlatform("windows")]
+    private static partial IntPtr GetStdHandle(int nStdHandle);
 
     [LibraryImport(Kernel32, SetLastError = true)]
     [return: MarshalAs(UnmanagedType.Bool)]
     [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
-    internal static partial bool GetConsoleMode(IntPtr handle, out uint mode);
+    [SupportedOSPlatform("windows")]
+    private static partial bool GetConsoleMode(IntPtr handle, out uint mode);
+#endif
 }
