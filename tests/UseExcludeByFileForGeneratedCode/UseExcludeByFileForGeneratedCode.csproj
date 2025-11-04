@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RunSettingsFilePath>$(MSBuildThisFileDirectory).runsettings</RunSettingsFilePath>
+  </PropertyGroup>
+
+  <ItemGroup>
+  </ItemGroup>
+
+  <Import Project="$(MSBuildThisFileDirectory)../UpdateRunSettings.targets" />
+
+</Project>

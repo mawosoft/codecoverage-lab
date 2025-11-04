@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RunSettingsFilePath>$(MSBuildThisFileDirectory).runsettings</RunSettingsFilePath>
+  </PropertyGroup>
+
+  <ItemGroup>
+      <CopyForCoverletFiles Include="System.Text.RegularExpressions" />
+      <CopyForCoverletFiles Include="System.Text.Json" />
+      <!-- Required by LibraryImport sourcegen -->
+      <CopyForCoverletFiles Include="System.Runtime.InteropServices" />
+      <!-- Required by LibraryImport and JsonSerializer sourcegen -->
+      <CopyForCoverletFiles Include="System.Runtime" />
+      <!-- System.Private.CoreLib doesn't have a ref assembly, but with manual copy
+           this succeeds. TODO Find a way to automate it. -->
+      <!-- Required by LibraryImport and JsonSerializer sourcegen -->
+      <CopyForCoverletFiles Include="System.Private.CoreLib" />
+  </ItemGroup>
+
+  <Import Project="$(MSBuildThisFileDirectory)../UpdateRunSettings.targets" />
+  <Import Project="$(MSBuildThisFileDirectory)../CopyForCoverlet.targets" />
+
+</Project>
