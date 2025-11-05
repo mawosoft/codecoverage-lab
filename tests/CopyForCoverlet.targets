@@ -11,22 +11,23 @@
   -->
 
   <Target Name="CopyForCoverlet"
-          AfterTargets="ResolveReferences">
-    <JoinItems Left="@(CopyForCoverletFiles)" Right="@(ReferencePath)" RightKey="FileName" RightMetadata="OriginalItemSpec">
-      <Output TaskParameter="JoinResult" ItemName="_CopyForCoverletRefFiles" />
-    </JoinItems>
+          AfterTargets="ResolveFrameworkReferences">
+    <PropertyGroup>
+      <_DotnetSharedDirectory>$([System.IO.Path]::Combine($(NetCoreRoot), 'shared', %(ResolvedFrameworkReference.OriginalItemSpec), %(ResolvedFrameworkReference.TargetingPackVersion)))</_DotnetSharedDirectory>
+    </PropertyGroup>
     <ItemGroup>
-      <_CopyForCoverletFiles Include="$(
-          [System.Text.RegularExpressions.Regex]::Replace(
-            $([System.Text.RegularExpressions.Regex]::Replace(
-              $([System.Text.RegularExpressions.Regex]::Replace(
-                %(_CopyForCoverletRefFiles.OriginalItemSpec),
-                '\bpacks\b', 'shared')),
-              '\.Ref(?=[\\/])', '')),
-            '[\\/]ref[\\/]net\d+\.\d+(?=[\\/])', '')
-      )" />
+      <_DotnetSharedFiles Include="$(_DotnetSharedDirectory)/*" />
     </ItemGroup>
-    <Copy SourceFiles="@(_CopyForCoverletFiles)" DestinationFolder="$(TargetDir)" SkipUnchangedFiles="true">
+    <JoinItems Left="@(CopyForCoverletFiles)" Right="@(_DotnetSharedFiles)" RightKey="FileName" ItemSpecToUse="Right">
+      <Output TaskParameter="JoinResult" ItemName="_CopyForCoverletFiles" />
+    </JoinItems>
+    <!-- If unelevated hard- or symlinks are supported, change corresponding parameters. -->
+    <Copy SourceFiles="@(_CopyForCoverletFiles)"
+          DestinationFolder="$(TargetDir)"
+          UseHardlinksIfPossible="false"
+          UseSymbolicLinksIfPossible="false"
+          SkipUnchangedFiles="true">
+      <!-- Don't add to FileWrites if copied files should persist during Clean. -->
       <Output TaskParameter="CopiedFiles" ItemName="FileWrites" />
     </Copy>
   </Target>

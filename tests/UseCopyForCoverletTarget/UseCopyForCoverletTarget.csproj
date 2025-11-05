@@ -5,16 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-      <CopyForCoverletFiles Include="System.Text.RegularExpressions" />
-      <CopyForCoverletFiles Include="System.Text.Json" />
-      <!-- Required by LibraryImport sourcegen -->
-      <CopyForCoverletFiles Include="System.Runtime.InteropServices" />
-      <!-- Required by LibraryImport and JsonSerializer sourcegen -->
-      <CopyForCoverletFiles Include="System.Runtime" />
-      <!-- System.Private.CoreLib doesn't have a ref assembly, but with manual copy
-           this succeeds. TODO Find a way to automate it. -->
-      <!-- Required by LibraryImport and JsonSerializer sourcegen -->
+      <!-- <CopyForCoverletFiles Include="System.Text.RegularExpressions" /> -->
+      <!-- <CopyForCoverletFiles Include="System.Text.Json" /> -->
       <CopyForCoverletFiles Include="System.Private.CoreLib" />
+      <CopyForCoverletFiles Include="System.Runtime" />
+      <CopyForCoverletFiles Include="System.Runtime.InteropServices" />
   </ItemGroup>
 
   <Import Project="$(MSBuildThisFileDirectory)../UpdateRunSettings.targets" />
