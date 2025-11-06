@@ -11,7 +11,6 @@ public class SourceGenDemoJsonSerializer
 
     public int Method1(int value)
     {
-        if (AutoProp1 < 0 || value < 0) return 0;
 #if DISABLE_SOURCEGEN_JSONSERIALIZER
         var typeinfo = (System.Text.Json.Serialization.Metadata.JsonTypeInfo<SourceGenDemoJsonSerializer>)JsonSerializerOptions.Default.GetTypeInfo(typeof(SourceGenDemoJsonSerializer));
 #else

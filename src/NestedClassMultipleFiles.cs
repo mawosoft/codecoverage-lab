@@ -2,20 +2,12 @@
 
 namespace FooLib;
 
+#pragma warning disable CA1822 // Mark members as static
 public partial class NestedClassMultipleFiles
 {
-    public int AutoProp1 { get; set; }
-
     public int Method1(int value)
     {
-        if (value < 0)
-        {
-            var inner = new Inner { AutoProp1 = value };
-            return inner.Method1(value);
-        }
-        else
-        {
-            return value - AutoProp1;
-        }
+        var inner = new Inner();
+        return inner.Method1(value);
     }
 }

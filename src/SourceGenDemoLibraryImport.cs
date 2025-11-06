@@ -6,16 +6,14 @@ using System.Runtime.Versioning;
 
 namespace FooLib;
 
+#pragma warning disable CA1822 // Mark members as static
 public partial class SourceGenDemoLibraryImport
 {
     private const string Kernel32 = "kernel32.dll";
     private const int StdOutputHandle = -11;
 
-    public int AutoProp1 { get; set; }
-
-    public int Method1(int value)
+    public int Method1()
     {
-        if (AutoProp1 < 0 || value < 0) return 0;
         if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) return 0;
         var handle = GetStdHandle(StdOutputHandle);
         GetConsoleMode(handle, out uint mode);

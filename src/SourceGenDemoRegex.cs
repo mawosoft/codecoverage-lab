@@ -4,21 +4,13 @@ using System.Text.RegularExpressions;
 
 namespace FooLib;
 
+#pragma warning disable CA1822 // Mark members as static
 public partial class SourceGenDemoRegex
 {
-    public int AutoProp1 { get; set; }
-
-    public int Method1(string? value)
+    public bool Method1(string? value)
     {
-        if (AutoProp1 != 0 || value is null)
-        {
-            return 0;
-        }
-        if (RegexBar().IsMatch(value))
-        {
-            return 1;
-        }
-        return -1;
+        if (value is null) return false;
+        return RegexBar().IsMatch(value);
     }
 
 #if DISABLE_SOURCEGEN_REGEX

@@ -17,7 +17,7 @@ public class SourceGenDemoTests
     public void Test2()
     {
         var demo = new SourceGenDemoLibraryImport();
-        demo.Method1(0);
+        demo.Method1();
     }
 
     [Fact]
