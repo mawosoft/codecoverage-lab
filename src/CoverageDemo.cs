@@ -7,28 +7,80 @@ namespace FooLib;
 
 public class CoverageDemo
 {
-    private int _prop2;
-    public int AutoProp1 { get; set; }
-    public int Prop2
+    private int _fullProp;
+    public int AutoProp01SingleLineFullCoverage { get; set; }
+    public int AutoProp02SingleLineGetCoverage { get; set; }
+    public int AutoProp03SingleLineSetCoverage { get; set; }
+
+    public int AutoProp04MultiLineFullCoverage
     {
-        get => _prop2;
-        set => _prop2 = value;
+        get;
+        set;
+    }
+
+    public int AutoProp05MultiLineGetCoverage
+    {
+        get;
+        set;
+    }
+
+    public int AutoProp06MultiLineSetCoverage
+    {
+        get;
+        set;
+    }
+
+    public int AutoProp07InitSingleLineFullCoverage { get; init; }
+    public int AutoProp08InitSingleLineInitCoverage { get; init; }
+
+    public int AutoProp09InitMultiLineFullCoverage
+    {
+        get;
+        init;
+    }
+
+    public int AutoProp10InitMultiLineInitCoverage
+    {
+        get;
+        init;
+    }
+
+    public int FullProp1SingleLineFullCoverage { get => _fullProp; set => _fullProp = value; }
+    public int FullProp2SingleLineGetCoverage { get => _fullProp; set => _fullProp = value; }
+    public int FullProp3SingleLineSetCoverage { get => _fullProp; set => _fullProp = value; }
+
+    public int FullProp4MultiLineFullCoverage
+    {
+        get => _fullProp;
+        set => _fullProp = value;
+    }
+
+    public int FullProp5MultiLineGetCoverage
+    {
+        get => _fullProp;
+        set => _fullProp = value;
+    }
+
+    public int FullProp6MultiLineSetCoverage
+    {
+        get => _fullProp;
+        set => _fullProp = value;
     }
 
     public int NoBranch(int value)
     {
-        return value - _prop2;
+        return value - _fullProp;
     }
 
     public int SingleBranchFullCoverage(int value)
     {
         if (value < 0)
         {
-            return value + _prop2;
+            return value + _fullProp;
         }
         else
         {
-            return value - _prop2;
+            return value - _fullProp;
         }
     }
 
@@ -36,56 +88,56 @@ public class CoverageDemo
     {
         if (value < 0)
         {
-            return value + _prop2;
+            return value + _fullProp;
         }
         else
         {
-            return value - _prop2;
+            return value - _fullProp;
         }
     }
 
     public int SingleBranchSingleLineFullCoverage(int value)
     {
-        return value < 0 ? value + _prop2 : value - _prop2;
+        return value < 0 ? value + _fullProp : value - _fullProp;
     }
 
     public int SingleBranchSingleinePartialCoverage(int value)
     {
-        return value < 0 ? value + _prop2 : value - _prop2;
+        return value < 0 ? value + _fullProp : value - _fullProp;
     }
 
-    public int MultiBranchFullCoverage(int value)
+    public int MultiBranchFullCoverage(int value1, int value2)
     {
-        if (value < 0 || AutoProp1 < 0)
+        if (value1 < 0 || value2 < 0)
         {
-            return value + _prop2;
+            return value1 + _fullProp;
         }
         else
         {
-            return value - _prop2;
+            return value1 - _fullProp;
         }
     }
 
-    public int MultiBranchPartialCoverage(int value)
+    public int MultiBranchPartialCoverage(int value1, int value2)
     {
-        if (value < 0 || AutoProp1 < 0)
+        if (value1 < 0 || value2 < 0)
         {
-            return value + _prop2;
+            return value1 + _fullProp;
         }
         else
         {
-            return value - _prop2;
+            return value1 - _fullProp;
         }
     }
 
-    public int MultiBranchSingleLineFullCoverage(int value)
+    public int MultiBranchSingleLineFullCoverage(int value1, int value2)
     {
-        return value < 0 || AutoProp1 < 0 ? value + _prop2 : value - _prop2;
+        return value1 < 0 || value2 < 0 ? value1 + _fullProp : value1 - _fullProp;
     }
 
-    public int MultiBranchSingleLinePartialCoverage(int value)
+    public int MultiBranchSingleLinePartialCoverage(int value1, int value2)
     {
-        return value < 0 || AutoProp1 < 0 ? value + _prop2 : value - _prop2;
+        return value1 < 0 || value2 < 0 ? value1 + _fullProp : value1 - _fullProp;
     }
 
     public int SwitchStatementFullCoverage(int value)
@@ -94,33 +146,33 @@ public class CoverageDemo
         switch (value)
         {
             case 0:
-                result = _prop2;
+                result = _fullProp;
                 break;
             case 1:
-                result = _prop2 * 10;
-                AutoProp1 = 5;
+                result = _fullProp * 10;
+                _fullProp = 5;
                 break;
             case 2:
-                result = _prop2 + 10;
-                AutoProp1 += 5;
+                result = _fullProp + 10;
+                _fullProp += 5;
                 break;
             case 3:
-                result = _prop2 + value;
+                result = _fullProp + value;
                 break;
             case 4:
-                result = _prop2 + 2 * value;
+                result = _fullProp + 2 * value;
                 break;
             case 5:
                 result = value;
                 break;
             case 6:
-                result = value - _prop2;
+                result = value - _fullProp;
                 break;
             case 7:
-                result = value - 2 * _prop2;
+                result = value - 2 * _fullProp;
                 break;
             case 8:
-                result = value + value * _prop2;
+                result = value + value * _fullProp;
                 break;
             case 9:
                 result = -2;
@@ -138,33 +190,33 @@ public class CoverageDemo
         switch (value)
         {
             case 0:
-                result = _prop2;
+                result = _fullProp;
                 break;
             case 1:
-                result = _prop2 * 10;
-                AutoProp1 = 5;
+                result = _fullProp * 10;
+                _fullProp = 5;
                 break;
             case 2:
-                result = _prop2 + 10;
-                AutoProp1 += 5;
+                result = _fullProp + 10;
+                _fullProp += 5;
                 break;
             case 3:
-                result = _prop2 + value;
+                result = _fullProp + value;
                 break;
             case 4:
-                result = _prop2 + 2 * value;
+                result = _fullProp + 2 * value;
                 break;
             case 5:
                 result = value;
                 break;
             case 6:
-                result = value - _prop2;
+                result = value - _fullProp;
                 break;
             case 7:
-                result = value - 2 * _prop2;
+                result = value - 2 * _fullProp;
                 break;
             case 8:
-                result = value + value * _prop2;
+                result = value + value * _fullProp;
                 break;
             case 9:
                 result = -2;
@@ -180,15 +232,15 @@ public class CoverageDemo
     {
         var result = value switch
         {
-            0 => _prop2,
-            1 => _prop2 * 10,
-            2 => _prop2 + 10,
-            3 => _prop2 + value,
-            4 => _prop2 + 2 * value,
+            0 => _fullProp,
+            1 => _fullProp * 10,
+            2 => _fullProp + 10,
+            3 => _fullProp + value,
+            4 => _fullProp + 2 * value,
             5 => value,
-            6 => value - _prop2,
-            7 => value - 2 * _prop2,
-            8 => value + value * _prop2,
+            6 => value - _fullProp,
+            7 => value - 2 * _fullProp,
+            8 => value + value * _fullProp,
             9 => -2,
             _ => -1,
         };
@@ -199,15 +251,15 @@ public class CoverageDemo
     {
         var result = value switch
         {
-            0 => _prop2,
-            1 => _prop2 * 10,
-            2 => _prop2 + 10,
-            3 => _prop2 + value,
-            4 => _prop2 + 2 * value,
+            0 => _fullProp,
+            1 => _fullProp * 10,
+            2 => _fullProp + 10,
+            3 => _fullProp + value,
+            4 => _fullProp + 2 * value,
             5 => value,
-            6 => value - _prop2,
-            7 => value - 2 * _prop2,
-            8 => value + value * _prop2,
+            6 => value - _fullProp,
+            7 => value - 2 * _fullProp,
+            8 => value + value * _fullProp,
             9 => -2,
             _ => -1,
         };
@@ -219,18 +271,18 @@ public class CoverageDemo
         if (value < 0)
         {
             ThrowSomething();
-            return value + _prop2;
+            return value + _fullProp;
         }
         else
         {
-            return value - _prop2;
+            return value - _fullProp;
         }
     }
 
     public int UnreachableCodeIf(int value)
     {
         ThrowSomethingIf(value < 0);
-        return value + _prop2;
+        return value + _fullProp;
     }
 
     [DoesNotReturn]
