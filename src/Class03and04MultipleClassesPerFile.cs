@@ -3,7 +3,7 @@
 namespace FooLib;
 
 #pragma warning disable CA1822 // Mark members as static
-public class MultipleClassesPerFile
+public class Class03MultipleClassesPerFile
 {
     public int Method1(int value)
     {
@@ -11,7 +11,7 @@ public class MultipleClassesPerFile
     }
 }
 
-public class AnotherClass
+public class Class04MultipleClassesPerFile
 {
     public int Method1(int value)
     {

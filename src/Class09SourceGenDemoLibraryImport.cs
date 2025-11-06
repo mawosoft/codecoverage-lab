@@ -7,7 +7,7 @@ using System.Runtime.Versioning;
 namespace FooLib;
 
 #pragma warning disable CA1822 // Mark members as static
-public partial class SourceGenDemoLibraryImport
+public partial class Class09SourceGenDemoLibraryImport
 {
     private const string Kernel32 = "kernel32.dll";
     private const int StdOutputHandle = -11;

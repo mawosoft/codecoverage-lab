@@ -3,9 +3,9 @@
 namespace FooLib;
 
 #pragma warning disable CA1822 // Mark members as static
-public class SingleClassPerFile
+public partial class Class02SingleClassMultipleFiles
 {
-    public int Method1(int value)
+    public int Method2(int value)
     {
         return value;
     }

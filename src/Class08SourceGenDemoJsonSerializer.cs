@@ -4,7 +4,7 @@ using System.Text.Json;
 
 namespace FooLib;
 
-public class SourceGenDemoJsonSerializer
+public class Class08SourceGenDemoJsonSerializer
 {
     public int AutoProp1 { get; set; }
     public int AutoProp2 { get; set; }
@@ -12,9 +12,9 @@ public class SourceGenDemoJsonSerializer
     public int Method1(int value)
     {
 #if DISABLE_SOURCEGEN_JSONSERIALIZER
-        var typeinfo = (System.Text.Json.Serialization.Metadata.JsonTypeInfo<SourceGenDemoJsonSerializer>)JsonSerializerOptions.Default.GetTypeInfo(typeof(SourceGenDemoJsonSerializer));
+        var typeinfo = (System.Text.Json.Serialization.Metadata.JsonTypeInfo<Class08SourceGenDemoJsonSerializer>)JsonSerializerOptions.Default.GetTypeInfo(typeof(Class08SourceGenDemoJsonSerializer));
 #else
-        var typeinfo = SourceGenDemoContext.Default.SourceGenDemoJsonSerializer;
+        var typeinfo = SourceGenDemoContext.Default.Class08SourceGenDemoJsonSerializer;
 #endif
         var json = JsonSerializer.Serialize(this, typeinfo);
         var demo2 = JsonSerializer.Deserialize(json, typeinfo);
@@ -24,7 +24,7 @@ public class SourceGenDemoJsonSerializer
 
 
 #if !DISABLE_SOURCEGEN_JSONSERIALIZER
-[System.Text.Json.Serialization.JsonSerializable(typeof(SourceGenDemoJsonSerializer))]
+[System.Text.Json.Serialization.JsonSerializable(typeof(Class08SourceGenDemoJsonSerializer))]
 internal sealed partial class SourceGenDemoContext : System.Text.Json.Serialization.JsonSerializerContext
 {
 }

@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 namespace FooLib;
 
 #pragma warning disable CA1822 // Mark members as static
-public partial class SourceGenDemoRegex
+public partial class Class07SourceGenDemoRegex
 {
     public bool Method1(string? value)
     {

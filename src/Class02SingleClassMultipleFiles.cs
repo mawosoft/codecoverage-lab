@@ -3,11 +3,10 @@
 namespace FooLib;
 
 #pragma warning disable CA1822 // Mark members as static
-public partial class NestedClassMultipleFiles
+public partial class Class02SingleClassMultipleFiles
 {
     public int Method1(int value)
     {
-        var inner = new Inner();
-        return inner.Method1(value);
+        return value;
     }
 }

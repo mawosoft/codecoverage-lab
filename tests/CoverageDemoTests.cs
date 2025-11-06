@@ -11,7 +11,7 @@ public class CoverageDemoTests
     {
         for (int hits = 0; hits < 5; hits++)
         {
-            var demo = new CoverageDemo()
+            var demo = new Class10CoverageDemo()
             {
                 AutoProp07InitSingleLineFullCoverage = 1,
                 AutoProp08InitSingleLineInitCoverage = 1,
@@ -57,7 +57,7 @@ public class CoverageDemoTests
     {
         for (int hits = 0; hits < 5; hits++)
         {
-            var demo = new CoverageDemo();
+            var demo = new Class10CoverageDemo();
             demo.MultiBranchFullCoverage(value1, value2);
             demo.MultiBranchSingleLineFullCoverage(value1, value2);
             if (value1 != 0)
@@ -73,7 +73,7 @@ public class CoverageDemoTests
     {
         for (int hits = 0; hits < 5; hits++)
         {
-            var demo = new CoverageDemo();
+            var demo = new Class10CoverageDemo();
             for (int i = 0; i <= 10; i++)
             {
                 demo.SwitchStatementFullCoverage(i);
@@ -93,7 +93,7 @@ public class CoverageDemoTests
     {
         for (int hits = 0; hits < 5; hits++)
         {
-            var demo = new CoverageDemo();
+            var demo = new Class10CoverageDemo();
             try { demo.UnreachableCode(0); } catch { }
             try { demo.UnreachableCode(-1); } catch { }
             try { demo.UnreachableCodeIf(0); } catch { }

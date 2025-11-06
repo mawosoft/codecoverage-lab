@@ -5,7 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace FooLib;
 
-public class CoverageDemo
+public class Class10CoverageDemo
 {
     private int _fullProp;
     public int AutoProp01SingleLineFullCoverage { get; set; }
