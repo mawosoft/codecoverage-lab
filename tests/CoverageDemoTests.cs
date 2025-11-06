@@ -38,13 +38,13 @@ public class CoverageDemoTests
             v += demo.FullProp5MultiLineGetCoverage;
             demo.FullProp6MultiLineSetCoverage = v;
 
-            demo.NoBranch(0);
-            demo.SingleBranchFullCoverage(0);
-            demo.SingleBranchFullCoverage(-1);
-            demo.SingleBranchPartialCoverage(0);
-            demo.SingleBranchSingleLineFullCoverage(0);
-            demo.SingleBranchSingleLineFullCoverage(-1);
-            demo.SingleBranchSingleinePartialCoverage(0);
+            demo.Method01NoBranch(0);
+            demo.Method02SingleBranchFullCoverage(0);
+            demo.Method02SingleBranchFullCoverage(-1);
+            demo.Method03SingleBranchPartialCoverage(0);
+            demo.Method04SingleBranchSingleLineFullCoverage(0);
+            demo.Method04SingleBranchSingleLineFullCoverage(-1);
+            demo.Method05SingleBranchSingleLinePartialCoverage(0);
         }
     }
 
@@ -58,12 +58,12 @@ public class CoverageDemoTests
         for (int hits = 0; hits < 5; hits++)
         {
             var demo = new Class10CoverageDemo();
-            demo.MultiBranchFullCoverage(value1, value2);
-            demo.MultiBranchSingleLineFullCoverage(value1, value2);
+            demo.Method06MultiBranchFullCoverage(value1, value2);
+            demo.Method08MultiBranchSingleLineFullCoverage(value1, value2);
             if (value1 != 0)
             {
-                demo.MultiBranchPartialCoverage(value1, value2);
-                demo.MultiBranchSingleLinePartialCoverage(value1, value2);
+                demo.Method07MultiBranchPartialCoverage(value1, value2);
+                demo.Method09MultiBranchSingleLinePartialCoverage(value1, value2);
             }
         }
     }
@@ -76,12 +76,12 @@ public class CoverageDemoTests
             var demo = new Class10CoverageDemo();
             for (int i = 0; i <= 10; i++)
             {
-                demo.SwitchStatementFullCoverage(i);
-                demo.SwitchExpressionFullCoverage(i);
+                demo.Method10SwitchStatementFullCoverage(i);
+                demo.Method12SwitchExpressionFullCoverage(i);
                 if ((i & 1) == 0)
                 {
-                    demo.SwitchStatementPartialCoverage(i);
-                    demo.SwitchExpressionPartialCoverage(i);
+                    demo.Method11SwitchStatementPartialCoverage(i);
+                    demo.Method13SwitchExpressionPartialCoverage(i);
                 }
             }
         }
@@ -94,10 +94,10 @@ public class CoverageDemoTests
         for (int hits = 0; hits < 5; hits++)
         {
             var demo = new Class10CoverageDemo();
-            try { demo.UnreachableCode(0); } catch { }
-            try { demo.UnreachableCode(-1); } catch { }
-            try { demo.UnreachableCodeIf(0); } catch { }
-            try { demo.UnreachableCodeIf(-1); } catch { }
+            try { demo.Method14UnreachableCode(0); } catch { }
+            try { demo.Method14UnreachableCode(-1); } catch { }
+            try { demo.Method15UnreachableCodeIf(0); } catch { }
+            try { demo.Method15UnreachableCodeIf(-1); } catch { }
         }
     }
 #pragma warning restore CA1031 // Do not catch general exception types

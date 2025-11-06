@@ -67,12 +67,12 @@ public class Class10CoverageDemo
         set => _fullProp = value;
     }
 
-    public int NoBranch(int value)
+    public int Method01NoBranch(int value)
     {
         return value - _fullProp;
     }
 
-    public int SingleBranchFullCoverage(int value)
+    public int Method02SingleBranchFullCoverage(int value)
     {
         if (value < 0)
         {
@@ -84,7 +84,7 @@ public class Class10CoverageDemo
         }
     }
 
-    public int SingleBranchPartialCoverage(int value)
+    public int Method03SingleBranchPartialCoverage(int value)
     {
         if (value < 0)
         {
@@ -96,17 +96,17 @@ public class Class10CoverageDemo
         }
     }
 
-    public int SingleBranchSingleLineFullCoverage(int value)
+    public int Method04SingleBranchSingleLineFullCoverage(int value)
     {
         return value < 0 ? value + _fullProp : value - _fullProp;
     }
 
-    public int SingleBranchSingleinePartialCoverage(int value)
+    public int Method05SingleBranchSingleLinePartialCoverage(int value)
     {
         return value < 0 ? value + _fullProp : value - _fullProp;
     }
 
-    public int MultiBranchFullCoverage(int value1, int value2)
+    public int Method06MultiBranchFullCoverage(int value1, int value2)
     {
         if (value1 < 0 || value2 < 0)
         {
@@ -118,7 +118,7 @@ public class Class10CoverageDemo
         }
     }
 
-    public int MultiBranchPartialCoverage(int value1, int value2)
+    public int Method07MultiBranchPartialCoverage(int value1, int value2)
     {
         if (value1 < 0 || value2 < 0)
         {
@@ -130,17 +130,17 @@ public class Class10CoverageDemo
         }
     }
 
-    public int MultiBranchSingleLineFullCoverage(int value1, int value2)
+    public int Method08MultiBranchSingleLineFullCoverage(int value1, int value2)
     {
         return value1 < 0 || value2 < 0 ? value1 + _fullProp : value1 - _fullProp;
     }
 
-    public int MultiBranchSingleLinePartialCoverage(int value1, int value2)
+    public int Method09MultiBranchSingleLinePartialCoverage(int value1, int value2)
     {
         return value1 < 0 || value2 < 0 ? value1 + _fullProp : value1 - _fullProp;
     }
 
-    public int SwitchStatementFullCoverage(int value)
+    public int Method10SwitchStatementFullCoverage(int value)
     {
         int result;
         switch (value)
@@ -184,7 +184,7 @@ public class Class10CoverageDemo
         return result;
     }
 
-    public int SwitchStatementPartialCoverage(int value)
+    public int Method11SwitchStatementPartialCoverage(int value)
     {
         int result;
         switch (value)
@@ -228,7 +228,7 @@ public class Class10CoverageDemo
         return result;
     }
 
-    public int SwitchExpressionFullCoverage(int value)
+    public int Method12SwitchExpressionFullCoverage(int value)
     {
         var result = value switch
         {
@@ -247,7 +247,7 @@ public class Class10CoverageDemo
         return result;
     }
 
-    public int SwitchExpressionPartialCoverage(int value)
+    public int Method13SwitchExpressionPartialCoverage(int value)
     {
         var result = value switch
         {
@@ -266,7 +266,7 @@ public class Class10CoverageDemo
         return result;
     }
 
-    public int UnreachableCode(int value)
+    public int Method14UnreachableCode(int value)
     {
         if (value < 0)
         {
@@ -279,7 +279,7 @@ public class Class10CoverageDemo
         }
     }
 
-    public int UnreachableCodeIf(int value)
+    public int Method15UnreachableCodeIf(int value)
     {
         ThrowSomethingIf(value < 0);
         return value + _fullProp;
