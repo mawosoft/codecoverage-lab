@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <RunSettings>
   <RunConfiguration>
-    <ResultsDirectory>./../../TestResults/logs</ResultsDirectory>
+    <ResultsDirectory>./../TestResults/logs</ResultsDirectory>
     <TestAdaptersPaths>C:\Users\mw\.nuget\packages\coverlet.collector\6.0.4\build\netstandard2.0;C:\Users\mw\.nuget\packages\microsoft.codecoverage\18.0.0\build\netstandard2.0</TestAdaptersPaths>
     <SkipDefaultAdapters>true</SkipDefaultAdapters>
   </RunConfiguration>

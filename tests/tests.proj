@@ -1,13 +1,12 @@
 ﻿<Project>
 
-  <Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))" />
-
   <PropertyGroup>
     <RootNamespace>FooLib</RootNamespace>
+    <RunSettingsFilePath Condition="'$(RunSettingsFilePath)' == ''">$(MSBuildThisFileDirectory)default.runsettings</RunSettingsFilePath>
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)*.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)src/*.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,5 +26,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
   </ItemGroup>
+
+  <Import Project="$(MSBuildThisFileDirectory)UpdateRunSettings.targets" />
 
 </Project>
