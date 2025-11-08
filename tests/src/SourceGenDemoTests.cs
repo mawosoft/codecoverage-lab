@@ -1,8 +1,6 @@
 // Copyright (c) Matthias Wolf, Mawosoft.
 
-using Xunit;
-
-namespace FooLib;
+namespace DemoLib;
 
 public class SourceGenDemoTests
 {

@@ -11,7 +11,8 @@
       <CopyForCoverletFiles Include="System.Runtime.InteropServices" />
   </ItemGroup>
 
-  <Import Project="$(MSBuildThisFileDirectory)../tests.proj" />
-  <Import Project="$(MSBuildThisFileDirectory)../CopyForCoverlet.targets" />
+  <Import Project="$(MSBuildThisFileDirectory)../../build/tests.common.props" />
+  <Import Project="$(MSBuildThisFileDirectory)../../build/tests.vstest.props" />
+  <Import Project="$(MSBuildThisFileDirectory)../../build/CopyForCoverlet.targets" />
 
 </Project>

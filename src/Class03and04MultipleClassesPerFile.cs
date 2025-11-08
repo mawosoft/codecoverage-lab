@@ -1,6 +1,6 @@
 // Copyright (c) Matthias Wolf, Mawosoft.
 
-namespace FooLib;
+namespace DemoLib;
 
 #pragma warning disable CA1822 // Mark members as static
 public class Class03MultipleClassesPerFile

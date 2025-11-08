@@ -8,6 +8,7 @@
   <ItemGroup>
   </ItemGroup>
 
-  <Import Project="$(MSBuildThisFileDirectory)../tests.proj" />
+  <Import Project="$(MSBuildThisFileDirectory)../../build/tests.common.props" />
+  <Import Project="$(MSBuildThisFileDirectory)../../build/tests.vstest.props" />
 
 </Project>

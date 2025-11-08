@@ -4,7 +4,7 @@ using System;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 
-namespace FooLib;
+namespace DemoLib;
 
 #pragma warning disable CA1822 // Mark members as static
 public partial class Class09SourceGenDemoLibraryImport

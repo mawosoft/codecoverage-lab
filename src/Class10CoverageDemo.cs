@@ -3,7 +3,7 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 
-namespace FooLib;
+namespace DemoLib;
 
 public class Class10CoverageDemo
 {

@@ -2,7 +2,7 @@
 
 using System.Text.Json;
 
-namespace FooLib;
+namespace DemoLib;
 
 public class Class08SourceGenDemoJsonSerializer
 {

@@ -1,9 +1,8 @@
 // Copyright (c) Matthias Wolf, Mawosoft.
 
 using System.Collections.Generic;
-using Xunit;
 
-namespace FooLib;
+namespace DemoLib;
 
 public class TestCoverageDemoTests
 {
