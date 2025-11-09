@@ -7,11 +7,11 @@ public class Class05NestedClassSingleFile
 {
     public int Method1(int value)
     {
-        var inner = new Inner();
+        var inner = new Class05NestedInner();
         return inner.Method1(value);
     }
 
-    private sealed class Inner
+    private sealed class Class05NestedInner
     {
         public int Method1(int value)
         {
