@@ -4,10 +4,12 @@ namespace DemoLib;
 
 public class CoverageDemoTests
 {
+    private const int HitCount = 5;
+
     [Fact]
     public void Test1()
     {
-        for (int hits = 0; hits < 5; hits++)
+        for (int hits = 0; hits < HitCount; hits++)
         {
             var demo = new Class10CoverageDemo()
             {
@@ -35,51 +37,63 @@ public class CoverageDemoTests
             v = demo.FullProp4MultiLineFullCoverage;
             v += demo.FullProp5MultiLineGetCoverage;
             demo.FullProp6MultiLineSetCoverage = v;
-
-            demo.Method01NoBranch(0);
-            demo.Method02SingleBranchFullCoverage(0);
-            demo.Method02SingleBranchFullCoverage(-1);
-            demo.Method03SingleBranchPartialCoverage(0);
-            demo.Method04SingleBranchSingleLineFullCoverage(0);
-            demo.Method04SingleBranchSingleLineFullCoverage(-1);
-            demo.Method05SingleBranchSingleLinePartialCoverage(0);
         }
     }
 
-    [Theory]
-    [InlineData(-1, -1)]
-    [InlineData(-1, 0)]
-    [InlineData(0, -1)]
-    [InlineData(0, 0)]
-    public void Test2(int value1, int value2)
+    [Fact]
+    public void Test2()
     {
-        for (int hits = 0; hits < 5; hits++)
+        for (int hits = 0; hits < HitCount; hits++)
         {
             var demo = new Class10CoverageDemo();
-            demo.Method06MultiBranchFullCoverage(value1, value2);
-            demo.Method08MultiBranchSingleLineFullCoverage(value1, value2);
-            if (value1 != 0)
-            {
-                demo.Method07MultiBranchPartialCoverage(value1, value2);
-                demo.Method09MultiBranchSingleLinePartialCoverage(value1, value2);
-            }
+            demo.Method01NoBranch(0);
+#pragma warning disable format
+            int[] p1 = [10, 10, 0];
+            int[] p2 = [ 0, 10, 0];
+#pragma warning restore format
+            demo.Method02SingleConditionMultiLineBranches(p1);
+            demo.Method02SingleConditionMultiLineBranches(p2);
+            demo.Method03SingleConditionSingleLineBranches(p1);
+            demo.Method03SingleConditionSingleLineBranches(p2);
+#pragma warning disable format
+            (int, int)[] p10 = [(10,  0), (10, 10), (0, 10), (0, 0), (10, 0)];
+            (int, int)[] p20 = [( 0, 10), (10, 10), (0, 10), (0, 0), (10, 0)];
+            (int, int)[] p30 = [( 0,  0), ( 0, 10), (0, 10), (0, 0), (10, 0)];
+#pragma warning restore format
+            demo.Method04MultiConditionMultiLineBranches(p10);
+            demo.Method04MultiConditionMultiLineBranches(p20);
+            demo.Method04MultiConditionMultiLineBranches(p30);
+            demo.Method05MultiConditionSingleLineBranches(p10);
+            demo.Method05MultiConditionSingleLineBranches(p20);
+            demo.Method05MultiConditionSingleLineBranches(p30);
+#pragma warning disable format
+            int[] p100 = [10, 10, 20, 0, 10];
+            int[] p200 = [20, 10, 20, 0, 10];
+            int[] p300 = [ 0, 20, 20, 0, 10];
+#pragma warning restore format
+            demo.Method06MultiPatternConditionMultiLineBranches(p100);
+            demo.Method06MultiPatternConditionMultiLineBranches(p200);
+            demo.Method06MultiPatternConditionMultiLineBranches(p300);
+            demo.Method07MultiPatternConditionSingleLineBranches(p100);
+            demo.Method07MultiPatternConditionSingleLineBranches(p200);
+            demo.Method07MultiPatternConditionSingleLineBranches(p300);
         }
     }
 
     [Fact]
     public void Test3()
     {
-        for (int hits = 0; hits < 5; hits++)
+        for (int hits = 0; hits < HitCount; hits++)
         {
             var demo = new Class10CoverageDemo();
             for (int i = 0; i <= 10; i++)
             {
-                demo.Method10SwitchStatementFullCoverage(i);
-                demo.Method12SwitchExpressionFullCoverage(i);
+                demo.Method08SwitchStatementFullCoverage(i);
+                demo.Method10SwitchExpressionFullCoverage(i);
                 if ((i & 1) == 0)
                 {
-                    demo.Method11SwitchStatementPartialCoverage(i);
-                    demo.Method13SwitchExpressionPartialCoverage(i);
+                    demo.Method09SwitchStatementPartialCoverage(i);
+                    demo.Method11SwitchExpressionPartialCoverage(i);
                 }
             }
         }
@@ -89,13 +103,13 @@ public class CoverageDemoTests
     [Fact]
     public void Test4()
     {
-        for (int hits = 0; hits < 5; hits++)
+        for (int hits = 0; hits < HitCount; hits++)
         {
             var demo = new Class10CoverageDemo();
-            try { demo.Method14UnreachableCode(0); } catch { }
-            try { demo.Method14UnreachableCode(-1); } catch { }
-            try { demo.Method15UnreachableCodeIf(0); } catch { }
-            try { demo.Method15UnreachableCodeIf(-1); } catch { }
+            try { demo.Method12UnreachableCode(0); } catch { }
+            try { demo.Method12UnreachableCode(-1); } catch { }
+            try { demo.Method13UnreachableCodeIf(0); } catch { }
+            try { demo.Method13UnreachableCodeIf(-1); } catch { }
         }
     }
 #pragma warning restore CA1031 // Do not catch general exception types

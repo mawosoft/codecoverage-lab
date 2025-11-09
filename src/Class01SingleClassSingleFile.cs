@@ -9,4 +9,14 @@ public class Class01SingleClassSingleFile
     {
         return value;
     }
+
+    public int Method2(int value)
+    {
+        return Method2Inner(value);
+
+        static int Method2Inner(int value)
+        {
+            return value;
+        }
+    }
 }

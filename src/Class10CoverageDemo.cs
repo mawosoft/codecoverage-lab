@@ -5,9 +5,11 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace DemoLib;
 
+#pragma warning disable CA1062 // Validate arguments of public methods
 public class Class10CoverageDemo
 {
     private int _fullProp;
+
     public int AutoProp01SingleLineFullCoverage { get; set; }
     public int AutoProp02SingleLineGetCoverage { get; set; }
     public int AutoProp03SingleLineSetCoverage { get; set; }
@@ -72,75 +74,202 @@ public class Class10CoverageDemo
         return value - _fullProp;
     }
 
-    public int Method02SingleBranchFullCoverage(int value)
+    public int Method02SingleConditionMultiLineBranches(params int[] values)
     {
-        if (value < 0)
+        int result = 0;
+        // Expected coverage: 100% -> 100%
+        if (values[0] == 10)
         {
-            return value + _fullProp;
+            result += values[0] + _fullProp;
         }
         else
         {
-            return value - _fullProp;
+            result += values[0] - _fullProp;
         }
-    }
-
-    public int Method03SingleBranchPartialCoverage(int value)
-    {
-        if (value < 0)
+        // Expected coverage: 50% -> 50%, hit | nohit
+        if (values[1] == 10)
         {
-            return value + _fullProp;
+            result += values[1] + _fullProp;
         }
         else
         {
-            return value - _fullProp;
+            result += values[1] - _fullProp;
         }
-    }
-
-    public int Method04SingleBranchSingleLineFullCoverage(int value)
-    {
-        return value < 0 ? value + _fullProp : value - _fullProp;
-    }
-
-    public int Method05SingleBranchSingleLinePartialCoverage(int value)
-    {
-        return value < 0 ? value + _fullProp : value - _fullProp;
-    }
-
-    public int Method06MultiBranchFullCoverage(int value1, int value2)
-    {
-        if (value1 < 0 || value2 < 0)
+        // Expected coverage: 50% -> 50%, nohit | hit
+        if (values[2] == 10)
         {
-            return value1 + _fullProp;
+            result += values[2] + _fullProp;
         }
         else
         {
-            return value1 - _fullProp;
+            result += values[2] - _fullProp;
         }
+        return result;
     }
 
-    public int Method07MultiBranchPartialCoverage(int value1, int value2)
+    public int Method03SingleConditionSingleLineBranches(params int[] values)
     {
-        if (value1 < 0 || value2 < 0)
+        int result = 0;
+        // Expected coverage: 100% -> 100%
+        result += values[0] == 10 ? values[0] + _fullProp : values[0] - _fullProp;
+        // Expected coverage: 50% -> 50%, hit | nohit
+        result += values[1] == 10 ? values[1] + _fullProp : values[1] - _fullProp;
+        // Expected coverage: 50% -> 50%, nohit | hit
+        result += values[2] == 10 ? values[2] + _fullProp : values[2] - _fullProp;
+        return result;
+    }
+
+    public int Method04MultiConditionMultiLineBranches(params (int, int)[] values)
+    {
+        int result = 0;
+        // Expected coverage: 100% + 100% -> 100%
+        if (values[0].Item1 == 10 || values[0].Item2 == 10)
         {
-            return value1 + _fullProp;
+            result += values[0].Item1 + _fullProp;
         }
         else
         {
-            return value1 - _fullProp;
+            result += values[0].Item2 - _fullProp;
         }
+        // Expected coverage: 100% + 50% -> 75%, hit | nohit
+        if (values[1].Item1 == 10 || values[1].Item2 == 10)
+        {
+            result += values[1].Item1 + _fullProp;
+        }
+        else
+        {
+            result += values[1].Item2 - _fullProp;
+        }
+        // Expected coverage: 50% + 50% -> 50%, hit | nohit
+        if (values[2].Item1 == 10 || values[2].Item2 == 10)
+        {
+            result += values[2].Item1 + _fullProp;
+        }
+        else
+        {
+            result += values[2].Item2 - _fullProp;
+        }
+        // Expected coverage: 50% + 50% -> 50%, nohit | hit
+        if (values[3].Item1 == 10 || values[3].Item2 == 10)
+        {
+            result += values[3].Item1 + _fullProp;
+        }
+        else
+        {
+            result += values[3].Item2 - _fullProp;
+        }
+        // Expected coverage: 50% + 0% -> 25%, hit | nohit
+        // Actual coverage: 50% + 50% -> 50%, hit | nohit
+        if (values[4].Item1 == 10 || values[4].Item2 == 10)
+        {
+            result += values[4].Item1 + _fullProp;
+        }
+        else
+        {
+            result += values[4].Item2 - _fullProp;
+        }
+        return result;
     }
 
-    public int Method08MultiBranchSingleLineFullCoverage(int value1, int value2)
+    public int Method05MultiConditionSingleLineBranches(params (int, int)[] values)
     {
-        return value1 < 0 || value2 < 0 ? value1 + _fullProp : value1 - _fullProp;
+        int result = 0;
+        // Expected coverage: 100% + 100% -> 100%
+        result += values[0].Item1 == 10 || values[0].Item2 == 10 ? values[0].Item1 + _fullProp : values[0].Item2 - _fullProp;
+        // Expected coverage: 100% + 50% -> 75%, hit | nohit
+        result += values[1].Item1 == 10 || values[1].Item2 == 10 ? values[1].Item1 + _fullProp : values[1].Item2 - _fullProp;
+        // Expected coverage: 50% + 50% -> 50%, hit | nohit
+        // Actual coverage: 100% + 50% -> 75%
+        result += values[2].Item1 == 10 || values[2].Item2 == 10 ? values[2].Item1 + _fullProp : values[2].Item2 - _fullProp;
+        // Expected coverage: 50% + 50% -> 50%, nohit | hit
+        result += values[3].Item1 == 10 || values[3].Item2 == 10 ? values[3].Item1 + _fullProp : values[3].Item2 - _fullProp;
+        // Expected coverage: 50% + 0% -> 25%, hit | nohit
+        // Actual coverlet: 50% + 50% -> 50%
+        // Actual mscc: as expected
+        result += values[4].Item1 == 10 || values[4].Item2 == 10 ? values[4].Item1 + _fullProp : values[4].Item2 - _fullProp;
+        return result;
     }
 
-    public int Method09MultiBranchSingleLinePartialCoverage(int value1, int value2)
+    public int Method06MultiPatternConditionMultiLineBranches(params int[] values)
     {
-        return value1 < 0 || value2 < 0 ? value1 + _fullProp : value1 - _fullProp;
+        int result = 0;
+        // Expected coverage: 100% + 100% -> 100%
+        // Actual coverage: 100% + 100% + 100% -> 100%
+        if (values[0] is 10 or 20)
+        {
+            result += values[0] + _fullProp;
+        }
+        else
+        {
+            result += values[0] - _fullProp;
+        }
+        // Expected coverage: 100% + 50% -> 75%, hit | nohit
+        // Actual coverage: 100% + 50% + 50% -> 66%, hit | nohit
+        if (values[1] is 10 or 20)
+        {
+            result += values[1] + _fullProp;
+        }
+        else
+        {
+            result += values[1] - _fullProp;
+        }
+        // Expected coverage: 50% + 50% -> 50%, hit | nohit
+        // Actual coverage: 100% + 50% + 50% -> 66%, hit | nohit
+        if (values[2] is 10 or 20)
+        {
+            result += values[2] + _fullProp;
+        }
+        else
+        {
+            result += values[2] - _fullProp;
+        }
+        // Expected coverage: 50% + 50% -> 50%, nohit | hit
+        // Actual coverage: 50% + 50% + 50% -> 50%, nohit | hit
+        if (values[3] is 10 or 20)
+        {
+            result += values[3] + _fullProp;
+        }
+        else
+        {
+            result += values[3] - _fullProp;
+        }
+        // Expected coverage: 50% + 0% -> 25%, hit | nohit
+        // Actual coverlet: 50% + 50% + 50% -> 50%, hit | nohit
+        // Actual mscc: 50% + 0% + 50% -> 33%, hit | nohit
+        if (values[4] is 10 or 20)
+        {
+            result += values[4] + _fullProp;
+        }
+        else
+        {
+            result += values[4] - _fullProp;
+        }
+        return result;
     }
 
-    public int Method10SwitchStatementFullCoverage(int value)
+    public int Method07MultiPatternConditionSingleLineBranches(params int[] values)
+    {
+        int result = 0;
+        // Expected coverage: 100% + 100% -> 100%
+        // Actual coverage: 100% + 100% + 100% -> 100%
+        result += values[0] is 10 or 20 ? values[0] + _fullProp : values[0] - _fullProp;
+        // Expected coverage: 100% + 50% -> 75%, hit | nohit
+        // Actual coverage: 100% + 50% + 50% -> 66%
+        result += values[1] is 10 or 20 ? values[1] + _fullProp : values[1] - _fullProp;
+        // Expected coverage: 50% + 50% -> 50%, hit | nohit
+        // Actual coverage: 100% + 50% + 50% -> 66%
+        result += values[2] is 10 or 20 ? values[2] + _fullProp : values[2] - _fullProp;
+        // Expected coverage: 50% + 50% -> 50%, nohit | hit
+        // Actual coverage: 50% + 50% + 50% -> 50%
+        result += values[3] is 10 or 20 ? values[3] + _fullProp : values[3] - _fullProp;
+        // Expected coverage: 50% + 0% -> 25%, hit | nohit
+        // Actual coverlet: 50% + 50% + 50% -> 50%
+        // Actual mscc: 50% + 0% + 50% -> 33%
+        result += values[4] is 10 or 20 ? values[4] + _fullProp : values[4] - _fullProp;
+        return result;
+    }
+
+    public int Method08SwitchStatementFullCoverage(int value)
     {
         int result;
         switch (value)
@@ -184,7 +313,7 @@ public class Class10CoverageDemo
         return result;
     }
 
-    public int Method11SwitchStatementPartialCoverage(int value)
+    public int Method09SwitchStatementPartialCoverage(int value)
     {
         int result;
         switch (value)
@@ -228,7 +357,7 @@ public class Class10CoverageDemo
         return result;
     }
 
-    public int Method12SwitchExpressionFullCoverage(int value)
+    public int Method10SwitchExpressionFullCoverage(int value)
     {
         var result = value switch
         {
@@ -247,7 +376,7 @@ public class Class10CoverageDemo
         return result;
     }
 
-    public int Method13SwitchExpressionPartialCoverage(int value)
+    public int Method11SwitchExpressionPartialCoverage(int value)
     {
         var result = value switch
         {
@@ -266,7 +395,7 @@ public class Class10CoverageDemo
         return result;
     }
 
-    public int Method14UnreachableCode(int value)
+    public int Method12UnreachableCode(int value)
     {
         if (value < 0)
         {
@@ -279,7 +408,7 @@ public class Class10CoverageDemo
         }
     }
 
-    public int Method15UnreachableCodeIf(int value)
+    public int Method13UnreachableCodeIf(int value)
     {
         ThrowSomethingIf(value < 0);
         return value + _fullProp;
