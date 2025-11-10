@@ -9,6 +9,7 @@
     <!-- <DefineConstants>$(DefineConstants);DISABLE_SOURCEGEN_JSONSERIALIZER</DefineConstants> -->
     <!-- <DefineConstants>$(DefineConstants);DISABLE_SOURCEGEN_LIBRARYIMPORT</DefineConstants> -->
     <!-- <DefineConstants>$(DefineConstants);DISABLE_SOURCEGEN_REGEX</DefineConstants> -->
+    <!-- <DefineConstants>$(DefineConstants);DISABLE_SOURCEGEN_REGEXOPTIONS</DefineConstants> -->
   </PropertyGroup>
 
   <ItemGroup>

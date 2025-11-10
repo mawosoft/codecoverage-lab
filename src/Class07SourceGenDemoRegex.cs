@@ -16,10 +16,13 @@ public partial class Class07SourceGenDemoRegex
 #if DISABLE_SOURCEGEN_REGEX
     private static Regex RegexBar() => s_regexBar;
 #pragma warning disable SYSLIB1045 // Convert to 'GeneratedRegexAttribute'.
-    private static readonly Regex s_regexBar = new(@"bar");
+    private static readonly Regex s_regexBar = new(@"bar", RegexOptions.None);
 #pragma warning restore SYSLIB1045 // Convert to 'GeneratedRegexAttribute'.
-#else
+#elif DISABLE_SOURCEGEN_REGEXOPTIONS
     [GeneratedRegex(@"bar")]
+    private static partial Regex RegexBar();
+#else
+    [GeneratedRegex(@"bar", RegexOptions.None)]
     private static partial Regex RegexBar();
 #endif
 }

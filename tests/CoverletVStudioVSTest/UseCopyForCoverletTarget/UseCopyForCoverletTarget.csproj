@@ -4,7 +4,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-      <!-- <CopyForCoverletFiles Include="System.Text.RegularExpressions" /> -->
+      <CopyForCoverletFiles Include="System.Text.RegularExpressions" />
       <!-- <CopyForCoverletFiles Include="System.Text.Json" /> -->
       <CopyForCoverletFiles Include="System.Private.CoreLib" />
       <CopyForCoverletFiles Include="System.Runtime" />
