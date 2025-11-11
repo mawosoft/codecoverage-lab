@@ -3,17 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.36623.8
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoLib", "src\DemoLib.csproj", "{9CEC675E-0B3D-ECD6-8A83-572A89DB1F03}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoverageDemo", "CoverageDemo\src\CoverageDemo.csproj", "{9CEC675E-0B3D-ECD6-8A83-572A89DB1F03}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Default", "tests\CoverletVStudioVSTest\Default\Default.csproj", "{54272EAC-4085-827E-177A-C037BE3C3C0A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NoMitigations", "CoverageDemo\tests\CoverletVStudioVSTest\NoMitigations\NoMitigations.csproj", "{54272EAC-4085-827E-177A-C037BE3C3C0A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PreserveCompContextAndCopyLockFiles", "tests\CoverletVStudioVSTest\PreserveCompContextAndCopyLockFiles\PreserveCompContextAndCopyLockFiles.csproj", "{DB34DF82-B521-369F-04CC-497F0C2BD5B0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PreserveCompContextAndCopyLockFiles", "CoverageDemo\tests\CoverletVStudioVSTest\PreserveCompContextAndCopyLockFiles\PreserveCompContextAndCopyLockFiles.csproj", "{DB34DF82-B521-369F-04CC-497F0C2BD5B0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PreserveCompContextAndCopyLockFilesAndOutputExe", "tests\CoverletVStudioVSTest\PreserveCompContextAndCopyLockFilesAndOutputExe\PreserveCompContextAndCopyLockFilesAndOutputExe.csproj", "{61BCF870-B5C3-F828-A061-07125126F00F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PreserveCompContextAndCopyLockFilesAndOutputExe", "CoverageDemo\tests\CoverletVStudioVSTest\PreserveCompContextAndCopyLockFilesAndOutputExe\PreserveCompContextAndCopyLockFilesAndOutputExe.csproj", "{61BCF870-B5C3-F828-A061-07125126F00F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UseCopyForCoverletTarget", "tests\CoverletVStudioVSTest\UseCopyForCoverletTarget\UseCopyForCoverletTarget.csproj", "{E6BFDA9C-6C68-6A14-BC76-57485F3159A0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UseCopyForCoverletTarget", "CoverageDemo\tests\CoverletVStudioVSTest\UseCopyForCoverletTarget\UseCopyForCoverletTarget.csproj", "{E6BFDA9C-6C68-6A14-BC76-57485F3159A0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UseExcludeByFileForGeneratedCode", "tests\CoverletVStudioVSTest\UseExcludeByFileForGeneratedCode\UseExcludeByFileForGeneratedCode.csproj", "{FC3C5441-ED2C-F07E-9800-5E803BE54CDE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UseExcludeByFileForGeneratedCode", "CoverageDemo\tests\CoverletVStudioVSTest\UseExcludeByFileForGeneratedCode\UseExcludeByFileForGeneratedCode.csproj", "{FC3C5441-ED2C-F07E-9800-5E803BE54CDE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NoCoverage", "CoverageDemo\tests\NoCoverage\NoCoverage.csproj", "{21209BE6-9590-D0B2-BD7D-6E7A975AE4B9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportComparison", "CoverageDemo\tests\ReportComparison\ReportComparison.csproj", "{19DA7D12-EAB7-927C-A642-737A1A3A38D7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +49,14 @@ Global
 		{FC3C5441-ED2C-F07E-9800-5E803BE54CDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FC3C5441-ED2C-F07E-9800-5E803BE54CDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FC3C5441-ED2C-F07E-9800-5E803BE54CDE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21209BE6-9590-D0B2-BD7D-6E7A975AE4B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21209BE6-9590-D0B2-BD7D-6E7A975AE4B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21209BE6-9590-D0B2-BD7D-6E7A975AE4B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21209BE6-9590-D0B2-BD7D-6E7A975AE4B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19DA7D12-EAB7-927C-A642-737A1A3A38D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19DA7D12-EAB7-927C-A642-737A1A3A38D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19DA7D12-EAB7-927C-A642-737A1A3A38D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19DA7D12-EAB7-927C-A642-737A1A3A38D7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

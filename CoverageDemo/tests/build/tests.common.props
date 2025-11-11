@@ -1,0 +1,18 @@
+﻿<Project>
+
+  <PropertyGroup>
+    <RootNamespace>CoverageDemo</RootNamespace>
+    <RunSettingsFilePath Condition="'$(RunSettingsFilePath)' == ''">$(MSBuildThisFileDirectory)../coverlet.runsettings</RunSettingsFilePath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)../src/*.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="$(MSBuildThisFileDirectory)../../src/CoverageDemo.csproj" />
+  </ItemGroup>
+
+  <Import Project="$(MSBuildThisFileDirectory)UpdateRunSettings.targets" />
+
+</Project>

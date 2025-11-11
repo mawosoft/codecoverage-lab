@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RootNamespace>CoverageDemo</RootNamespace>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <!-- <DefineConstants>$(DefineConstants);DISABLE_SOURCEGEN_JSONSERIALIZER</DefineConstants> -->
+    <!-- <DefineConstants>$(DefineConstants);DISABLE_SOURCEGEN_LIBRARYIMPORT</DefineConstants> -->
+    <!-- <DefineConstants>$(DefineConstants);DISABLE_SOURCEGEN_REGEX</DefineConstants> -->
+    <!-- <DefineConstants>$(DefineConstants);DISABLE_SOURCEGEN_REGEXOPTIONS</DefineConstants> -->
+  </PropertyGroup>
+
+  <ItemGroup>
+  </ItemGroup>
+
+</Project>
