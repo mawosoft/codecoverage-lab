@@ -1,7 +1,9 @@
 // Copyright (c) Matthias Wolf, Mawosoft.
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Threading.Tasks;
 
 namespace DemoLib;
 
@@ -412,6 +414,45 @@ public class Class10CoverageDemo
     {
         ThrowSomethingIf(value < 0);
         return value + _fullProp;
+    }
+
+    public IEnumerable<int> Method14YieldEnumerable(int value)
+    {
+        int n = Math.Max(5, value);
+        for (int i = 0; i < n; i++)
+        {
+            yield return i + value;
+        }
+        for (int i = 0; i < n; i++)
+        {
+            yield return i + _fullProp;
+        }
+    }
+
+    public async IAsyncEnumerable<int> Method15YieldAsyncEnumerable(int value)
+    {
+        int n = Math.Max(5, value);
+        for (int i = 0; i < n; i++)
+        {
+            await Task.Delay(0).ConfigureAwait(false);
+            yield return i + value;
+        }
+        for (int i = 0; i < n; i++)
+        {
+            await Task.Delay(0).ConfigureAwait(false);
+            yield return i + _fullProp;
+        }
+    }
+
+    public async Task<int> Method16AsyncTask(int value)
+    {
+        int result = 0;
+        for (int i = 0; i < 5; i++)
+        {
+            await Task.Delay(0).ConfigureAwait(false);
+            result += value - _fullProp;
+        }
+        return result;
     }
 
     [DoesNotReturn]

@@ -1,5 +1,8 @@
 // Copyright (c) Matthias Wolf, Mawosoft.
 
+using System.Linq;
+using System.Threading.Tasks;
+
 namespace DemoLib;
 
 public class CoverageDemoTests
@@ -113,4 +116,36 @@ public class CoverageDemoTests
         }
     }
 #pragma warning restore CA1031 // Do not catch general exception types
+
+    [Fact]
+    public void Test5()
+    {
+        for (int hits = 0; hits < HitCount; hits++)
+        {
+            var demo = new Class10CoverageDemo();
+            var result = demo.Method14YieldEnumerable(0).ToArray();
+            Assert.NotEmpty(result);
+        }
+    }
+
+    [Fact]
+    public void Test6()
+    {
+        for (int hits = 0; hits < HitCount; hits++)
+        {
+            var demo = new Class10CoverageDemo();
+            var result = demo.Method15YieldAsyncEnumerable(0).ToBlockingEnumerable().ToArray();
+            Assert.NotEmpty(result);
+        }
+    }
+
+    [Fact]
+    public async Task Test7()
+    {
+        for (int hits = 0; hits < HitCount; hits++)
+        {
+            var demo = new Class10CoverageDemo();
+            await demo.Method16AsyncTask(0);
+        }
+    }
 }
