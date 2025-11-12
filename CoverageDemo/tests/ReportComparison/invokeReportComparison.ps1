@@ -12,18 +12,8 @@ try {
     $reportPath = "$resultPath/report"
     $projectPath = "$PSScriptRoot/ReportComparison.csproj"
 
-    $reportParam = @(
-        "-reports:$logPath/*/*cobertura.xml"
-        "-targetdir:$reportPath"
-        '-reporttypes:Html,Markdown,Cobertura'
-    )
-    $reportParamRawMode = $reportParam + 'settings:rawMode=true'
-
+    $reportParam = @('-reporttypes:Html,Markdown,Cobertura', "-targetdir:$reportPath")
     $testParam = @('--no-build', '--collect')
-    $testParamCoverlet = $testParam + 'XPlat Code Coverage'
-    $testParamCoverletSingleHit = $testParamCoverlet + @('--', 'DataCollectionRunSettings.DataCollectors.DataCollector[1].Configuration.SingleHit=true')
-    $testParamMsCodeCoverage = $testParam + 'Code Coverage'
-
     $configs = @('Debug', 'Release')
 
     Remove-Item $resultPath -Recurse -ErrorAction Ignore
@@ -33,35 +23,54 @@ try {
         $projectParam = @($projectPath, '--configuration', $config)
         dotnet build $projectParam
 
-        dotnet test $projectParam $testParamCoverlet
-        reportgenerator $reportParam
-        Get-ChildItem -LiteralPath $logPath -Filter '*.cobertura.xml' -Recurse | Move-Item -Destination "$logPath/coverlet.cobertura.xml"
-        Get-ChildItem -LiteralPath $logPath -Filter 'coverage.json' -Recurse | Move-Item -Destination "$logPath/coverlet.json"
+        $testId = 'coverlet'
+        dotnet test $projectParam $testParam 'XPlat Code Coverage'
+        $reportSource = "$resultPath/$testId.cobertura.xml"
+        Get-ChildItem -LiteralPath $logPath -Filter '*.cobertura.xml' -Recurse | Move-Item -Destination $reportSource
+        Get-ChildItem -LiteralPath $logPath -Filter 'coverage.json' -Recurse | Move-Item -Destination "$resultPath/$testId.json"
         Get-ChildItem -LiteralPath $logPath -Directory | Remove-Item -Recurse
-        Rename-Item $logPath 'logs-coverlet'
-        Rename-Item $reportPath 'report-coverlet'
+        reportgenerator $reportParam "-reports:$reportSource"
+        Rename-Item $reportPath "report-$testId"
 
-        dotnet test $projectParam $testParamCoverletSingleHit
-        reportgenerator $reportParamRawMode
-        Get-ChildItem -LiteralPath $logPath -Filter '*.cobertura.xml' -Recurse | Move-Item -Destination "$logPath/coverlet.cobertura.xml"
-        Get-ChildItem -LiteralPath $logPath -Filter 'coverage.json' -Recurse | Move-Item -Destination "$logPath/coverlet.json"
+        $testId = 'coverlet-singlehit-rawmode'
+        dotnet test $projectParam $testParam 'XPlat Code Coverage' '--' 'DataCollectionRunSettings.DataCollectors.DataCollector[1].Configuration.SingleHit=true'
+        $reportSource = "$resultPath/$testId.cobertura.xml"
+        Get-ChildItem -LiteralPath $logPath -Filter '*.cobertura.xml' -Recurse | Move-Item -Destination $reportSource
+        Get-ChildItem -LiteralPath $logPath -Filter 'coverage.json' -Recurse | Move-Item -Destination "$resultPath/$testId.json"
         Get-ChildItem -LiteralPath $logPath -Directory | Remove-Item -Recurse
-        Rename-Item $logPath 'logs-coverlet-singlehit-rawmode'
-        Rename-Item $reportPath 'report-coverlet-singlehit-rawmode'
+        reportgenerator $reportParam "-reports:$reportSource" 'settings:rawMode=true'
+        Rename-Item $reportPath "report-$testId"
 
-        dotnet test $projectParam $testParamMsCodeCoverage
-        reportgenerator $reportParam
-        Get-ChildItem -LiteralPath $logPath -Filter '*.cobertura.xml' -Recurse | Move-Item -Destination "$logPath/mscc.cobertura.xml"
+        $testId = 'mscc-multi'
+        dotnet test $projectParam $testParam 'Code Coverage;Format=cobertura,xml'
+        Get-ChildItem -LiteralPath $logPath -Filter '*.cobertura.xml' -Recurse | Move-Item -Destination "$resultPath/$testId.cobertura.xml"
+        Get-ChildItem -LiteralPath $logPath -Filter '*.xml' -Recurse | Move-Item -Destination "$resultPath/$testId.xml"
         Get-ChildItem -LiteralPath $logPath -Directory | Remove-Item -Recurse
-        Rename-Item $logPath 'logs-mscc'
-        Rename-Item $reportPath 'report-mscc'
 
-        dotnet test $projectParam $testParamMsCodeCoverage
-        reportgenerator $reportParamRawMode
-        Get-ChildItem -LiteralPath $logPath -Filter '*.cobertura.xml' -Recurse | Move-Item -Destination "$logPath/mscc.cobertura.xml"
+        $testId = 'mscc-xml'
+        dotnet test $projectParam $testParam 'Code Coverage;Format=xml'
+        $reportSource = "$resultPath/$testId.xml"
+        Get-ChildItem -LiteralPath $logPath -Filter '*.xml' -Recurse | Move-Item -Destination $reportSource
         Get-ChildItem -LiteralPath $logPath -Directory | Remove-Item -Recurse
-        Rename-Item $logPath 'logs-mscc-rawmode'
-        Rename-Item $reportPath 'report-mscc-rawmode'
+        reportgenerator $reportParam "-reports:$reportSource"
+        Rename-Item $reportPath "report-$testId"
+
+        $testId = 'mscc-cobertura'
+        dotnet test $projectParam $testParam 'Code Coverage'
+        $reportSource = "$resultPath/$testId.cobertura.xml"
+        Get-ChildItem -LiteralPath $logPath -Filter '*.cobertura.xml' -Recurse | Move-Item -Destination $reportSource
+        Get-ChildItem -LiteralPath $logPath -Directory | Remove-Item -Recurse
+        reportgenerator $reportParam "-reports:$reportSource"
+        Rename-Item $reportPath "report-$testId"
+        $testId = 'mscc-cobertura-rawmode'
+        reportgenerator $reportParam "-reports:$reportSource" 'settings:rawMode=true'
+        Rename-Item $reportPath "report-$testId"
+
+        $xmlfiles = Get-ChildItem -LiteralPath $resultPath -Filter '*.xml' | Select-Object -ExpandProperty FullName
+        foreach ($xmlfile in $xmlfiles) {
+            $destination = [System.IO.Path]::ChangeExtension($xmlfile, '.diffable.xml')
+            & "$PSScriptRoot/convertToDiffableXml.ps1" $xmlfile $destination
+        }
 
         Rename-Item $resultPath "TestResults-$config"
     }
