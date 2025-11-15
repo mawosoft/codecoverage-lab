@@ -1,0 +1,10 @@
+<Solution>
+  <Project Path="src/CoverageDemo.csproj" />
+  <Project Path="tests/CoverletVStudioVSTest/NoMitigations/NoMitigations.csproj" />
+  <Project Path="tests/CoverletVStudioVSTest/PreserveCompContextAndCopyLockFiles/PreserveCompContextAndCopyLockFiles.csproj" />
+  <Project Path="tests/CoverletVStudioVSTest/PreserveCompContextAndCopyLockFilesAndOutputExe/PreserveCompContextAndCopyLockFilesAndOutputExe.csproj" />
+  <Project Path="tests/CoverletVStudioVSTest/UseCopyForCoverletTarget/UseCopyForCoverletTarget.csproj" />
+  <Project Path="tests/CoverletVStudioVSTest/UseExcludeByFileForGeneratedCode/UseExcludeByFileForGeneratedCode.csproj" />
+  <Project Path="tests/NoCoverage/NoCoverage.csproj" />
+  <Project Path="tests/ReportComparison/ReportComparison.csproj" />
+</Solution>
