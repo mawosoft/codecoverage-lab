@@ -8,68 +8,10 @@ using System.Threading.Tasks;
 namespace CoverageDemo;
 
 #pragma warning disable CA1062 // Validate arguments of public methods
-public class Class10CoverageDemo
+public class Class11CoverageDemo
 {
     private int _fullProp;
-
-    public int AutoProp01SingleLineFullCoverage { get; set; }
-    public int AutoProp02SingleLineGetCoverage { get; set; }
-    public int AutoProp03SingleLineSetCoverage { get; set; }
-
-    public int AutoProp04MultiLineFullCoverage
-    {
-        get;
-        set;
-    }
-
-    public int AutoProp05MultiLineGetCoverage
-    {
-        get;
-        set;
-    }
-
-    public int AutoProp06MultiLineSetCoverage
-    {
-        get;
-        set;
-    }
-
-    public int AutoProp07InitSingleLineFullCoverage { get; init; }
-    public int AutoProp08InitSingleLineInitCoverage { get; init; }
-
-    public int AutoProp09InitMultiLineFullCoverage
-    {
-        get;
-        init;
-    }
-
-    public int AutoProp10InitMultiLineInitCoverage
-    {
-        get;
-        init;
-    }
-
-    public int FullProp1SingleLineFullCoverage { get => _fullProp; set => _fullProp = value; }
-    public int FullProp2SingleLineGetCoverage { get => _fullProp; set => _fullProp = value; }
-    public int FullProp3SingleLineSetCoverage { get => _fullProp; set => _fullProp = value; }
-
-    public int FullProp4MultiLineFullCoverage
-    {
-        get => _fullProp;
-        set => _fullProp = value;
-    }
-
-    public int FullProp5MultiLineGetCoverage
-    {
-        get => _fullProp;
-        set => _fullProp = value;
-    }
-
-    public int FullProp6MultiLineSetCoverage
-    {
-        get => _fullProp;
-        set => _fullProp = value;
-    }
+    public int FullProp { get => _fullProp; set => _fullProp = value; }
 
     public int Method01NoBranch(int value)
     {
@@ -397,7 +339,46 @@ public class Class10CoverageDemo
         return result;
     }
 
-    public int Method12UnreachableCode(int value)
+    public IEnumerable<int> Method12YieldEnumerable(int value)
+    {
+        int n = Math.Max(5, value);
+        for (int i = 0; i < n; i++)
+        {
+            yield return i + value;
+        }
+        for (int i = 0; i < n; i++)
+        {
+            yield return i + _fullProp;
+        }
+    }
+
+    public async IAsyncEnumerable<int> Method13YieldAsyncEnumerable(int value)
+    {
+        int n = Math.Max(5, value);
+        for (int i = 0; i < n; i++)
+        {
+            await Task.Delay(0).ConfigureAwait(false);
+            yield return i + value;
+        }
+        for (int i = 0; i < n; i++)
+        {
+            await Task.Delay(0).ConfigureAwait(false);
+            yield return i + _fullProp;
+        }
+    }
+
+    public async Task<int> Method14AsyncTask(int value)
+    {
+        int result = 0;
+        for (int i = 0; i < 5; i++)
+        {
+            await Task.Delay(0).ConfigureAwait(false);
+            result += value - _fullProp;
+        }
+        return result;
+    }
+
+    public int Method15UnreachableCode(int value)
     {
         if (value < 0)
         {
@@ -410,49 +391,10 @@ public class Class10CoverageDemo
         }
     }
 
-    public int Method13UnreachableCodeIf(int value)
+    public int Method16UnreachableCodeIf(int value)
     {
         ThrowSomethingIf(value < 0);
         return value + _fullProp;
-    }
-
-    public IEnumerable<int> Method14YieldEnumerable(int value)
-    {
-        int n = Math.Max(5, value);
-        for (int i = 0; i < n; i++)
-        {
-            yield return i + value;
-        }
-        for (int i = 0; i < n; i++)
-        {
-            yield return i + _fullProp;
-        }
-    }
-
-    public async IAsyncEnumerable<int> Method15YieldAsyncEnumerable(int value)
-    {
-        int n = Math.Max(5, value);
-        for (int i = 0; i < n; i++)
-        {
-            await Task.Delay(0).ConfigureAwait(false);
-            yield return i + value;
-        }
-        for (int i = 0; i < n; i++)
-        {
-            await Task.Delay(0).ConfigureAwait(false);
-            yield return i + _fullProp;
-        }
-    }
-
-    public async Task<int> Method16AsyncTask(int value)
-    {
-        int result = 0;
-        for (int i = 0; i < 5; i++)
-        {
-            await Task.Delay(0).ConfigureAwait(false);
-            result += value - _fullProp;
-        }
-        return result;
     }
 
     [DoesNotReturn]

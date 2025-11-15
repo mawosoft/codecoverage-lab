@@ -14,7 +14,7 @@ public class CoverageDemoTests
     {
         for (int hits = 0; hits < HitCount; hits++)
         {
-            var demo = new Class10CoverageDemo()
+            var demo = new Class13CoverageDemoProperties()
             {
                 AutoProp07InitSingleLineFullCoverage = 1,
                 AutoProp08InitSingleLineInitCoverage = 1,
@@ -48,7 +48,7 @@ public class CoverageDemoTests
     {
         for (int hits = 0; hits < HitCount; hits++)
         {
-            var demo = new Class10CoverageDemo();
+            var demo = new Class11CoverageDemo();
             demo.Method01NoBranch(0);
 #pragma warning disable format
             int[] p1 = [10, 10, 0];
@@ -88,7 +88,7 @@ public class CoverageDemoTests
     {
         for (int hits = 0; hits < HitCount; hits++)
         {
-            var demo = new Class10CoverageDemo();
+            var demo = new Class11CoverageDemo();
             for (int i = 0; i <= 10; i++)
             {
                 demo.Method08SwitchStatementFullCoverage(i);
@@ -108,11 +108,11 @@ public class CoverageDemoTests
     {
         for (int hits = 0; hits < HitCount; hits++)
         {
-            var demo = new Class10CoverageDemo();
-            try { demo.Method12UnreachableCode(0); } catch { }
-            try { demo.Method12UnreachableCode(-1); } catch { }
-            try { demo.Method13UnreachableCodeIf(0); } catch { }
-            try { demo.Method13UnreachableCodeIf(-1); } catch { }
+            var demo = new Class11CoverageDemo();
+            try { demo.Method15UnreachableCode(0); } catch { }
+            try { demo.Method15UnreachableCode(-1); } catch { }
+            try { demo.Method16UnreachableCodeIf(0); } catch { }
+            try { demo.Method16UnreachableCodeIf(-1); } catch { }
         }
     }
 #pragma warning restore CA1031 // Do not catch general exception types
@@ -122,8 +122,8 @@ public class CoverageDemoTests
     {
         for (int hits = 0; hits < HitCount; hits++)
         {
-            var demo = new Class10CoverageDemo();
-            var result = demo.Method14YieldEnumerable(0).ToArray();
+            var demo = new Class11CoverageDemo();
+            var result = demo.Method12YieldEnumerable(0).ToArray();
             Assert.NotEmpty(result);
         }
     }
@@ -133,8 +133,8 @@ public class CoverageDemoTests
     {
         for (int hits = 0; hits < HitCount; hits++)
         {
-            var demo = new Class10CoverageDemo();
-            var result = demo.Method15YieldAsyncEnumerable(0).ToBlockingEnumerable().ToArray();
+            var demo = new Class11CoverageDemo();
+            var result = demo.Method13YieldAsyncEnumerable(0).ToBlockingEnumerable().ToArray();
             Assert.NotEmpty(result);
         }
     }
@@ -144,8 +144,25 @@ public class CoverageDemoTests
     {
         for (int hits = 0; hits < HitCount; hits++)
         {
-            var demo = new Class10CoverageDemo();
-            await demo.Method16AsyncTask(0);
+            var demo = new Class11CoverageDemo();
+            await demo.Method14AsyncTask(0);
+        }
+    }
+
+    [Fact]
+    public void Test8()
+    {
+        for (int hits = 0; hits < HitCount; hits++)
+        {
+            var demo = new Class12CoverageDemoGenerics();
+            demo.Method01GenericsFullCoverage(0, 1, true);
+            demo.Method01GenericsFullCoverage(0, 1, false);
+            demo.Method02GenericsFullCoverageViaDifferentTypeParam(0, 1, true);
+            demo.Method02GenericsFullCoverageViaDifferentTypeParam(0.0, 1.0, false);
+            demo.Method03GenericsTypeOptimizationApplied(0, 1);
+            demo.Method04GenericsTypeOptimizationNotApplied(0.0, 1.0);
+            demo.Method05GenericsTypeOptimizationBoth(0, 1);
+            demo.Method05GenericsTypeOptimizationBoth(0.0, 1.0);
         }
     }
 }
