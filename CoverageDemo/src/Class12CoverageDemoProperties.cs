@@ -2,7 +2,7 @@
 
 namespace CoverageDemo;
 
-public class Class13CoverageDemoProperties
+public class Class12CoverageDemoProperties
 {
     private int _fullProp;
 

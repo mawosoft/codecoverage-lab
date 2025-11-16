@@ -2,9 +2,8 @@
 
 namespace CoverageDemo;
 
-//#pragma warning disable CA1062 // Validate arguments of public methods
 #pragma warning disable CA1822 // Mark members as static
-public class Class12CoverageDemoGenerics
+public class Class16CoverageDemoGenerics
 {
     public TItem Method01GenericsFullCoverage<TItem>(TItem value1, TItem value2, bool condition)
     {
