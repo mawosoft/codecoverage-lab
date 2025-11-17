@@ -8,7 +8,7 @@
 | Block coverage             |   ❌    |   ✔<sup>1</sup> | 1. Not in *Cobertura* report. |
 | Branch coverage            |    ✔<sup>1</sup> | ✔<sup>2</sup>  | 1. Incorrect details for multiple conditions in some cases.<br>2. Only in *Cobertura* report. |
 | Partial coverage           |    ✔    |   ✔<sup>1</sup> | 1. Missing from *XML* report if created together with another report format. |
-| Lambda coverage            |   ❌    |   ✔  |       |
+| Lambda coverage            |    ✔    |   ✔  |       |
 | Actual hit count           |    ✔    |  ❌  |       |
 | Single-hit                 |    ✔    |   ✔  |       |
 | Hits per property accessor |    ✖<sup>1</sup> | ✔ | 1. Only if on separate lines. |
