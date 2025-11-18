@@ -50,6 +50,8 @@ if ($root.get_Name() -eq 'coverage') {
     SortChildNodes $root '//lines/line' -sortQueries 'number(@number)'
     SortChildNodes $root '/coverage/packages/package/classes/class/methods/method' -sortQueries 'number(lines/line[1]/@number)', '@name', '@signature'
     $root.SelectNodes('//conditions/condition/@number').ForEach({ $_.Value = '0' })
+    $root.SelectNodes("//@branch[. = 'false']").ForEach({ $_.Value = 'False' })
+    $root.SelectNodes("//@branch[. = 'true']").ForEach({ $_.Value = 'True' })
 }
 elseif ($root.get_Name() -eq 'results') {
     SortChildNodes $root '/results/*' -sortQueries 'name(.)'
@@ -77,7 +79,6 @@ elseif ($root.get_Name() -eq 'results') {
         $badNumber.Value = $badNumber.Value.Replace([char]',', [char]'.')
     }
     SortChildNodes $root '//ranges/range' -sortQueries 'number(@source_id)', 'number(@start_line)', 'number(@start_column)'
-    SortChildNodes $root '/coverage/packages/package/classes/class/methods/method' -sortQueries 'number(lines/line[1]/@number)', '@name', '@signature'
     SortChildNodes $root '/results/modules/module/functions/function' -sortQueries 'number(ranges/range[1]/@source_id)', 'number(ranges/range[1]/@start_line)', '@namespace', '@type_name', '@name'
 }
 
