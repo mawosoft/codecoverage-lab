@@ -55,6 +55,7 @@ public class Class14CoverageDemoSwitchConditions
     public int Method02SwitchStatementPartialCoverage(int value)
     {
         int result;
+        // Expected coverage: 6/11. nohit on odd values.
         switch (value)
         {
             case 0:
@@ -117,6 +118,7 @@ public class Class14CoverageDemoSwitchConditions
 
     public int Method04SwitchExpressionPartialCoverage(int value)
     {
+        // Expected coverage: 6/11. nohit on odd values.
         var result = value switch
         {
             0 => _someField,

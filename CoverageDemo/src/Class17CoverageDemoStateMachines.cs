@@ -24,7 +24,7 @@ public class Class17CoverageDemoStateMachines
         {
             yield break;
         }
-        yield return 20 + _someField;
+        yield return 20 + _someField; // Expected: nohit
     }
 
     public async IAsyncEnumerable<int> Method02YieldAsyncEnumerable(int value)
@@ -41,6 +41,7 @@ public class Class17CoverageDemoStateMachines
         {
             yield break;
         }
+        // Expected: nohit
         await Task.Delay(0).ConfigureAwait(false);
         yield return 20 + _someField;
     }
@@ -58,6 +59,7 @@ public class Class17CoverageDemoStateMachines
         result += 10 + _someField;
         if (value >= n)
         {
+            // Expected: nohit
             await Task.Delay(0).ConfigureAwait(false);
             result += 20 + _someField;
         }

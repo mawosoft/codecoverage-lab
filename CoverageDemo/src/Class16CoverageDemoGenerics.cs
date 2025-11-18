@@ -35,14 +35,14 @@ public class Class16CoverageDemoGenerics
         {
             return value1;
         }
-        return value2;
+        return value2; // Expected: nohit
     }
 
     public TItem Method04GenericsTypeOptimizationNotApplied<TItem>(TItem value1, TItem value2)
     {
         if (typeof(TItem) == typeof(int))
         {
-            return value1;
+            return value1; // Expected: nohit
         }
         return value2;
     }
