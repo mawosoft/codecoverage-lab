@@ -1,13 +1,30 @@
 // Copyright (c) Matthias Wolf, Mawosoft.
 
 using System;
+using System.Buffers;
 using System.Collections.Generic;
 using System.IO;
 
-namespace ReportComparer;
+namespace ReportComparer.Helpers;
 
 internal static class PathHelper
 {
+    private static readonly SearchValues<char> s_invalidFileNameChars = SearchValues.Create(Path.GetInvalidFileNameChars());
+
+    public static string SanitizeFileName(string fileName)
+    {
+        int pos = fileName.IndexOfAny(s_invalidFileNameChars);
+        if (pos < 0) return fileName;
+        char[] chars = fileName.ToCharArray();
+        Span<char> span = chars;
+        do
+        {
+            span[pos] = '_';
+            span = span[(pos + 1)..];
+        } while ((pos = span.IndexOfAny(s_invalidFileNameChars)) >= 0);
+        return new string(chars);
+    }
+
     public static int GetCommonPathLength(IEnumerable<string> paths, bool ignoreCase = true)
     {
         using var enumerator = paths.GetEnumerator();
@@ -40,7 +57,7 @@ internal static class PathHelper
         return commonChars;
     }
 
-    internal static int EqualStartingCharacterCount(string? first, string? second, bool ignoreCase)
+    private static int EqualStartingCharacterCount(string? first, string? second, bool ignoreCase)
     {
         if (string.IsNullOrEmpty(first) || string.IsNullOrEmpty(second)) return 0;
         int commonLength = first.AsSpan().CommonPrefixLength(second);
@@ -58,5 +75,6 @@ internal static class PathHelper
         return commonLength;
     }
 
-    internal static bool IsDirectorySeparator(char c) => c == Path.DirectorySeparatorChar || c == Path.AltDirectorySeparatorChar;
+    private static bool IsDirectorySeparator(char c)
+        => c == Path.DirectorySeparatorChar || c == Path.AltDirectorySeparatorChar;
 }

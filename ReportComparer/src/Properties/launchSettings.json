@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "ReportComparer": {
+      "commandName": "Project",
+      "commandLineArgs": "@args.response.txt",
+      "workingDirectory": "$(SolutionDir)",
+      "hotReloadEnabled": false
+    }
+  }
+}

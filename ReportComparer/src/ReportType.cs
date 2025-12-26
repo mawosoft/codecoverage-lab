@@ -2,10 +2,9 @@
 
 namespace ReportComparer;
 
-internal enum CoverageStatus
+internal enum ReportType
 {
     None,
-    NotCovered,
-    Covered,
-    Partial,
+    Cobertura,
+    DynamicCoverage,
 }

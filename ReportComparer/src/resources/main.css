@@ -1,0 +1,170 @@
+/* Copyright (c) Matthias Wolf, Mawosoft. */
+
+:root {
+    --back: hsl(0 0% 95%);
+    --altback: hsl(0 0% 90%);
+    --border: hsl(0 0% 60%);
+    --text: hsl(0 0% 10%);
+    --redtext: hsl(0 100% 40%);
+    --green: hsl(120 40% 60%);
+    --red: hsl(0 50% 60%);
+    --yellow: hsl(45 70% 60%);
+    --blank: hsl(0 0% 70%);
+    background-color: var(--back);
+    color: var(--text);
+}
+
+:root {
+    font-family: sans-serif;
+    font-size: 0.875em;
+    --h1size: 1.5em; /* default 2em */
+    --h2size: 1.3em; /* default 1.5em */
+    --h3size: 1.15em; /* default 1.17em */
+}
+
+a {
+    text-decoration: none;
+    color: LinkText;
+    &:hover { text-decoration: underline; }
+}
+
+button.help {
+      background-color: hsl(210 80% 70%);
+      color: hsl(0 0% 90%);
+      &:hover, &:active { background-color: hsl(210 80% 60%); }
+}
+
+footer { font-size: 0.86em; }
+
+pre {
+  font-family: monospace, monospace;
+  font-size: 1em;
+}
+
+h1 { font-size: var(--h1size); }
+h2 { font-size: var(--h2size); }
+h3 { font-size: var(--h3size); }
+
+summary > :is(h2, h3) { display: inline-block; }
+summary:has(> h2)::marker { font-size: var(--h2size); }
+summary:has(> h3)::marker { font-size: var(--h3size); }
+
+@media screen and (prefers-color-scheme: dark) {
+    :root {
+        --back: hsl(0 0% 15%);
+        --altback: hsl(0 0% 20%);
+        --border: hsl(0 0% 40%);
+        --text: hsl(0 0% 90%);
+        --redtext: hsl(0 50% 70%);
+        --green: hsl(120 40% 30%);
+        --red: hsl(0 50% 40%);
+        --yellow: hsl(45 50% 50%);
+        --blank: hsl(0 0% 60%);
+        background-color: var(--back);
+        color: var(--text);
+    }
+
+    a { color: hsl(210 100% 80%); }
+
+    button {
+        background-color: var(--back);
+        color: var(--text);
+        border: 1px outset black;
+        border-radius: 2px;
+        &:active { border-style: inset; }
+        &:hover { background-color: hsl(from var(--back) h s calc(l + 10)); }
+    }
+
+    button.help {
+        background-color: hsl(210 80% 30%);
+        color: hsl(0 0% 90%);
+        &:hover, &:active { background-color: hsl(210 80% 40%); }
+    }
+}
+
+.hidden { display: none; }
+
+.left { text-align: left; }
+.right { text-align: right; }
+.center { text-align: center; }
+.top { vertical-align: top; }
+
+.altback { background-color: var(--altback); }
+.green { background-color: var(--green); }
+.red { background-color: var(--red); }
+.yellow { background-color: var(--yellow); }
+.blank { background-color: var(--blank); }
+.redtext { color: var(--redtext); }
+
+button.small {
+    font-size: 0.65em;
+    padding: 1px 2px;
+}
+
+button.help {
+      font-family: inherit;
+      font-size: 1em;
+      width: 1.3em;
+      height: 1.3em;
+      border: none;
+      border-radius: 50%;
+      padding: 0px;
+      vertical-align: super;
+}
+
+h2.help, h3.help { display: inline-block; }
+
+table.datagrid {
+    margin-block: 10px;
+    border-collapse: collapse;
+    > thead > tr > th,
+    > tbody > tr > td {
+        border: 1px solid var(--border);
+        padding: 2px 5px;
+    }
+    > tbody > tr > td {
+        vertical-align: top;
+    }
+    > tbody > tr:not(:last-child) { height: 0px; }
+}
+
+table.zebra {
+    > tbody:nth-child(even) { background-color: var(--altback); }
+}
+
+tbody.zebra {
+    > tr:nth-child(odd) { background-color: var(--altback); }
+}
+
+thead.sticky {
+    position: sticky;
+    inset-block-start: -1px;
+    background-color: var(--back);
+    box-shadow: inset 0px -1px var(--border);
+}
+
+table.sourceLines {
+    border-collapse: collapse;
+    pre { margin-block: 0px; }
+    > tbody > tr > td {
+        vertical-align: top;
+        &:nth-child(3) {
+            padding-right: 10px;
+            text-align: right;
+        }
+    }
+}
+
+table.lineMarginGlyphs {
+    border-collapse: separate;
+    border-spacing: 2px 0px;
+}
+
+table.legend {
+    margin-block: 10px;
+    border-collapse: collapse;
+    > tbody > tr > td {
+        border: 1px solid var(--border);
+        padding: 5px 10px;
+    }
+}

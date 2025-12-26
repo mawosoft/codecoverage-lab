@@ -2,195 +2,158 @@
 
 using System;
 using System.Collections.Generic;
-using System.Globalization;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Xml;
-using System.Xml.Linq;
+using ReportComparer.Helpers;
 
 namespace ReportComparer;
 
 internal sealed class ReportComparison
 {
-    public required List<FileInfo> FileInfos { get; set; }
+    private Dictionary<string, RealAssembly> _realAssemblies = new(StringComparer.OrdinalIgnoreCase);
+    private List<ParsedReport> _reports = [];
+    private bool _frozen;
 
-    internal sealed class Builder
+    public IReadOnlyCollection<ParsedReport> Reports => _reports;
+    public IReadOnlyCollection<RealAssembly> RealAssemblies => _realAssemblies.Values;
+
+    public void Freeze()
     {
-        private static readonly XmlReaderSettings s_xmlReaderSettings = new()
+        Debug.Assert(!_frozen);
+        int commonReportPathLength = PathHelper.GetCommonPathLength(_reports.Select(r => r.FullName));
+        foreach (var report in _reports) report.Name = report.FullName[commonReportPathLength..];
+        _reports = _reports.OrderBy(r => r.Name, StringComparer.OrdinalIgnoreCase).ToList();
+        for (int reportOrder = 0; reportOrder < _reports.Count; reportOrder++)
         {
-            DtdProcessing = DtdProcessing.Ignore,
-            IgnoreComments = true,
-            IgnoreProcessingInstructions = true,
-            IgnoreWhitespace = true,
-            Async = false, // Explicit for clarity
-        };
-
-        private readonly Dictionary<string, FileInfo.Builder> _fileInfos = new(StringComparer.OrdinalIgnoreCase);
-
-        public required int CommonReportPathLength { get; init; }
-
-        public void ParseReport(string reportPath)
-        {
-            using var reader = XmlReader.Create(reportPath, s_xmlReaderSettings);
-            reportPath = reportPath[CommonReportPathLength..].Replace('\\', '/');
-            var root = XElement.Load(reader);
-            if (root.Name == "coverage")
-            {
-                ParseCobertura(root, reportPath);
-            }
-            else if (root.Name == "results")
-            {
-                ParseDynamicCoverage(root, reportPath);
-            }
-            else
-            {
-                throw new XmlException("Not a known coverage report.");
-            }
+            _reports[reportOrder].Order = reportOrder + 1;
         }
 
-        public ReportComparison ToReportComparison()
+        _realAssemblies = _realAssemblies.OrderBy(kvp => kvp.Value.Name, StringComparer.OrdinalIgnoreCase).ToDictionary(_realAssemblies.Comparer);
+        int commonSourcePathLength = PathHelper.GetCommonPathLength(_realAssemblies.Values.SelectMany(a => a.RealSources).Select(s => s.FullName));
+        foreach (var source in _realAssemblies.Values.SelectMany(a => a.RealSources))
         {
-            int commonSourcePathLength = PathHelper.GetCommonPathLength(_fileInfos.Keys);
-            List<FileInfo> fileInfos = new(_fileInfos.Count);
-            foreach (var fileInfo in _fileInfos.Values)
-            {
-                fileInfo.Name = fileInfo.Name[commonSourcePathLength..].Replace('\\', '/');
-                fileInfos.Add(fileInfo.ToFileInfo());
-            }
-            fileInfos.Sort((x, y) => string.Compare(x.Name, y.Name, StringComparison.OrdinalIgnoreCase));
-            return new ReportComparison
-            {
-                FileInfos = fileInfos,
-            };
+            source.Name = source.FullName[commonSourcePathLength..];
+        }
+        int assemblyOrder = 1;
+        int sourceOrder = 1;
+        foreach (var assembly in _realAssemblies.Values)
+        {
+            assembly.Order = assemblyOrder++;
+            assembly.FreezeParsing(_reports);
+            foreach (var source in assembly.RealSources) source.Order = sourceOrder++;
         }
 
-        private void ParseCobertura(XElement root, string report)
-        {
-            var sources = root.Elements("sources").Elements("source").Nodes().OfType<XText>().Select(n => n.Value).ToArray();
-            string? sourceRoot = sources.Length == 1 ? sources[0] : null;
-            if (string.IsNullOrEmpty(sourceRoot)) sourceRoot = null;
-            foreach (var package in root.Elements("packages").Elements("package"))
-            {
-                string packageName = (string)package.Attribute("name")!;
-                foreach (var @class in package.Elements("classes").Elements("class"))
-                {
-                    string fileName = (string)@class.Attribute("filename")!;
-                    if (sourceRoot is not null) fileName = Path.Combine(sourceRoot, fileName);
-                    if (!_fileInfos.TryGetValue(fileName, out var fileInfo))
-                    {
-                        fileInfo = new FileInfo.Builder { Name = fileName };
-                        _fileInfos.Add(fileName, fileInfo);
-                    }
-                    string className = $"{packageName}:{(string)@class.Attribute("name")!}";
-                    foreach (var method in @class.Elements("methods").Elements("method"))
-                    {
-                        string methodName = $"{className}.{(string)method.Attribute("name")!}{(string)method.Attribute("signature")!}";
-                        ParseCoberturaLines(method, fileInfo, methodName, report);
-                    }
-                    ParseCoberturaLines(@class, fileInfo, className, report);
-                }
-            }
-        }
+        foreach (var report in _reports) report.Freeze();
+        MapParsedToRealMethods();
+        foreach (var realAssembly in _realAssemblies.Values) realAssembly.Freeze();
+        _frozen = true;
+    }
 
-        private static void ParseCoberturaLines(XElement parent, FileInfo.Builder fileInfo, string container, string report)
+    public void ParseReport(string reportPath)
+    {
+        Debug.Assert(!_frozen);
+        reportPath = Path.GetFullPath(reportPath);
+        var report = ReportParser.ParseReport(reportPath, this);
+        _reports.Add(report);
+    }
+
+    public RealAssembly GetOrAddRealAssembly(string name)
+    {
+        Debug.Assert(!_frozen);
+        if (name.EndsWith(".dll", StringComparison.OrdinalIgnoreCase)) name = name[..^4];
+        if (_realAssemblies.TryGetValue(name, out var assembly)) return assembly;
+        assembly = new RealAssembly(name);
+        _realAssemblies.Add(name, assembly);
+        return assembly;
+    }
+
+    private void MapParsedToRealMethods()
+    {
+        foreach (var realSourceGroup in _reports.SelectMany(r => r.Assemblies)
+            .SelectMany(a => a.Types)
+            .SelectMany(t => t.Methods)
+            .Select(m => m.BoundingRange)
+            .OrderBy(br => br.RealSource.Order).ThenBy(br => br.Range).ThenBy(br => br.ParentMethod.Name)
+            .GroupBy(br => br.RealSource))
         {
-            foreach (var line in parent.Elements("lines").Elements("line"))
+            ParsedRange[][] boundingRangesPerReport = realSourceGroup
+                .GroupBy(boundingRange => boundingRange.ParentReport,
+                         (report, boundingRanges) => boundingRanges.ToArray())
+                .ToArray();
+            for (int outerReportIndex = 0; outerReportIndex < boundingRangesPerReport.Length; outerReportIndex++)
             {
-                var rangeCoverage = new RangeCoverage.Builder
+                ParsedRange[] outerBoundingRanges = boundingRangesPerReport[outerReportIndex];
+                for (int outerRangeIndex = 0; outerRangeIndex < outerBoundingRanges.Length; outerRangeIndex++)
                 {
-                    Status = CoverageStatus.NotCovered,
-                    StartLine = (int)line.Attribute("number")!,
-                    Hits = (int)line.Attribute("hits")!,
-                };
-                if (rangeCoverage.Hits != 0) rangeCoverage.Status = CoverageStatus.Covered;
-                ReadOnlySpan<char> conditionCoverage = (string?)line.Attribute("condition-coverage");
-                int pos = conditionCoverage.IsEmpty ? -1 : conditionCoverage.IndexOf('(');
-                if (pos >= 0)
-                {
-                    var span = conditionCoverage[(pos + 1)..];
-                    pos = span.IndexOf("/");
-                    rangeCoverage.CoveredBranches = int.Parse(span[..pos], CultureInfo.InvariantCulture);
-                    rangeCoverage.TotalBranches = int.Parse(span[(pos + 1)..span.IndexOf(')')], CultureInfo.InvariantCulture);
-                    if (rangeCoverage.CoveredBranches != rangeCoverage.TotalBranches) rangeCoverage.Status = CoverageStatus.Partial;
-                }
-                if (!conditionCoverage.IsEmpty)
-                {
-                    List<double>? conditions = null;
-                    foreach (var condition in line.Elements("conditions").Elements("condition"))
+                    ParsedRange outerRange = outerBoundingRanges[outerRangeIndex];
+                    if (outerRange.ParentMethod.RealMethod is not null) continue;
+                    RealMethod realMethod = outerRange.ParentAssembly.RealAssembly.CreateRealMethod(outerRange.ParentMethod);
+                    for (int innerReportIndex = outerReportIndex + 1;
+                        innerReportIndex < boundingRangesPerReport.Length;
+                        innerReportIndex++)
                     {
-                        var coverage = ((string?)condition.Attribute("coverage")).AsSpan().TrimEnd('%');
-                        if (!coverage.IsEmpty)
+                        ParsedRange[] innerBoundingRanges = boundingRangesPerReport[innerReportIndex];
+                        ParsedRange? candidate = null;
+                        long candidateMatchSize = 0;
+                        int candidateTypeDistance = 0;
+                        int candidateMethodDistance = 0;
+                        for (int innerRangeIndex = 0; innerRangeIndex < innerBoundingRanges.Length; innerRangeIndex++)
                         {
-                            conditions ??= [];
-                            conditions.Add(double.Parse(coverage, CultureInfo.InvariantCulture));
+                            ParsedRange innerRange = innerBoundingRanges[innerRangeIndex];
+                            if (innerRange.ParentMethod.RealMethod is not null) continue;
+                            Range intersection = outerRange.Range.Intersect(innerRange.Range);
+                            if (intersection.IsValid())
+                            {
+                                long matchSize = intersection.VirtualSize;
+                                int typeDistance = LevenshteinDistance(outerRange.ParentType.Name, innerRange.ParentType.Name);
+                                int methodDistance = LevenshteinDistance(outerRange.ParentMethod.Name, innerRange.ParentMethod.Name);
+                                if (candidate is null
+                                    || matchSize > candidateMatchSize
+                                    || (matchSize == candidateMatchSize
+                                        && (typeDistance < candidateTypeDistance
+                                            || (typeDistance == candidateTypeDistance && methodDistance < candidateMethodDistance))))
+                                {
+                                    candidate = innerRange;
+                                    candidateMatchSize = matchSize;
+                                    candidateTypeDistance = typeDistance;
+                                    candidateMethodDistance = methodDistance;
+                                }
+                            }
+                            else if (innerRange.Range.StartLine > outerRange.Range.EndLine)
+                            {
+                                break;
+                            }
+                        }
+                        if (candidate is not null)
+                        {
+                            realMethod.AddParsedMethod(candidate.ParentMethod);
                         }
                     }
-                    if (conditions is not null)
-                    {
-                        rangeCoverage.Conditions = new EquatableSequence<double>(conditions);
-                    }
                 }
-                fileInfo.AddRangeCoverage(rangeCoverage, container, report);
             }
         }
+    }
 
-        private void ParseDynamicCoverage(XElement root, string report)
+    private static int LevenshteinDistance(string s1, string s2)
+    {
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+        int[,] m = new int[s1.Length + 1, s2.Length + 1];
+#pragma warning restore CA1814 // Prefer jagged arrays over multidimensional
+        for (int i = 0; i <= s1.Length; i++) m[i, 0] = i;
+        for (int i = 0; i <= s2.Length; i++) m[0, i] = i;
+        for (int i = 1; i <= s1.Length; i++)
         {
-            foreach (var module in root.Elements("modules").Elements("module"))
+            for (int k = 1; k <= s2.Length; k++)
             {
-                string moduleName = (string)module.Attribute("name")!;
-                var sourcesById = new Dictionary<int, string>();
-                foreach (var source in module.Elements("source_files").Elements("source_file"))
-                {
-                    // Cannot use Add() here because dupes are possible.
-                    sourcesById[(int)source.Attribute("id")!] = (string)source.Attribute("path")!;
-                }
-                foreach (var function in module.Elements("functions").Elements("function"))
-                {
-                    string? @namespace = (string?)function.Attribute("namespace");
-                    if (!string.IsNullOrEmpty(@namespace)) @namespace += '.';
-                    string? typeName = (string?)function.Attribute("type_name");
-                    if (!string.IsNullOrEmpty(typeName)) typeName += '.';
-                    string container = $"{moduleName}:{@namespace}{typeName}{(string)function.Attribute("name")!}";
-                    ParseDynamicCoverageRanges(function, sourcesById, container, report);
-                }
+                int diff = (s1[i - 1] == s2[k - 1]) ? 0 : 1;
+                m[i, k] = Math.Min(
+                            Math.Min(
+                                m[i - 1, k] + 1,
+                                m[i, k - 1] + 1),
+                            m[i - 1, k - 1] + diff);
             }
         }
-
-        private void ParseDynamicCoverageRanges(XElement function, Dictionary<int, string> sourcesById, string container, string report)
-        {
-            int lastSourceId = -1;
-            FileInfo.Builder? fileInfo = null;
-            string fileName = "";
-            foreach (var range in function.Elements("ranges").Elements("range"))
-            {
-                int sourceId = (int)range.Attribute("source_id")!;
-                if (sourceId != lastSourceId)
-                {
-                    lastSourceId = sourceId;
-                    fileName = sourcesById[sourceId];
-                    _fileInfos.TryGetValue(fileName, out fileInfo);
-                }
-                if (fileInfo is null)
-                {
-                    fileInfo = new FileInfo.Builder { Name = fileName };
-                    _fileInfos.Add(fileName, fileInfo);
-                }
-                var rangeCoverage = new RangeCoverage.Builder
-                {
-                    Status = range.Attribute("covered")?.Value switch
-                    {
-                        "yes" => CoverageStatus.Covered,
-                        "partial" => CoverageStatus.Partial,
-                        _ => CoverageStatus.NotCovered,
-                    },
-                    StartLine = (int)range.Attribute("start_line")!,
-                    StartColumn = (int)range.Attribute("start_column")!,
-                    EndLine = (int)range.Attribute("end_line")!,
-                    EndColumn = (int)range.Attribute("end_column")!,
-                };
-                fileInfo.AddRangeCoverage(rangeCoverage, container, report);
-            }
-        }
+        return m[s1.Length, s2.Length];
     }
 }

@@ -7,4 +7,8 @@
     <TargetFramework>net10.0</TargetFramework>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <Product>Report Comparer</Product>
+  </PropertyGroup>
+
 </Project>

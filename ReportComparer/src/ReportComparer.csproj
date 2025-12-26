@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="resources/*" WithCulture="false" />
   </ItemGroup>
 
 </Project>
