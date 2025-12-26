@@ -13,7 +13,7 @@
 | Single-hit                 |    ✔    |   ✔  |       |
 | Hits per property accessor |    ✖<sup>1</sup> | ✔ | 1. Only if on separate lines. |
 | Simple type names          |   ❌    |   ✔  | For example, `int` instead of `System.Int32`. |
-| Nested type separator      |    ✔    |  ❌  | Needed by *ReportGenerator* to distinguish nested types and namespaces. |
+| Nested type separator in *Cobertura* report |    ✔    |  ❌  | Needed by *ReportGenerator* to distinguish nested types and namespaces. |
 | Inclusion/exclusion filters|    ✔    |   ✔  |       |
 | Static instrumentation     |    ✔    |   ✔  |       |
 | Dynamic instrumentation    |   ❌    |   ✔  |       |

@@ -48,4 +48,11 @@
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <Authors>Matthias Wolf, Mawosoft</Authors>
+    <Company>$(Authors)</Company>
+    <Copyright>Copyright (c) 2025 Matthias Wolf, Mawosoft</Copyright>
+    <Version>1.0.2-dev</Version>
+  </PropertyGroup>
+
 </Project>
