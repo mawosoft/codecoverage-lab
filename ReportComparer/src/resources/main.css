@@ -17,6 +17,7 @@
 :root {
     font-family: sans-serif;
     font-size: 0.875em;
+    line-height: 1.286em;
     --h1size: 1.5em; /* default 2em */
     --h2size: 1.3em; /* default 1.5em */
     --h3size: 1.15em; /* default 1.17em */
@@ -24,8 +25,8 @@
 
 a {
     text-decoration: none;
-    color: LinkText;
-    &:hover { text-decoration: underline; }
+    color: var(--text);
+    &:hover { color: LinkText; }
 }
 
 button.help {
@@ -36,7 +37,7 @@ button.help {
 
 footer { font-size: 0.86em; }
 
-pre {
+pre, code {
   font-family: monospace, monospace;
   font-size: 1em;
 }
@@ -64,7 +65,7 @@ summary:has(> h3)::marker { font-size: var(--h3size); }
         color: var(--text);
     }
 
-    a { color: hsl(210 100% 80%); }
+    a:hover { color: hsl(210 100% 80%); }
 
     button {
         background-color: var(--back);
@@ -113,14 +114,24 @@ button.help {
 }
 
 h2.help, h3.help { display: inline-block; }
+p.help { max-width: 900px; }
+
+table.help {
+    margin-block: 1em;
+    border-collapse: collapse;
+    > tbody > tr > td {
+        border: 1px solid var(--border);
+        padding: 3px 8px;
+    }
+}
 
 table.datagrid {
-    margin-block: 10px;
+    margin-block: 1em;
     border-collapse: collapse;
     > thead > tr > th,
     > tbody > tr > td {
         border: 1px solid var(--border);
-        padding: 2px 5px;
+        padding: 3px 8px;
     }
     > tbody > tr > td {
         vertical-align: top;
@@ -147,9 +158,10 @@ table.sourceLines {
     border-collapse: collapse;
     pre { margin-block: 0px; }
     > tbody > tr > td {
+        line-height: normal;
         vertical-align: top;
         &:nth-child(3) {
-            padding-right: 10px;
+            padding-inline: 8px;
             text-align: right;
         }
     }
@@ -158,13 +170,4 @@ table.sourceLines {
 table.lineMarginGlyphs {
     border-collapse: separate;
     border-spacing: 2px 0px;
-}
-
-table.legend {
-    margin-block: 10px;
-    border-collapse: collapse;
-    > tbody > tr > td {
-        border: 1px solid var(--border);
-        padding: 5px 10px;
-    }
 }

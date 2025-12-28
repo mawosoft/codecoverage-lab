@@ -17,6 +17,7 @@ internal sealed class ReportComparison
 
     public IReadOnlyCollection<ParsedReport> Reports => _reports;
     public IReadOnlyCollection<RealAssembly> RealAssemblies => _realAssemblies.Values;
+    public bool Frozen => _frozen;
 
     public void Freeze()
     {

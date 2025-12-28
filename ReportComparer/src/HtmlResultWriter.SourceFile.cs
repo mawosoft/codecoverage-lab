@@ -15,7 +15,13 @@ internal sealed partial class HtmlResultWriter
         _writer.WriteLine($"<h1>{WebUtility.HtmlEncode(_realSource.Name)}</h1>");
         _writer.WriteLine($"<p>Assembly: {WebUtility.HtmlEncode(_realSource.ParentAssembly.Name)}</p>");
 
-        _writer.WriteLine("<details><summary><h2>Type and Method Names</h2></summary>");
+        _writer.WriteLine("""
+            <details><summary><h2>Type and Method Names</h2> <button class="help" data-for="help1">?</button></summary>
+            <p id="help1" class="help hidden">
+            The table below uses the plus sign (+) as separator for nested types, but only if the associated reports
+            provide a way to distinguish between type and namespace nesting.
+            </p>
+            """);
         WriteParsedNames();
         _writer.WriteLine("</details>");
 
@@ -24,8 +30,8 @@ internal sealed partial class HtmlResultWriter
         _writer.WriteLine("</details>");
 
         _writer.WriteLine("""
-            <h2 class="help">Coverage</h2> <button class="help" data-for="help1">?</button>
-            <div id="help1" class="hidden"><table class="legend"><tbody>
+            <h2 class="help">Coverage</h2> <button class="help" data-for="help2">?</button>
+            <div id="help2" class="hidden"><table class="help"><tbody>
             <tr>
               <td><table class="lineMarginGlyphs"><tbody>
                   <tr><td class=blank>&nbsp;</td><td class=green>&nbsp;</td><td class=red>&nbsp;</td><td class=yellow>&nbsp;</td></tr>

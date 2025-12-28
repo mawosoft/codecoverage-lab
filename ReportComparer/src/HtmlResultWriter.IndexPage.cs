@@ -22,7 +22,7 @@ internal sealed partial class HtmlResultWriter
         _writer.WriteLine("<h2>Report Groups</h2>");
         _writer.WriteLine("""
             <details open><summary><h3 class="help">By Content</h3> <button class="help" data-for="help1">?</button></summary>
-            <p id="help1" class="hidden">
+            <p id="help1" class="help hidden">
             Assembly names, source file names, nested type separators, and the order of data elements have been normalized
             before comparing the reports. Apart from these normalizations, reports in the same group are identical.
             Consider removing the duplicates for better readability of the comparison results.
@@ -114,7 +114,14 @@ internal sealed partial class HtmlResultWriter
     {
         _writer.WriteLine("""
             <table class="datagrid zebra">
-            <thead><tr><th colspan="2">Source Files</th><th>Range<br>Overlaps</th><th>Reports</th></tr></thead>
+            <thead><tr>
+            <th colspan="2">Source Files</th>
+            <th>Range<br />Overlaps</th>
+            <th>Name<br />Groups</th>
+            <th>Coverage<br />Groups</th>
+            <th>Line Status<br />Groups</th>
+            <th>Reports</th>
+            </tr></thead>
             """);
         int index = 0;
         foreach (var realAssembly in _reportComparison.RealAssemblies)
@@ -124,7 +131,7 @@ internal sealed partial class HtmlResultWriter
                 kvp => kvp.Value?.FullName,
                 (name, g) => (name, reports: g.Select(g => g.Key).ToArray())))
             {
-                _writer.Write($"""<tr><td colspan="3">{HtmlEncodeName(name)}</td><td>""");
+                _writer.Write($"""<tr><td colspan="6">{HtmlEncodeName(name)}</td><td>""");
                 WriteReportGroup(reports);
                 _writer.WriteLine("</td></tr>");
             }
@@ -135,20 +142,38 @@ internal sealed partial class HtmlResultWriter
                     .OrderBy(g => g.Key)
                     .Select(g => (missing: g.Key, reports: g.Select(kvp => kvp.Key).ToArray()))
                     .ToArray();
-                int? overlaps = realSource.LinesCoverage.Count(line => line.HasOverlaps);
-                if (overlaps == 0) overlaps = null;
+                int? overlapCount = realSource.LinesCoverage.Count(line => line.HasOverlaps);
+                if (overlapCount == 0) overlapCount = null;
+                int nameGroupCount = realSource.ParsedSources.DistinctBy(kvp => EquatableSequence.Create(
+                    kvp.Value?.LinesCoverage.SelectMany(line => line.ValuesOrDefault)
+                        .Select(pr => pr.ParentMethod)
+                        .DistinctBy(m => m.RealMethod)
+                        .Select(m => (m.RealMethod, m.ParentType.Name, m.Name))
+                        .ToArray()))
+                    .Count();
+                int coverageGroupCount = realSource.ParsedSources.DistinctBy(kvp => EquatableSequence.Create(
+                    kvp.Value?.LinesCoverage))
+                    .Count();
+                int statusGroupCount = realSource.ParsedSources.DistinctBy(kvp => EquatableSequence.Create(
+                    kvp.Value?.LinesCoverage.Select(line => ParsedRange.AggregateStatus(line.ValuesOrDefault))
+                        .ToArray()))
+                    .Count();
                 _writer.Write($"""
-                    <tbody>
-                    <tr><td class="right"{Rowspan(parsed.Length)}>{++index}</td>
-                    <td><a href="{WebUtility.HtmlEncode(_sourceFileTargetNames[realSource])}"
+                    <tbody class="right">
+                    <tr><td{Rowspan(parsed.Length)}>{++index}</td>
+                    <td class="left"><a href="{WebUtility.HtmlEncode(_sourceFileTargetNames[realSource])}"
                     >{WebUtility.HtmlEncode(realSource.Name)}</a></td>
-                    <td class=right{Rowspan(parsed.Length)}>{overlaps}</td><td>
+                    <td{Rowspan(parsed.Length)}>{overlapCount}</td>
+                    <td{Rowspan(parsed.Length)}>{nameGroupCount}</td>
+                    <td{Rowspan(parsed.Length)}>{coverageGroupCount}</td>
+                    <td{Rowspan(parsed.Length)}>{statusGroupCount}</td>
+                    <td class="left">
                     """);
                 WriteReportGroup(parsed[0].reports);
                 _writer.WriteLine("</td></tr>");
                 if (parsed.Length > 1)
                 {
-                    _writer.WriteLine($"<tr><td>{Missing}</td><td>");
+                    _writer.WriteLine($"""<tr><td class="left">{Missing}</td><td class="left">""");
                     WriteReportGroup(parsed[1].reports);
                     _writer.WriteLine("</td></tr>");
                 }

@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -16,6 +17,7 @@ internal sealed partial class HtmlResultWriter
     private readonly ReportComparison _reportComparison;
     private readonly string _targetDirectoryPath;
     private readonly Dictionary<RealSource, string> _sourceFileTargetNames;
+    private readonly Dictionary<ParsedReport, string> _reportFileLinks;
     private readonly Dictionary<string, string> _hiddenReportGroups = [];
     private int _uniqueId;
     private RealSource _realSource = null!;
@@ -24,12 +26,20 @@ internal sealed partial class HtmlResultWriter
 
     public HtmlResultWriter(ReportComparison reportComparison, string targetDirectoryPath)
     {
+        Debug.Assert(reportComparison.Frozen);
         _reportComparison = reportComparison;
-        _targetDirectoryPath = targetDirectoryPath;
+        _targetDirectoryPath = Path.GetFullPath(targetDirectoryPath);
         _sourceFileTargetNames = reportComparison.RealAssemblies.SelectMany(ra => ra.RealSources)
             .ToDictionary(
                 rs => rs,
                 rs => PathHelper.SanitizeFileName(rs.ParentAssembly.Name + '_' + rs.Name + ".html"));
+        _reportFileLinks = _reportComparison.Reports.ToDictionary(r => r, r =>
+        {
+            string relative = Path.GetRelativePath(targetDirectoryPath, r.FullName);
+            return Path.IsPathRooted(relative)
+                ? WebUtility.HtmlEncode(r.Name)
+                : $"""<a href="{WebUtility.HtmlEncode(relative.Replace('\\', '/'))}">{WebUtility.HtmlEncode(r.Name)}</a>""";
+        });
     }
 
     public void WriteResult()
@@ -181,14 +191,18 @@ internal sealed partial class HtmlResultWriter
     private void WriteReportGroup(ParsedReport[] reports)
     {
         if (reports.Length == 0) return;
+        int skip = 0;
         if (reports.Length == _reportComparison.Reports.Count)
         {
             _writer.Write("(all)");
-            return;
         }
-        _writer.Write(WebUtility.HtmlEncode(reports[0].Name));
-        if (reports.Length == 1) return;
-        string html = string.Join("", reports.Skip(1).Select(r => "<br />" + WebUtility.HtmlEncode(r.Name)));
+        else
+        {
+            _writer.Write(_reportFileLinks[reports[0]]);
+            if (reports.Length == 1) return;
+            skip = 1;
+        }
+        string html = string.Join("", reports.Skip(skip).Select(r => "<br />" + _reportFileLinks[r]));
         if (!_hiddenReportGroups.TryGetValue(html, out string? idSource))
         {
             idSource = NextId();
