@@ -5,64 +5,57 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using ReportComparer.Helpers;
 
 namespace ReportComparer;
 
 [DebuggerDisplay("{Name,nq}")]
 internal sealed class RealAssembly
 {
-    private Dictionary<ParsedReport, ParsedAssembly?> _parsedAssemblies = new(ReferenceEqualityComparer.Instance);
+    private List<ParsedAssembly> _parsedAssemblies = [];
+    private readonly Dictionary<string, RealType> _realTypes = [];
     private Dictionary<string, RealSource> _realSources = new(StringComparer.OrdinalIgnoreCase);
-    private List<RealType> _realTypes = [];
-    private int _frozenState;
+    private bool _frozen;
 
+    public ReportComparison ReportComparison { get; }
     public string Name { get; }
     public int Order { get; set; }
-    public IReadOnlyDictionary<ParsedReport, ParsedAssembly?> ParsedAssemblies => _parsedAssemblies;
+    public IReadOnlyCollection<ParsedAssembly> ParsedAssemblies => _parsedAssemblies;
     public IReadOnlyCollection<RealSource> RealSources => _realSources.Values;
-    public IReadOnlyCollection<RealType> RealTypes => _realTypes;
+    public IReadOnlyCollection<ParsedReport> Reports { get; private set; } = null!;
 
-    public RealAssembly(string name)
+    public RealAssembly(ReportComparison reportComparison, string name)
     {
+        ReportComparison = reportComparison;
         Name = name;
-    }
-
-    public void FreezeParsing(IEnumerable<ParsedReport> allReports)
-    {
-        Debug.Assert(_frozenState == 0);
-        Debug.Assert(_parsedAssemblies.All(kvp => kvp.Key.Order != 0));
-        _realSources = _realSources.OrderBy(kvp => kvp.Value.Name, StringComparer.OrdinalIgnoreCase)
-            .ToDictionary(_realSources.Comparer);
-        foreach (var report in allReports) _parsedAssemblies.TryAdd(report, null);
-        _parsedAssemblies = _parsedAssemblies.OrderBy(kvp => kvp.Key.Order).ToDictionary(_parsedAssemblies.Comparer);
-        _frozenState = 1;
     }
 
     public void Freeze()
     {
-        Debug.Assert(_frozenState == 1);
+        Debug.Assert(!_frozen);
+        Debug.Assert(_parsedAssemblies.All(a => a.ParentReport.Order != 0));
+        Debug.Assert(_realSources.Values.All(s => s.Order != 0));
+        _parsedAssemblies = _parsedAssemblies.OrderBy(a => a.ParentReport.Order).ToList();
+        _realSources = _realSources.OrderBy(kvp => kvp.Value.Order).ToDictionary(_realSources.Comparer);
+        Reports = _parsedAssemblies.Select(a => a.ParentReport).ToArray();
+        Debug.Assert(Reports.Count == Reports.Distinct().Count());
         CalculateNamespaces();
-        foreach (var realType in _realTypes) realType.Freeze(_parsedAssemblies.Keys);
-        foreach (var realSource in _realSources.Values) realSource.Freeze(_parsedAssemblies.Keys);
-        Debug.Assert(_realTypes.All(t => t.RealMethods.First().BoundingRange.source.Order != 0));
-        _realTypes = _realTypes.OrderBy(t => t.RealMethods.First().BoundingRange.source.Order)
-            .ThenBy(t => t.RealMethods.First().BoundingRange.range)
-            .ThenBy(t => t.Name)
-            .ToList();
-        for (int i = 0; i < _realTypes.Count; i++) _realTypes[i].Order = i;
-        _frozenState = 2;
+        // TODO do we need to sort real types?
+        foreach (var realType in _realTypes.Values) realType.Freeze();
+        foreach (var realSource in _realSources.Values) realSource.Freeze();
+        _frozen = true;
     }
 
     public void AddParsedAssembly(ParsedAssembly parsedAssembly)
     {
-        Debug.Assert(_frozenState == 0);
+        Debug.Assert(!_frozen);
         Debug.Assert(parsedAssembly.RealAssembly == this);
-        _parsedAssemblies.Add(parsedAssembly.ParentReport, parsedAssembly);
+        _parsedAssemblies.Add(parsedAssembly);
     }
 
     public RealSource GetOrAddRealSource(string fullName)
     {
-        Debug.Assert(_frozenState == 0);
+        Debug.Assert(!_frozen);
         fullName = Path.GetFullPath(fullName);
         if (_realSources.TryGetValue(fullName, out var source)) return source;
         source = new RealSource(this, fullName);
@@ -70,67 +63,27 @@ internal sealed class RealAssembly
         return source;
     }
 
-    public RealMethod CreateRealMethod(ParsedMethod parsedMethod)
+    public RealType GetOrAddRealType(string name)
     {
-        Debug.Assert(_frozenState == 1);
-        Debug.Assert(parsedMethod.RealMethod is null);
-        Debug.Assert(parsedMethod.ParentAssembly.RealAssembly == this);
-        RealType? realType = parsedMethod.ParentType.RealType;
-        if (realType is null)
-        {
-            realType = new RealType(this);
-            _realTypes.Add(realType);
-        }
-        var realMethod = new RealMethod(realType);
-        realType.AddRealMethod(realMethod);
-        realMethod.AddParsedMethod(parsedMethod);
-        return realMethod;
+        Debug.Assert(!_frozen);
+        if (_realTypes.TryGetValue(name, out var type)) return type;
+        type = new RealType(this, name);
+        _realTypes.Add(name, type);
+        return type;
     }
 
     private void CalculateNamespaces()
     {
-        HashSet<string> namespaces = [];
-        HashSet<string> candidates = [];
-        foreach (var realType in _realTypes)
+        var parsedTypeNames = _realTypes.Values.SelectMany(rt => rt.ParsedTypes).Select(pt => pt.Name).ToHashSet();
+        var namespaces = parsedTypeNames.Select(name => name[..SymbolNameHelper.NamespaceLength(name)]).ToHashSet();
+        namespaces.ExceptWith(parsedTypeNames);
+        namespaces.Remove("");
+        var orderedNamespaces = namespaces.OrderByDescending(s => s.Length).ToArray();
+        foreach (var realType in _realTypes.Values)
         {
-            ReadOnlySpan<char> name = realType.Name;
-            int pos = name.IndexOf('+');
-            if (pos >= 0)
+            for (int i = 0; i < orderedNamespaces.Length; i++)
             {
-                name = name[..pos];
-                pos = name.LastIndexOf('.');
-                if (pos >= 0) namespaces.Add(name[..pos].ToString());
-            }
-            else if ((pos = name.LastIndexOf('.')) >= 0)
-            {
-                candidates.Add(name[..pos].ToString());
-            }
-        }
-        candidates.ExceptWith(namespaces);
-        foreach (var candidate in candidates)
-        {
-            bool verified = true;
-            foreach (var realType in _realTypes)
-            {
-                if (realType.Name == candidate)
-                {
-                    verified = false;
-                    break;
-                }
-            }
-            if (verified) namespaces.Add(candidate);
-        }
-        foreach (var @namespace in namespaces.OrderByDescending(s => s.Length))
-        {
-            foreach (var realType in _realTypes)
-            {
-                if (realType.Namespace.Length == 0
-                    && realType.Name.Length > @namespace.Length
-                    && realType.Name[@namespace.Length] == '.'
-                    && realType.Name.StartsWith(@namespace, StringComparison.Ordinal))
-                {
-                    realType.Namespace = @namespace;
-                }
+                if (realType.TrySetNamespace(orderedNamespaces[i])) break;
             }
         }
     }

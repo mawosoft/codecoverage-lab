@@ -10,39 +10,23 @@ namespace ReportComparer;
 [DebuggerDisplay("{Status}, {Range} in {RealSource}")]
 internal sealed class ParsedRange : IEquatable<ParsedRange>
 {
-    public ParsedReport ParentReport => ParentAssembly.ParentReport;
-    public ParsedAssembly ParentAssembly => ParentType.ParentAssembly;
-    public ParsedType ParentType => ParentMethod.ParentType;
-    public ParsedMethod ParentMethod { get; }
     public ParsedSource ParentSource { get; }
-    public RealSource RealSource => ParentSource.RealSource;
     public Range Range { get; }
     public CoverageStatus Status { get; }
     public CoberturaCoverage? Cobertura { get; }
 
+    public RealSource RealSource => ParentSource.RealSource;
+
     public ParsedRange(
-        ParsedMethod parentMethod,
         ParsedSource parentSource,
         Range range,
         CoverageStatus status,
         CoberturaCoverage? coberturaCoverage)
     {
-        ParentMethod = parentMethod;
         ParentSource = parentSource;
         Range = range;
         Status = status;
         Cobertura = coberturaCoverage;
-    }
-
-    public bool Equals([NotNullWhen(true)] ParsedRange? other)
-    {
-        if (ReferenceEquals(this, other)) return true;
-        if (other is null) return false;
-        if (!ReferenceEquals(RealSource, other.RealSource)) return false;
-        if (Range != other.Range) return false;
-        if (Status != other.Status) return false;
-        if (Cobertura != other.Cobertura) return false;
-        return true;
     }
 
     public static CoverageStatus AggregateStatus(IEnumerable<ParsedRange> parsedRanges)
@@ -71,10 +55,21 @@ internal sealed class ParsedRange : IEquatable<ParsedRange>
             for (int k = i + 1; k < parsedRanges.Length; k++)
             {
                 var r = pr.Range.Intersect(parsedRanges[k].Range);
-                if (r.IsValid() && r.Overlaps(lineNumber)) return true;
+                if (r.IsValid && r.Overlaps(lineNumber)) return true;
             }
         }
         return false;
+    }
+
+    public bool Equals([NotNullWhen(true)] ParsedRange? other)
+    {
+        if (ReferenceEquals(this, other)) return true;
+        if (other is null) return false;
+        if (!ReferenceEquals(RealSource, other.RealSource)) return false;
+        if (Range != other.Range) return false;
+        if (Status != other.Status) return false;
+        if (Cobertura != other.Cobertura) return false;
+        return true;
     }
 
     public override bool Equals([NotNullWhen(true)] object? obj) => Equals(obj as ParsedRange);

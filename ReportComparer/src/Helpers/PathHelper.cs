@@ -41,6 +41,8 @@ internal static class PathHelper
     }
 
     // See https://github.com/dotnet/runtime/blob/main/src/libraries/Common/src/System/IO/PathInternal.cs
+    // Note that the original EqualStartingCharacterCount() method stops at mismatching directory separator
+    // chars, e.g. aa/bb/foo and aa\bb\foo return 2 instead of 6.
     public static int GetCommonPathLength(string first, string second, bool ignoreCase = true)
     {
         int commonChars = EqualStartingCharacterCount(first, second, ignoreCase: ignoreCase);
@@ -57,19 +59,63 @@ internal static class PathHelper
         return commonChars;
     }
 
+    // Compare paths and sort shallower paths first.
+    public static int ComparePath(string? left, string? right, bool ignoreCase = true)
+    {
+        if (ReferenceEquals(left, right)) return 0;
+        if (left is null) return -1;
+        if (right is null) return 1;
+        int commonChars = EqualStartingCharacterCount(left, right, ignoreCase: ignoreCase);
+        int leftPos = commonChars;
+        while (leftPos < left.Length && !IsDirectorySeparator(left[leftPos])) leftPos++;
+        int rightPos = commonChars;
+        while (rightPos < right.Length && !IsDirectorySeparator(right[rightPos])) rightPos++;
+        StringComparison comparisonType = ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal;
+        if (leftPos < left.Length)
+        {
+            if (rightPos < right.Length)
+            {
+                int r = string.Compare(left, commonChars, right, commonChars, Math.Min(leftPos, rightPos) - commonChars, comparisonType);
+                if (r != 0) return r;
+                r = leftPos.CompareTo(rightPos);
+                if (r != 0) return r;
+                commonChars += leftPos + 1;
+            }
+            else
+            {
+                return 1;
+            }
+        }
+        else if (rightPos < right.Length)
+        {
+            return -1;
+        }
+        int r2 = string.Compare(left, commonChars, right, commonChars, Math.Min(left.Length, right.Length) - commonChars, comparisonType);
+        if (r2 != 0) return r2;
+        return left.Length.CompareTo(right.Length);
+    }
+
     private static int EqualStartingCharacterCount(string? first, string? second, bool ignoreCase)
     {
         if (string.IsNullOrEmpty(first) || string.IsNullOrEmpty(second)) return 0;
         int commonLength = first.AsSpan().CommonPrefixLength(second);
+        int maxLength = Math.Min(first.Length, second.Length);
         if (ignoreCase)
         {
-            for (; (uint)commonLength < (uint)first.Length; commonLength++)
+            while (commonLength < maxLength
+                   && (char.ToUpperInvariant(first[commonLength]) == char.ToUpperInvariant(second[commonLength])
+                       || (IsDirectorySeparator(first[commonLength]) && IsDirectorySeparator(second[commonLength]))))
             {
-                if (commonLength >= second.Length ||
-                    char.ToUpperInvariant(first[commonLength]) != char.ToUpperInvariant(second[commonLength]))
-                {
-                    break;
-                }
+                commonLength++;
+            }
+        }
+        else
+        {
+            while (commonLength < maxLength
+                   && (first[commonLength] == second[commonLength]
+                       || (IsDirectorySeparator(first[commonLength]) && IsDirectorySeparator(second[commonLength]))))
+            {
+                commonLength++;
             }
         }
         return commonLength;

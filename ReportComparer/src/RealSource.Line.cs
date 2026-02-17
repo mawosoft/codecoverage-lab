@@ -9,8 +9,8 @@ namespace ReportComparer;
 internal sealed partial class RealSource
 {
 #pragma warning disable CA1815 // Override equals and operator equals on value types
+    [DebuggerDisplay("{_rangeGroups}")]
     internal readonly struct Line
-#pragma warning restore CA1815 // Override equals and operator equals on value types
     {
         private readonly IReadOnlyCollection<(ParsedRange[] parsedRanges, ParsedReport[] reports)>? _rangeGroups;
 
@@ -28,7 +28,17 @@ internal sealed partial class RealSource
             }
         }
 
-        public Line(int number, IEnumerable<(IReadOnlyCollection<ParsedRange>? parsedRanges, IEnumerable<ParsedReport> reports)> rangeGroups)
+        public bool HasColumns
+        {
+            get
+            {
+                if (_rangeGroups is null) return false;
+                int n = Number;
+                return _rangeGroups.Any(rg => rg.parsedRanges.Any(pr => pr.Range.StartColumn != 0));
+            }
+        }
+
+        public Line(int number, IEnumerable<(ParsedRange[] parsedRanges, ParsedReport[] reports)> rangeGroups, int maxReportCount)
         {
             Number = number;
             using var e = rangeGroups.GetEnumerator();
@@ -37,11 +47,11 @@ internal sealed partial class RealSource
             if (!hasNext) return;
             var (parsedRanges, reports) = e.Current;
             hasNext = e.MoveNext();
-            if (!hasNext && (parsedRanges is null || parsedRanges.Count == 0))
+            if (!hasNext && parsedRanges.Length == 0)
             {
-                if (reports.First().ReportComparison.Reports.Count == reports.Count()) return;
+                if (reports.Length == maxReportCount) return;
             }
-            _rangeGroups = rangeGroups.Select(vt => (vt.parsedRanges?.ToArray() ?? [], vt.reports.ToArray())).ToArray();
+            _rangeGroups = rangeGroups.ToArray();
         }
     }
 }

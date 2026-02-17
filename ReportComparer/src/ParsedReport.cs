@@ -23,7 +23,7 @@ internal sealed class ParsedReport
     public int Order { get; set; }
     public ReportType ReportType { get; }
     public IReadOnlyCollection<ParsedAssembly> Assemblies => _assemblies;
-    public ReportedRootMetrics? ReportedMetrics { get; set; } // Cobertura only
+    public ReportedMetrics? ReportedMetrics { get; set; } // Cobertura only
     public IReadOnlyCollection<string> SourceRoots => _sourceRoots; // Cobertura only
     public IReadOnlyCollection<string> SkippedModules => _skippedModules; // DynamicCoverage only
 
@@ -38,10 +38,10 @@ internal sealed class ParsedReport
     {
         Debug.Assert(!_frozen);
         Debug.Assert(_assemblies.All(a => a.RealAssembly.Order != 0));
-        foreach (var assembly in _assemblies) assembly.Freeze();
         _assemblies = _assemblies.OrderBy(a => a.RealAssembly.Order).ToList();
         _skippedModules = _skippedModules.Order().ToHashSet();
-        _sourceRoots = _sourceRoots.Order().ToHashSet(_sourceRoots.Comparer);
+        _sourceRoots = _sourceRoots.Order(StringComparer.OrdinalIgnoreCase).ToHashSet(_sourceRoots.Comparer);
+        foreach (var assembly in _assemblies) assembly.Freeze();
         _frozen = true;
     }
 
@@ -76,17 +76,14 @@ internal sealed class ParsedReport
         public bool Equals(ParsedReport? x, ParsedReport? y)
         {
             if (ReferenceEquals(x, y)) return true;
-            if (y is null) return false;
-            Debug.Assert(x!._frozen);
+            if (x is null || y is null) return false;
+            Debug.Assert(x._frozen);
             Debug.Assert(y._frozen);
-            if (x!.ReportType != y.ReportType) return false;
-            if (EquatableSequence.Create(x._assemblies) != EquatableSequence.Create(y._assemblies)) return false;
+            if (x.ReportType != y.ReportType) return false;
             if (x.ReportedMetrics != y.ReportedMetrics) return false;
-            if (EquatableSequence.Create(x._skippedModules) != EquatableSequence.Create(y._skippedModules))
-                return false;
-            if (EquatableSequence.Create(x._sourceRoots) != EquatableSequence.Create(y._sourceRoots))
-                return false;
-            return true;
+            if (!x._assemblies.SequenceEqual(y._assemblies)) return false;
+            if (!x._sourceRoots.SetEquals(y._sourceRoots)) return false;
+            return x._skippedModules.SequenceEqual(y._skippedModules);
         }
 
         public int GetHashCode([DisallowNull] ParsedReport? obj)
@@ -95,9 +92,10 @@ internal sealed class ParsedReport
             Debug.Assert(obj._frozen);
             return HashCode.Combine(
                 obj.ReportType,
-                EquatableSequence.Create(obj._assemblies),
                 obj.ReportedMetrics,
-                EquatableSequence.Create(obj._skippedModules));
+                EquatableSequence.Create(obj._assemblies),
+                EquatableSequence.Create(obj._skippedModules),
+                EquatableSet.Create(obj._sourceRoots));
         }
     }
 }

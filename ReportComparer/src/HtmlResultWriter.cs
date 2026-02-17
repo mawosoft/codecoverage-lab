@@ -6,25 +6,26 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Text;
 using ReportComparer.Helpers;
 
 namespace ReportComparer;
 
 internal sealed partial class HtmlResultWriter
 {
-    private const string Missing = "(missing)";
-
     private readonly ReportComparison _reportComparison;
     private readonly string _targetDirectoryPath;
     private readonly Dictionary<RealSource, string> _sourceFileTargetNames;
     private readonly Dictionary<ParsedReport, string> _reportFileLinks;
-    private readonly Dictionary<string, string> _hiddenReportGroups = [];
+    private readonly string? _homeNavig;
+    private readonly Dictionary<EquatableSequence<ParsedReport>, (string id, string html)> _hiddenReportGroups = [];
+    private readonly StringBuilder _scratchBuilder = new(512);
     private int _uniqueId;
     private RealSource _realSource = null!;
     private StreamWriter _writer = null!;
     private StreamReader _reader = null!;
 
-    public HtmlResultWriter(ReportComparison reportComparison, string targetDirectoryPath)
+    public HtmlResultWriter(ReportComparison reportComparison, string targetDirectoryPath, string? homeLink, string? homeText)
     {
         Debug.Assert(reportComparison.Frozen);
         _reportComparison = reportComparison;
@@ -37,9 +38,13 @@ internal sealed partial class HtmlResultWriter
         {
             string relative = Path.GetRelativePath(targetDirectoryPath, r.FullName);
             return Path.IsPathRooted(relative)
-                ? WebUtility.HtmlEncode(r.Name)
-                : $"""<a href="{WebUtility.HtmlEncode(relative.Replace('\\', '/'))}">{WebUtility.HtmlEncode(r.Name)}</a>""";
+                ? Encode(r.Name)
+                : $"""<a href="{Encode(relative.Replace('\\', '/'))}">{Encode(r.Name)}</a>""";
         });
+        if (homeLink is not null)
+        {
+            _homeNavig = $"""<a href="{Encode(homeLink)}">{Encode(homeText ?? "Home")}</a> &nbsp;&gt;&nbsp; """;
+        }
     }
 
     public void WriteResult()
@@ -86,13 +91,13 @@ internal sealed partial class HtmlResultWriter
 
     private void WriteHtmlStart(string title)
     {
-        title = WebUtility.HtmlEncode(title);
+        title = Encode(title);
         _writer.WriteLine($"""
             <!DOCTYPE html>
             <html lang="en"><head>
             <meta charset="utf-8" />
             <meta name="viewport" content="width=device-width, initial-scale=1">
-            <title>{title}</title>
+            <title>{Encode(title)}</title>
             <link rel="stylesheet" type="text/css" href="main.css" />
             </head>
             <body>
@@ -102,149 +107,86 @@ internal sealed partial class HtmlResultWriter
     private void WriteHtmlEnd()
     {
         _writer.WriteLine("""
-            <footer><br /><hr />
-            <a href="https://github.com/mawosoft/codecoverage-lab">Copyright (c) 2025 Matthias Wolf, Mawosoft</a>
+            <footer>
+            <br /><hr />
+            <a href="https://github.com/mawosoft/codecoverage-lab">Copyright (c) 2026 Matthias Wolf, Mawosoft</a>
             </footer>
+            <div style="display: none;">
             """);
-        _writer.WriteLine("""<div style="display: none;">""");
-        foreach (var kvp in _hiddenReportGroups)
+        foreach ((string id, string html) in _hiddenReportGroups.Values)
         {
-            _writer.WriteLine($"""<span id="{kvp.Value}">{kvp.Key}</span>""");
+            _writer.WriteLine($"""<span id="{id}">{html}</span>""");
         }
         _writer.WriteLine("""
             </div>
             <script src="main.js"></script>
-            </body></html>
+            </body>
+            </html>
             """);
     }
 
-    private void WriteMetricsHeaderCells()
+    private string ReportGroup(IEnumerable<ParsedReport> reports)
     {
-        _writer.Write("""
-            <th>Block Coverage</th>
-            <th>Line Coverage</th>
-            <th>Branch Rate</th>
-            <th>Complexity</th>
-            <th>Blocks Covered</th>
-            <th>Blocks Not Covered</th>
-            <th>Lines Covered</th>
-            <th>Lines Partially Covered</th>
-            <th>Lines Not Covered</th>
-            """);
-    }
-
-    private void WriteRootMetricsHeaderCells()
-    {
-        _writer.Write("""
-            <th>Line Rate</th>
-            <th>Branch Rate</th>
-            <th>Complexity</th>
-            <th>Lines Covered</th>
-            <th>Lines Valid</th>
-            <th>Branches Covered</th>
-            <th>Branches Valid</th>
-            """);
-    }
-
-    private void WriteMetricsDataCells(ReportedMetrics? metrics)
-    {
-        if (metrics is null)
+        bool owned = false;
+        if (reports is not IReadOnlyCollection<ParsedReport> reportCollection)
         {
-            _writer.Write("<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>");
+            reportCollection = reports.ToArray();
+            owned = true;
         }
-        else
-        {
-            _writer.Write($"""
-                <td>{metrics.BlockCoverage}</td>
-                <td>{metrics.LineCoverage}</td>
-                <td>{metrics.BranchRate}</td>
-                <td>{metrics.Complexity}</td>
-                <td>{metrics.BlocksCovered}</td>
-                <td>{metrics.BlocksNotCovered}</td>
-                <td>{metrics.LinesCovered}</td>
-                <td>{metrics.LinesPartiallyCovered}</td>
-                <td>{metrics.LinesNotCovered}</td>
-                """);
-        }
-    }
-
-    private void WriteRootMetricsDataCells(ReportedRootMetrics? metrics)
-    {
-        if (metrics is null)
-        {
-            _writer.Write("<td></td><td></td><td></td><td></td><td></td><td></td><td></td>");
-        }
-        else
-        {
-            _writer.Write($"""
-                <td>{metrics.LineRate}</td>
-                <td>{metrics.BranchRate}</td>
-                <td>{metrics.Complexity}</td>
-                <td>{metrics.LinesCovered}</td>
-                <td>{metrics.LinesValid}</td>
-                <td>{metrics.BranchesCovered}</td>
-                <td>{metrics.BranchesValid}</td>
-                """);
-        }
-    }
-
-    private void WriteReportGroup(ParsedReport[] reports)
-    {
-        if (reports.Length == 0) return;
+        if (reportCollection.Count == 0) return "";
+        string first = "(all)";
         int skip = 0;
-        if (reports.Length == _reportComparison.Reports.Count)
+        if (reportCollection.Count != _reportComparison.Reports.Count)
         {
-            _writer.Write("(all)");
-        }
-        else
-        {
-            _writer.Write(_reportFileLinks[reports[0]]);
-            if (reports.Length == 1) return;
+            first = _reportFileLinks[reportCollection.First()];
+            if (reportCollection.Count == 1) return first;
             skip = 1;
         }
-        string html = string.Join("", reports.Skip(skip).Select(r => "<br />" + _reportFileLinks[r]));
-        if (!_hiddenReportGroups.TryGetValue(html, out string? idSource))
+        var key = EquatableSequence.Create(reportCollection);
+        if (!_hiddenReportGroups.TryGetValue(key, out var group))
         {
-            idSource = NextId();
-            _hiddenReportGroups.Add(html, idSource);
+            group = (NextUniqueId(), string.Join("", reportCollection.Skip(skip).Select(r => "<br />" + _reportFileLinks[r])));
+            if (!owned) key = EquatableSequence.Create(reportCollection.ToArray());
+            _hiddenReportGroups.Add(key, group);
         }
-        string idFor = NextId();
-        _writer.WriteLine($"""
-             <button class ="small top" data-for="{idFor}">… {reports.Length}</button>
-            <span id="{idFor}" class="hidden" data-source="{idSource}"></span>
-            """);
+        string idFor = NextUniqueId();
+        return $"""
+            {first}
+            <button class ="small top" data-for="{idFor}">… {reportCollection.Count}</button>
+            <span id="{idFor}" class="hidden" data-source="{group.id}"></span>
+            """;
     }
 
-    private void WriteExpandableSequence(IEnumerable<string?> lines)
+    private string Expandable(IEnumerable<string?> lines)
     {
         using var e = lines.GetEnumerator();
-        if (!e.MoveNext()) return;
-        _writer.Write(HtmlEncodeName(e.Current));
-        if (!e.MoveNext()) return;
-        string idFor = NextId();
-        _writer.WriteLine($"""
-             <button class ="small top" data-for="{idFor}">… {lines.Count()}</button>
+        if (!e.MoveNext()) return "";
+        string first = Encode(e.Current ?? "(missing)");
+        if (!e.MoveNext()) return first;
+        string idFor = NextUniqueId();
+        _scratchBuilder.Clear().AppendLine(first).AppendLine(null, $"""
+            <button class ="small top" data-for="{idFor}">… {lines.Count()}</button>
             <span id="{idFor}" class="hidden">
             """);
         do
         {
-            _writer.Write($"<br />{HtmlEncodeName(e.Current)}");
+            _scratchBuilder.Append("<br />").Append(Encode(e.Current ?? "(missing)"));
         } while (e.MoveNext());
-        _writer.WriteLine("</span>");
+        return _scratchBuilder.AppendLine("</span>").ToString();
     }
 
-    private string NextId()
+    private static string Encode(string? value)
     {
-        return $"id{++_uniqueId}";
+        return value is null ? "" : WebUtility.HtmlEncode(value);
     }
 
-    private static string HtmlEncodeName(string? name)
-    {
-        return name is null ? Missing : WebUtility.HtmlEncode(name);
-    }
-
-    private static string Rowspan(int value)
+    private static string RowSpan(int value)
     {
         return value <= 1 ? "" : $" rowspan=\"{value}\"";
+    }
+
+    private string NextUniqueId()
+    {
+        return $"id{++_uniqueId}";
     }
 }

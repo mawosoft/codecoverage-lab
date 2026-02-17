@@ -1,9 +1,10 @@
 // Copyright (c) Matthias Wolf, Mawosoft.
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Net;
+using ReportComparer.Helpers;
 
 namespace ReportComparer;
 
@@ -11,44 +12,207 @@ internal sealed partial class HtmlResultWriter
 {
     private void WriteSourceFile()
     {
-        WriteHtmlStart(_realSource.Name);
-        _writer.WriteLine($"<h1>{WebUtility.HtmlEncode(_realSource.Name)}</h1>");
-        _writer.WriteLine($"<p>Assembly: {WebUtility.HtmlEncode(_realSource.ParentAssembly.Name)}</p>");
+        WriteHtmlStart("Report Comparison - " + _realSource.Name);
+        _writer.WriteLine($"""
+            <h1>{_homeNavig}<a href="index.html">Report Comparison</a> &nbsp;&gt;&nbsp; {Encode(_realSource.Name)}</h1>
+            """);
+        _writer.WriteLine($"""
+            <table class="datagrid"><tbody>
+            <tr><td class="right">Source</td><td>{Encode(_realSource.Name)}</td></tr>
+            <tr><td class="right">Assembly</td><td>{Encode(_realSource.ParentAssembly.Name)}</td></tr>
+            """);
+        if (_realSource.Reports.Count != _reportComparison.Reports.Count)
+        {
+            _writer.WriteLine($"""
+                <tr><td class="right">Available reports</td><td>{ReportGroup(_realSource.Reports)}</td></tr>
+                <tr><td class="right">Missing reports</td><td>{ReportGroup(_reportComparison.Reports.Except(_realSource.Reports))}</td></tr>
+                """);
+        }
+        _writer.WriteLine("</tbody></table>");
 
         _writer.WriteLine("""
-            <details><summary><h2>Type and Method Names</h2> <button class="help" data-for="help1">?</button></summary>
+            <details><summary><h2>Type and Method Names <button class="help" data-for="help1">i</button></h2></summary>
             <p id="help1" class="help hidden">
-            The table below uses the plus sign (+) as separator for nested types, but only if the associated reports
+            The plus sign (+) is used as unified separator for nested type names if the associated reports
             provide a way to distinguish between type and namespace nesting.
             </p>
             """);
         WriteParsedNames();
         _writer.WriteLine("</details>");
 
-        _writer.WriteLine("<details><summary><h2>Reported Metrics</h2></summary>");
-        WriteReportedMetrics();
+        _writer.WriteLine("<details><summary><h2>Reported Type Metrics</h2></summary>");
+        WriteTypeMetrics();
         _writer.WriteLine("</details>");
 
         _writer.WriteLine("""
-            <h2 class="help">Coverage</h2> <button class="help" data-for="help2">?</button>
+            <details><summary><h2>Reported Method Metrics</h2>
+            <input type="checkbox" id="chkInlineMetrics" />
+            <label for="chkInlineMetrics">Show inline</label>
+            </summary>
+            """);
+        WriteMethodMetrics();
+        _writer.WriteLine("</details>");
+
+        _writer.WriteLine("""
+            <h2>Coverage <button class="help" data-for="help2">i</button></h2>
             <div id="help2" class="hidden"><table class="help"><tbody>
             <tr>
+              <td><button class="plus" inert>+</button> <button class="plus" inert>M</button></td>
+              <td>Click to display the line coverage details. If you have chosen to show reported method metrics
+                  inline, the <button class="plus" inert>M</button> button marks lines where those metrics
+                  are available.</td>
+            </tr><tr>
               <td><table class="lineMarginGlyphs"><tbody>
-                  <tr><td class=blank>&nbsp;</td><td class=green>&nbsp;</td><td class=red>&nbsp;</td><td class=yellow>&nbsp;</td></tr>
+                  <tr><td class="blank">&nbsp;</td><td class="green">&nbsp;</td><td class="red">&nbsp;</td><td class="yellow">&nbsp;</td></tr>
                   </tbody></table></td>
-              <td>Aggregated line status per report group: <em>not coverable, covered, not covered, partial</em>.<br />
-                  Click the <button class="small" inert>+</button> button to show the details.</td>
+              <td>Aggregated line status per report group: <em>not coverable, covered, not covered, partial</em>.</td>
             </tr><tr>
               <td class="redtext">37</td>
               <td>Lines containing overlapping ranges.</td>
             </tr><tr>
               <td>65,17 - 65,42</td>
-              <td>Starting line and column (inclusive) to ending line and column (exclusive).<br />
-                  Column numbers of 0 indicate that the range encompasses the entire line.</td>
+              <td>Starting line and column (inclusive) to ending line and column (exclusive) of a reported range.
+                  Hover the mouse over it to highlight the range in the source code line above.
+                  For line-based reports, column numbers are always 0.</td>
             </tr>
             </tbody></table></div>
             """);
+        WriteCoverage();
+        WriteHtmlEnd();
+    }
+
+    private void WriteParsedNames()
+    {
+        _writer.WriteLine("""
+            <table class="datagrid zebra">
+            <thead><tr><th>Line</th><th>Type</th><th>Method</th><th>Reports</th></tr></thead>
+            """);
+        string? lastNamespace = " ";
+        bool canUseTypeName = false;
+        foreach (var realMethod in _realSource.Methods)
+        {
+            var parsedMethodGroups = realMethod.ParsedMethods.GroupBy(
+                m => (m.ParentType.Name, m.Name),
+                (_, g) => (parsedMethod: g.First(), reports: g.Select(m => m.ParentReport))).ToArray();
+            string? @namespace = parsedMethodGroups.Select(vt => vt.parsedMethod.RealType.Namespace)
+                .Distinct()
+                .FirstIfSingleOrDefault();
+            if (@namespace != lastNamespace)
+            {
+                lastNamespace = @namespace;
+                canUseTypeName = !string.IsNullOrEmpty(@namespace);
+                _writer.WriteLine($"""<tbody><tr><td colspan="4">{EncodeNamespace(@namespace)}</td></tr></tbody>""");
+            }
+            int rowspan = parsedMethodGroups.Length;
+            if (_realSource.Reports.Count != realMethod.Reports.Count) rowspan++;
+            _writer.WriteLine($"""<tbody><tr><td{RowSpan(rowspan)} class="right">{realMethod.BoundingRange.StartLine}</td>""");
+            bool tr = false;
+            foreach ((ParsedMethod parsedMethod, IEnumerable<ParsedReport> reports) in parsedMethodGroups)
+            {
+                if (tr) _writer.Write("<tr>");
+                tr = true;
+                _writer.WriteLine($"""
+                    <td>{Encode(canUseTypeName ? parsedMethod.ParentType.TypeName : parsedMethod.ParentType.Name)}</td>
+                    <td>{Encode(parsedMethod.Name)}</td>
+                    <td>{ReportGroup(reports)}</td>
+                    </tr>
+                    """);
+            }
+            if (_realSource.Reports.Count != realMethod.Reports.Count)
+            {
+                if (tr) _writer.Write("<tr>");
+                _writer.WriteLine($"""
+                    <td colspan="2">(missing)</td>
+                    <td>{ReportGroup(_realSource.Reports.Except(realMethod.Reports))}</td>
+                    </tr>
+                    """);
+            }
+            _writer.WriteLine("</tbody>");
+        }
+        _writer.WriteLine("</table>");
+    }
+
+    private void WriteTypeMetrics()
+    {
+        var namespaceGroups = _realSource.Methods.SelectMany(rm => rm.ParsedTypes)
+            .DistinctBy(pt => pt, ReferenceEqualityComparer.Instance)
+            .GroupBy(
+                pt => pt.RealType,
+                (realType, g) => (
+                    realType,
+                    typeNames: g.Select(pt => pt.TypeName).Distinct(),
+                    typeMetrics: g.GroupBy(
+                            pt => pt.ReportedMetricsForSource(_realSource),
+                            (metrics, g) => (metrics, reports: g.Select(pt => pt.ParentReport)))
+                        .ToArray()))
+            .GroupBy(vt => vt.realType.Namespace);
+        (int columnMask, int fractionMask) = GetMetricsMask(
+            namespaceGroups.SelectMany(g => g.SelectMany(vt => vt.typeMetrics.Select(vt => vt.metrics))));
+        int columnCount = int.PopCount(columnMask) + 2;
+        _writer.WriteLine("""<table class="datagrid zebra">""");
+        WriteMetricsHeaders(columnMask, "Type");
+        foreach (var namespaceGroup in namespaceGroups)
+        {
+            _writer.WriteLine($"""<tbody><tr><td colspan="{columnCount}">{EncodeNamespace(namespaceGroup.Key)}</td></tr></tbody>""");
+            foreach (var (realType, typeNames, typeMetrics) in namespaceGroup)
+            {
+                _writer.WriteLine($"""
+                    <tbody class="right"><tr>
+                    <td class= "left"{RowSpan(typeMetrics.Length)}>{Expandable(typeNames)}</td>
+                    """);
+                WriteMetricsData(columnMask, fractionMask, startRow: false, typeMetrics);
+                _writer.WriteLine("</tbody>");
+            }
+        }
+        _writer.WriteLine("</table>");
+    }
+
+    private void WriteMethodMetrics()
+    {
+        (int columnMask, int fractionMask) = GetMetricsMask(_realSource.Methods.SelectMany(rm => rm.ParsedMethods).Select(pm => pm.ReportedMetrics));
+        int columnCount = int.PopCount(columnMask) + 4;
+        _writer.WriteLine("""<table class="datagrid zebra">""");
+        WriteMetricsHeaders(columnMask, "Line", "Type", "Method");
+        string? lastNamespace = " ";
+        bool canUseTypeName = false;
+        foreach (var realMethod in _realSource.Methods)
+        {
+            string? @namespace = realMethod.ParsedMethods.Select(pm => pm.RealType)
+                .Distinct()
+                .Select(rt => rt.Namespace)
+                .Distinct()
+                .FirstIfSingleOrDefault();
+            if (@namespace != lastNamespace)
+            {
+                lastNamespace = @namespace;
+                canUseTypeName = !string.IsNullOrEmpty(@namespace);
+                _writer.WriteLine($"""<tbody><tr><td colspan="{columnCount}">{EncodeNamespace(@namespace)}</td></tr></tbody>""");
+            }
+            var methodMetrics = realMethod.ParsedMethods.GroupBy(
+                pm => pm.ReportedMetrics,
+                (metrics, g) => (metrics, reports: g.Select(pm => pm.ParentReport)))
+                .ToArray();
+            string rowSpan = RowSpan(methodMetrics.Length);
+            // TODO sort type names and method names?
+            var typeNames = canUseTypeName
+                ? realMethod.ParsedMethods.Select(pm => pm.ParentType.TypeName).Distinct()
+                : realMethod.ParsedMethods.Select(pm => pm.ParentType.Name).Distinct();
+            _writer.WriteLine($"""
+                <tbody class="right"><tr>
+                <td{rowSpan}>{realMethod.BoundingRange.StartLine}</td>
+                <td class="left"{rowSpan}>{Expandable(typeNames)}</td>
+                <td class="left"{rowSpan}>{Expandable(realMethod.ParsedMethods.Select(pm => pm.Name).Distinct())}</td>
+                """);
+            WriteMetricsData(columnMask, fractionMask, startRow: false, methodMetrics);
+            _writer.WriteLine("</tbody>");
+        }
+        _writer.WriteLine("</table>");
+    }
+
+    private void WriteCoverage()
+    {
         _writer.WriteLine("""<table class="sourceLines"><tbody>""");
+        var methodsPerLine = _realSource.Methods.ToLookup(rm => rm.BoundingRange.StartLine);
         int lineNumber = 1;
         string? lineText;
         while ((lineText = _reader.ReadLine()) is not null || lineNumber < _realSource.LinesCoverage.Count)
@@ -57,242 +221,208 @@ internal sealed partial class HtmlResultWriter
             RealSource.Line line = lineNumber < _realSource.LinesCoverage.Count
                 ? _realSource.LinesCoverage[lineNumber]
                 : default;
-            string? detailId = null;
             if (line.IsCoverable)
             {
-                detailId = NextId();
-                _writer.Write($"""<tr><td><button class="small" data-for="{detailId}">+</button></td><td>""");
+                var methods = methodsPerLine[line.Number];
+                bool metrics = methods.Any();
+                string dataMetrics = metrics ? " data-metrics=\"true\"" : "";
+                string detailId = NextUniqueId();
+                _writer.Write($"""
+                    <tr><td><button class="plus" data-for="{detailId}"{dataMetrics}">+</button></td>
+                    <td>
+                    """);
                 WriteLineMarginGlyphs(line);
-                _writer.Write(line.HasOverlaps ? """</td><td class="redtext">""" : "</td><td>");
+                string redText = line.HasOverlaps ? " class=\"redtext\"" : "";
+                string? lineId = null;
+                string preId = "";
+                if (line.HasColumns)
+                {
+                    lineId = NextUniqueId();
+                    preId = $" id=\"{lineId}\"";
+                }
+                _writer.WriteLine($"""
+                    </td>
+                    <td{redText}>{lineNumber}</td>
+                    <td><pre{preId}>{Encode(lineText)}</pre></td></tr>
+                    <tr id="{detailId}" class="hidden"><td colspan="3"></td>
+                    <td>
+                    """);
+                WriteLineCoverageDetails(line, lineId, lineText.Length);
+                if (metrics) WriteInlineMethodMetrics(methods);
+                _writer.WriteLine("</td></tr>");
             }
             else
             {
-                _writer.Write("<tr><td></td><td></td><td>");
-            }
-            _writer.WriteLine($"{lineNumber}</td><td><pre>{WebUtility.HtmlEncode(lineText)}</pre></td></tr>");
-            if (line.IsCoverable)
-            {
+                Debug.Assert(!methodsPerLine[line.Number].Any());
                 _writer.WriteLine($"""
-                        <tr id="{detailId}" class="hidden"><td colspan="3"></td><td>
-                        <table class="datagrid zebra"><thead><tr>
-                        <th>Status</th><th>Range</th><th>Hits</th><th>Branches</th><th>Conditions</th><th>Reports</th>
-                        </tr></thead>
-                        """);
-                var rangeGroups = line.RangeGroups.OrderBy(rg => ParsedRange.AggregateStatus(rg.parsedRanges));
-                foreach (var (parsedRanges, reports) in rangeGroups)
-                {
-                    WriteLineCoverageDetails(parsedRanges, reports);
-                }
-                _writer.WriteLine("</table></td></tr>");
+                    <tr>
+                    <td></td><td></td>
+                    <td>{lineNumber}</td><td><pre>{Encode(lineText)}</pre></td>
+                    </tr>
+                    """);
             }
             lineNumber++;
         }
         _writer.WriteLine("</tbody></table>");
-        WriteHtmlEnd();
-    }
-
-    private void WriteParsedNames()
-    {
-        _writer.WriteLine("""
-            <table class="datagrid zebra">
-            <thead><tr><th colspan=2>Names</th><th>Reports</th></tr></thead>
-            """);
-        foreach (var @namespace in _realSource.RealTree)
-        {
-            _writer.WriteLine($"""<tbody><tr><td colspan="3">namespace {WebUtility.HtmlEncode(@namespace.Key)}</td></tr></tbody>""");
-            foreach (var type in @namespace)
-            {
-                _writer.WriteLine("<tbody>");
-                foreach ((string? name, ParsedReport[]? reports) in type.Key.ParsedTypes.GroupBy(
-                    kvp => kvp.Value?.Name,
-                    (k, g) => (name: g.First().Value?.ShortName, reports: g.Select(g => g.Key).ToArray())))
-                {
-                    _writer.Write($"""<tr><td colspan="2">{HtmlEncodeName(name)}</td><td>""");
-                    WriteReportGroup(reports);
-                    _writer.WriteLine("</td></tr>");
-                }
-                _writer.WriteLine("</tbody>");
-                foreach (RealMethod realMethod in type)
-                {
-                    var nameGroup = realMethod.ParsedMethods.GroupBy(
-                            kvp => kvp.Value?.Name,
-                            (name, g) => (name, reports: g.Select(g => g.Key).ToArray()))
-                        .ToArray();
-                    _writer.Write($"""<tbody><tr><td class="right"{Rowspan(nameGroup.Length)}>{realMethod.BoundingRange.range.StartLine}</td>""");
-                    bool tr = false;
-                    foreach ((string? name, ParsedReport[] reports) in nameGroup)
-                    {
-                        if (tr) _writer.Write("<tr>");
-                        tr = true;
-                        _writer.Write($"<td>{HtmlEncodeName(name)}</td><td>");
-                        WriteReportGroup(reports);
-                        _writer.WriteLine("</td></tr>");
-                    }
-                    _writer.WriteLine("</tbody>");
-                }
-            }
-        }
-        _writer.WriteLine("</table>");
-    }
-
-    private void WriteReportedMetrics()
-    {
-        _writer.Write("""<table class="datagrid zebra"><thead class="sticky"><tr><th colspan=2>Entity</th>""");
-        WriteMetricsHeaderCells();
-        _writer.WriteLine("""
-            <th>Reports</th></tr></thead>
-            """);
-        foreach (var @namespace in _realSource.RealTree)
-        {
-            _writer.WriteLine($"""<tbody><tr><td colspan="12">namespace {WebUtility.HtmlEncode(@namespace.Key)}</td></tr></tbody>""");
-            foreach (var type in @namespace)
-            {
-                RealType realType = type.Key;
-                var typeMetrics = realType.ParsedTypes.GroupBy(
-                        kvp => kvp.Value?.ReportedMetricsForSource(_realSource),
-                        (metrics, g) => (metrics, reports: g.Select(g => g.Key).ToArray()))
-                    .ToArray();
-                var typeNames = realType.ParsedTypes.Select(kvp => kvp.Value?.Name).Distinct();
-                if (typeNames.Any(s => s is null)) typeNames = typeNames.Where(s => s is not null).Append(null);
-                _writer.Write($"""<tbody class="right"><tr><td class="left" colspan="2"{Rowspan(typeMetrics.Length)}>""");
-                WriteExpandableSequence(typeNames);
-                _writer.WriteLine("</td>");
-                bool trType = false;
-                foreach ((ReportedMetrics? metrics, ParsedReport[] reports) in typeMetrics)
-                {
-                    if (trType) _writer.Write("<tr>");
-                    trType = true;
-                    WriteMetricsDataCells(metrics);
-                    _writer.Write("""<td class="left">""");
-                    WriteReportGroup(reports);
-                    _writer.WriteLine("</td></tr>");
-
-                }
-                _writer.WriteLine("</tbody>");
-                foreach (RealMethod realMethod in type)
-                {
-                    var methodMetrics = realMethod.ParsedMethods.GroupBy(
-                            kvp => kvp.Value?.ReportedMetrics,
-                            (metrics, g) => (metrics, reports: g.Select(g => g.Key).ToArray()))
-                        .ToArray();
-                    var methodNames = realMethod.ParsedMethods.Select(kvp => kvp.Value?.Name).Distinct();
-                    if (methodNames.Any(s => s is null)) methodNames = methodNames.Where(s => s is not null).Append(null);
-                    _writer.Write($"""
-                        <tbody class="right">
-                        <tr><td{Rowspan(methodMetrics.Length)}>{realMethod.BoundingRange.range.StartLine}</td>
-                        <td class="left"{Rowspan(methodMetrics.Length)}>
-                        """);
-                    WriteExpandableSequence(methodNames);
-                    _writer.WriteLine("</td>");
-                    bool trMethod = false;
-                    foreach ((ReportedMetrics? metrics, ParsedReport[] reports) in methodMetrics)
-                    {
-                        if (trMethod) _writer.Write("<tr>");
-                        trMethod = true;
-                        WriteMetricsDataCells(metrics);
-                        _writer.Write("""<td class="left">""");
-                        WriteReportGroup(reports);
-                        _writer.WriteLine("</td></tr>");
-
-                    }
-                    _writer.WriteLine("</tbody>");
-                }
-            }
-        }
-        _writer.WriteLine("</table>");
     }
 
     private void WriteLineMarginGlyphs(RealSource.Line line)
     {
         if (!line.IsCoverable) return;
-        var statuses = line.RangeGroups.Select(rg => ParsedRange.AggregateStatus(rg.parsedRanges)).Order();
+        var statuses = line.RangeGroups.Select(rg => ParsedRange.AggregateStatus(rg.parsedRanges));
         _writer.Write("""<table class="lineMarginGlyphs"><tbody><tr>""");
         foreach (var status in statuses)
         {
-            _writer.Write($"""<td class={CoverageStatusToClassName(status)}>&nbsp;</td>""");
+            _writer.Write($"""<td class="{StatusToClass(status)}">&nbsp;</td>""");
         }
         _writer.WriteLine("</tr></tbody></table>");
     }
 
-    private void WriteLineCoverageDetails(ParsedRange[] parsedRanges, ParsedReport[] reports)
+    private void WriteLineCoverageDetails(RealSource.Line line, string? lineId, int lineLength)
     {
-        if (parsedRanges.Length == 0)
+        if (!line.IsCoverable) return;
+        _writer.WriteLine("""
+            <table class="datagrid zebra">
+            <colgroup><col class="detailGlyph" /></colgroup>
+            <thead><tr>
+            <th colspan="2">Status</th>
+            <th>Range</th>
+            <th>Hits</th>
+            <th>Branches</th>
+            <th>Conditions</th>
+            <th>Reports</th>
+            </tr></thead>
+            """);
+        foreach (var (parsedRanges, reports) in line.RangeGroups)
         {
-            _writer.Write($"""
-                <tbody>
-                <tr><td class="center">{CoverageStatusToEncodedText(CoverageStatus.None)}</td>
-                <td colspan="4"></td><td>
-                """);
-            WriteReportGroup(reports);
-            _writer.WriteLine("</td></tr></tbody>");
-            return;
-        }
-
-        _writer.WriteLine("<tbody>");
-        bool first = true;
-        foreach (var parsedRange in parsedRanges)
-        {
-            var r = parsedRange.Range;
-            _writer.Write($"""
-                <tr><td class="center">{CoverageStatusToEncodedText(parsedRange.Status)}</td>
-                <td>{r.StartLine},{r.StartColumn} - {r.EndLine},{r.EndColumn}</td>
-                """);
-            if (parsedRange.Cobertura is null)
+            if (parsedRanges.Length == 0)
             {
-                _writer.WriteLine("""<td colspan="3"></td>""");
+                _writer.WriteLine($"""
+                    <tbody><tr>
+                    <td class="blank detailGlyph"></td>
+                    <td class="center">{EncodeStatus(CoverageStatus.None)}</td>
+                    <td colspan="4"></td>
+                    <td>{ReportGroup(reports)}</td>
+                    </tr></tbody>
+                    """);
             }
             else
             {
-                var c = parsedRange.Cobertura;
-                _writer.Write($"<td class=right>{c.Hits}</td>");
-                if (c.TotalBranches == 0)
+                string rowSpan = RowSpan(parsedRanges.Length);
+                string statusClass = StatusToClass(ParsedRange.AggregateStatus(parsedRanges));
+                _writer.WriteLine($"""<tbody><tr><td{rowSpan} class="{statusClass} detailGlyph"></td>""");
+                bool first = true;
+                foreach (var parsedRange in parsedRanges)
                 {
-                    _writer.Write("<td></td>");
+                    if (!first) _writer.Write("<tr>");
+                    var r = parsedRange.Range;
+                    string dataForRange = "";
+                    if (r.StartColumn != 0 && !string.IsNullOrEmpty(lineId))
+                    {
+                        int start = 0;
+                        int end = lineLength;
+                        if (line.Number == r.StartLine) start = r.StartColumn - 1;
+                        if (line.Number == r.EndLine) end = Math.Min(lineLength, r.EndColumn - 1);
+                        dataForRange = $""" data-for="{lineId}" data-range="{start} {end}" """;
+                    }
+                    _writer.Write($"""
+                        <td class="center">{EncodeStatus(parsedRange.Status)}</td>
+                        <td{dataForRange}>{r.StartLine},{r.StartColumn} - {r.EndLine},{r.EndColumn}</td>
+                        """);
+                    if (parsedRange.Cobertura is null)
+                    {
+                        _writer.WriteLine("""<td colspan="3"></td>""");
+                    }
+                    else
+                    {
+                        var c = parsedRange.Cobertura;
+                        _writer.Write($"<td class=right>{c.Hits}</td>");
+                        if (c.TotalBranches == 0)
+                        {
+                            _writer.Write("<td></td>");
+                        }
+                        else
+                        {
+                            _writer.Write($"""<td class="center">{c.CoveredBranches}/{c.TotalBranches}</td>""");
+                        }
+                        _writer.Write("<td>");
+                        foreach (double condition in c.Conditions.Values)
+                        {
+                            _writer.Write($" {condition}%");
+                        }
+                        _writer.Write("</td>");
+                    }
+                    if (first)
+                    {
+                        first = false;
+                        _writer.Write($"<td{rowSpan}>{ReportGroup(reports)}</td>");
+                    }
+                    _writer.WriteLine("</tr>");
                 }
-                else
-                {
-                    _writer.Write($"""<td class="center">{c.CoveredBranches}/{c.TotalBranches}</td>""");
-                }
-                _writer.Write("<td>");
-                foreach (double condition in c.Conditions.ValuesOrDefault)
-                {
-                    _writer.Write($" {condition}%");
-                }
-                _writer.Write("</td>");
+                _writer.WriteLine("</tbody>");
             }
-            if (first)
-            {
-                first = false;
-                _writer.Write($"<td{Rowspan(parsedRanges.Length)}>");
-                WriteReportGroup(reports);
-                _writer.Write("</td>");
-            }
-            _writer.WriteLine("</tr>");
         }
-        _writer.WriteLine("</tbody>");
+        _writer.WriteLine("</table>");
     }
 
-    private static string CoverageStatusToClassName(CoverageStatus status)
+    private void WriteInlineMethodMetrics(IEnumerable<RealMethod> methods)
     {
-        Debug.Assert(Enum.IsDefined(status));
-        return status switch
+        var realMethods = methods as ICollection<RealMethod> ?? methods.ToArray();
+        if (realMethods.Count == 0) return;
+        (int columnMask, int fractionMask) = GetMetricsMask(realMethods.SelectMany(rm => rm.ParsedMethods).Select(pm => pm.ReportedMetrics));
+        bool includeTypeNames = realMethods.Any(rm => rm.TypesAreAmbiguous);
+        _writer.WriteLine("""<table class="datagrid zebra hidden" data-metrics="true">""");
+        WriteMetricsHeaders(columnMask, includeTypeNames ? ["Type", "Method"] : ["Method"]);
+        foreach (var realMethod in realMethods)
         {
-            CoverageStatus.NotCovered => "red",
-            CoverageStatus.Covered => "green",
-            CoverageStatus.Partial => "yellow",
-            _ => "blank",
+            var methodMetrics = realMethod.ParsedMethods.GroupBy(
+                pm => pm.ReportedMetrics,
+                (metrics, g) => (metrics, reports: g.Select(pm => pm.ParentReport)))
+                .ToArray();
+            string rowSpan = RowSpan(methodMetrics.Length);
+            _writer.WriteLine("""<tbody class="right"><tr>""");
+            if (includeTypeNames)
+            {
+                _writer.WriteLine($"""<td class="left"{rowSpan}>{Expandable(realMethod.ParsedMethods.Select(pm => pm.ParentType.TypeName).Distinct())}</td>""");
+            }
+            _writer.WriteLine($"""<td class="left"{rowSpan}>{Expandable(realMethod.ParsedMethods.Select(pm => pm.Name).Distinct())}</td>""");
+            WriteMetricsData(columnMask, fractionMask, startRow: false, methodMetrics);
+            _writer.WriteLine("</tbody>");
+        }
+        _writer.WriteLine("</table>");
+    }
+
+    private static string EncodeNamespace(string? value)
+    {
+        return value switch
+        {
+            null => "Mixed namespace",
+            "" => "Global namespace",
+            _ => "namespace " + Encode(value),
         };
     }
 
-    private static string CoverageStatusToEncodedText(CoverageStatus status)
+    private static string EncodeStatus(CoverageStatus value)
     {
-        Debug.Assert(Enum.IsDefined(status));
-        return status switch
+        Debug.Assert(Enum.IsDefined(value));
+        return value switch
         {
             CoverageStatus.NotCovered => "not covered",
             CoverageStatus.Covered => "covered",
             CoverageStatus.Partial => "partial",
             _ => "not coverable",
+        };
+    }
+
+    private static string StatusToClass(CoverageStatus value)
+    {
+        Debug.Assert(Enum.IsDefined(value));
+        return value switch
+        {
+            CoverageStatus.NotCovered => "red",
+            CoverageStatus.Covered => "green",
+            CoverageStatus.Partial => "yellow",
+            _ => "blank",
         };
     }
 }

@@ -1,5 +1,6 @@
 // Copyright (c) Matthias Wolf, Mawosoft.
 
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -9,66 +10,57 @@ namespace ReportComparer;
 [DebuggerDisplay("{Name}")]
 internal sealed class RealType
 {
-    private Dictionary<ParsedReport, ParsedType?> _parsedTypes = new(ReferenceEqualityComparer.Instance);
-    private List<RealMethod> _realMethods = [];
+    private List<ParsedType> _parsedTypes = [];
     private bool _frozen;
 
     public RealAssembly ParentAssembly { get; }
-    public string Namespace { get; set; }
-    public string Name { get; private set; }
-    public int Order { get; set; }
-    public IReadOnlyDictionary<ParsedReport, ParsedType?> ParsedTypes => _parsedTypes;
-    public IReadOnlyCollection<RealMethod> RealMethods => _realMethods;
-    public bool Frozen => _frozen;
+    public string Name { get; }
+    public string Namespace { get; internal set; }
+    public string TypeName { get; internal set; }
+    public IReadOnlyCollection<ParsedType> ParsedTypes => _parsedTypes;
 
-    public RealType(RealAssembly parentAssembly)
+    public RealType(RealAssembly realAssembly, string normalizedName)
     {
-        ParentAssembly = parentAssembly;
+        ParentAssembly = realAssembly;
+        Name = normalizedName;
+        TypeName = normalizedName;
         Namespace = "";
-        Name = "";
     }
 
-    public void Freeze(IEnumerable<ParsedReport> allReports)
+    public void Freeze()
     {
         Debug.Assert(!_frozen);
-        foreach (var report in allReports) _parsedTypes.TryAdd(report, null);
-        Debug.Assert(_parsedTypes.All(kvp => kvp.Key.Order != 0));
-        _parsedTypes = _parsedTypes.OrderBy(kvp => kvp.Key.Order).ToDictionary(_parsedTypes.Comparer);
-        foreach (var realMethod in _realMethods) realMethod.Freeze(_parsedTypes.Keys);
-        Debug.Assert(_realMethods.All(m => m.BoundingRange.source.Order != 0));
-        _realMethods = _realMethods.OrderBy(m => m.BoundingRange.source.Order)
-            .ThenBy(m => m.BoundingRange.range)
-            .ThenBy(m => m.Name)
-            .ToList();
-        for (int i = 0; i < _realMethods.Count; i++) _realMethods[i].Order = i;
+        // TODO ThenBy
+        _parsedTypes = _parsedTypes.OrderBy(t => t.ParentReport.Order).ToList();
         _frozen = true;
-    }
-
-    public void AddRealMethod(RealMethod realMethod)
-    {
-        Debug.Assert(!_frozen);
-        _realMethods.Add(realMethod);
     }
 
     public void AddParsedType(ParsedType parsedType)
     {
         Debug.Assert(!_frozen);
-        Debug.Assert(parsedType.RealType is null);
-        _parsedTypes.Add(parsedType.ParentReport, parsedType);
-        if (Name.Contains('+'))
+        Debug.Assert(parsedType.RealType == this);
+        _parsedTypes.Add(parsedType);
+    }
+
+    public bool TrySetNamespace(string @namespace)
+    {
+        Debug.Assert(!_frozen);
+        int length = @namespace.Length;
+        if (Name.Length <= length || Name[length] != '.' || !Name.StartsWith(@namespace, StringComparison.Ordinal))
         {
-            if (parsedType.Name.Length > Name.Length && parsedType.Name.Contains('+'))
+            return false;
+        }
+        int offset = length + 1;
+        Namespace = @namespace;
+        TypeName = Name[offset..];
+        foreach (var parsedType in _parsedTypes)
+        {
+            string name = parsedType.Name;
+            if (name.Length > length && name[length] == '.' && name.StartsWith(@namespace, StringComparison.Ordinal))
             {
-                Name = parsedType.Name;
+                parsedType.TypeName = name[offset..];
             }
         }
-        else
-        {
-            if (parsedType.Name.Length > Name.Length || parsedType.Name.Contains('+'))
-            {
-                Name = parsedType.Name;
-            }
-        }
-        parsedType.RealType = this;
+        return true;
     }
 }

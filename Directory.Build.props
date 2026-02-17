@@ -21,7 +21,7 @@
   <PropertyGroup>
     <DebugType>embedded</DebugType>
     <EnablePackageValidation>false</EnablePackageValidation>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -51,8 +51,8 @@
   <PropertyGroup>
     <Authors>Matthias Wolf, Mawosoft</Authors>
     <Company>$(Authors)</Company>
-    <Copyright>Copyright (c) 2025 Matthias Wolf, Mawosoft</Copyright>
-    <Version>1.0.2-dev</Version>
+    <Copyright>Copyright (c) 2026 Matthias Wolf, Mawosoft</Copyright>
+    <Version>1.0.3-dev</Version>
   </PropertyGroup>
 
 </Project>

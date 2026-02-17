@@ -40,16 +40,11 @@ internal static partial class ReportParser
                 }
             }
         }
-        report.ReportedMetrics = new ReportedRootMetrics
-        {
-            LineRate = ParseDouble(root.Attribute(s_line_rate)),
-            BranchRate = ParseDouble(root.Attribute(s_branch_rate)),
-            Complexity = ParseInt(root.Attribute(s_complexity)),
-            LinesCovered = ParseInt(root.Attribute(s_lines_coveredCobertura)),
-            LinesValid = ParseInt(root.Attribute(s_lines_valid)),
-            BranchesCovered = ParseInt(root.Attribute(s_branches_covered)),
-            BranchesValid = ParseInt(root.Attribute(s_branches_valid))
-        };
+        report.ReportedMetrics = ParseCoberturaMetrics(root);
+        report.ReportedMetrics.LinesCovered = ParseInt(root.Attribute(s_lines_coveredCobertura));
+        report.ReportedMetrics.LinesValid = ParseInt(root.Attribute(s_lines_valid));
+        report.ReportedMetrics.BranchesCovered = ParseInt(root.Attribute(s_branches_covered));
+        report.ReportedMetrics.BranchesValid = ParseInt(root.Attribute(s_branches_valid));
     }
 
     private static void ParseCoberturaLines(XElement methodElement, ParsedMethod method, ParsedSource source)
@@ -101,11 +96,18 @@ internal static partial class ReportParser
 
     private static ReportedMetrics ParseCoberturaMetrics(XElement element)
     {
-        return new ReportedMetrics
+        var m = new ReportedMetrics
         {
             LineCoverage = ParseDouble(element.Attribute(s_line_rate)),
             BranchRate = ParseDouble(element.Attribute(s_branch_rate)),
             Complexity = ParseInt(element.Attribute(s_complexity)),
         };
+        // Change to percentage values to match DynamicCoverage
+        if (m.LineCoverage.HasValue && m.LineCoverage.Value <= 1.0 && m.BranchRate.HasValue && m.BranchRate <= 1.0)
+        {
+            m.LineCoverage *= 100.0;
+            m.BranchRate *= 100.0;
+        }
+        return m;
     }
 }
