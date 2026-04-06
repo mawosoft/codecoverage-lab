@@ -1,0 +1,17 @@
+--targetdir
+C:\Users\mw\Projects\Learning\codecoverage-lab\ReportComparison\artifacts/Results/comparison\Debug\xml-merged-vs-original
+--homelink
+../../index.html
+
+C:\Users\mw\Projects\Learning\codecoverage-lab\ReportComparison\artifacts\Results\report-xml\Debug\mscc(18.3.0).xml
+C:\Users\mw\Projects\Learning\codecoverage-lab\ReportComparison\artifacts\Results\report-xml\Debug\mscc(18.0.1)-static.xml
+C:\Users\mw\Projects\Learning\codecoverage-lab\ReportComparison\artifacts\Results\report-xml\Debug\dnc(18.5.2)-static.xml
+C:\Users\mw\Projects\Learning\codecoverage-lab\ReportComparison\artifacts\Results\report-xml\Debug\mscc(18.0.1).xml
+C:\Users\mw\Projects\Learning\codecoverage-lab\ReportComparison\artifacts\Results\report-xml\Debug\mscc(18.3.0)-static.xml
+C:\Users\mw\Projects\Learning\codecoverage-lab\ReportComparison\artifacts\Results\report-xml\Debug\dnc(18.5.2).xml
+C:\Users\mw\Projects\Learning\codecoverage-lab\ReportComparison\artifacts\Results\report-xml\Debug\dnc(18.5.2)-static.cobertura.to.xml
+C:\Users\mw\Projects\Learning\codecoverage-lab\ReportComparison\artifacts\Results\report-xml\Debug\mscc(18.3.0).cobertura.to.xml
+C:\Users\mw\Projects\Learning\codecoverage-lab\ReportComparison\artifacts\Results\report-xml\Debug\mscc(18.3.0)-static.cobertura.to.xml
+C:\Users\mw\Projects\Learning\codecoverage-lab\ReportComparison\artifacts\Results\report-xml\Debug\mscc(18.0.1)-static.cobertura.to.xml
+C:\Users\mw\Projects\Learning\codecoverage-lab\ReportComparison\artifacts\Results\report-xml\Debug\mscc(18.0.1).cobertura.to.xml
+C:\Users\mw\Projects\Learning\codecoverage-lab\ReportComparison\artifacts\Results\report-xml\Debug\dnc(18.5.2).cobertura.to.xml

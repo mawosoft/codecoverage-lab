@@ -1,0 +1,11 @@
+--targetdir
+C:\Users\mw\Projects\Learning\codecoverage-lab\ReportComparison\artifacts/Results/comparison\Debug\dnc+mscc-cobertura-versions
+--homelink
+../../index.html
+
+C:\Users\mw\Projects\Learning\codecoverage-lab\ReportComparison\artifacts\Results\report-xml\Debug\mscc(18.0.1)-static.cobertura.xml
+C:\Users\mw\Projects\Learning\codecoverage-lab\ReportComparison\artifacts\Results\report-xml\Debug\mscc(18.0.1).cobertura.xml
+C:\Users\mw\Projects\Learning\codecoverage-lab\ReportComparison\artifacts\Results\report-xml\Debug\dnc(18.5.2).cobertura.xml
+C:\Users\mw\Projects\Learning\codecoverage-lab\ReportComparison\artifacts\Results\report-xml\Debug\mscc(18.3.0).cobertura.xml
+C:\Users\mw\Projects\Learning\codecoverage-lab\ReportComparison\artifacts\Results\report-xml\Debug\mscc(18.3.0)-static.cobertura.xml
+C:\Users\mw\Projects\Learning\codecoverage-lab\ReportComparison\artifacts\Results\report-xml\Debug\dnc(18.5.2)-static.cobertura.xml

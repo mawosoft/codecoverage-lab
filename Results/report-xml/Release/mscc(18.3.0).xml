@@ -1,0 +1,1392 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<results>
+  <modules>
+    <module id="2EAD9967E5ABF44A9851A0F2614D3FEA28671EC3" name="CoverageDemo.Tests.dll" path="CoverageDemo.Tests.dll" block_coverage="78.38" line_coverage="70.21" blocks_covered="58" blocks_not_covered="16" lines_covered="33" lines_partially_covered="0" lines_not_covered="14">
+      <functions>
+        <function id="8272" token="0x6000001" name="Run()" namespace="CoverageDemo" type_name="CoverageTests" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="10" lines_covered="0" lines_partially_covered="0" lines_not_covered="10">
+          <ranges>
+            <range source_id="0" start_line="14" end_line="14" start_column="9" end_column="37" covered="no" />
+            <range source_id="0" start_line="15" end_line="15" start_column="9" end_column="28" covered="no" />
+            <range source_id="0" start_line="16" end_line="16" start_column="9" end_column="26" covered="no" />
+            <range source_id="0" start_line="17" end_line="17" start_column="9" end_column="25" covered="no" />
+            <range source_id="0" start_line="18" end_line="18" start_column="9" end_column="28" covered="no" />
+            <range source_id="0" start_line="19" end_line="19" start_column="9" end_column="30" covered="no" />
+            <range source_id="0" start_line="20" end_line="20" start_column="9" end_column="32" covered="no" />
+            <range source_id="0" start_line="21" end_line="21" start_column="9" end_column="32" covered="no" />
+            <range source_id="0" start_line="22" end_line="22" start_column="9" end_column="34" covered="no" />
+            <range source_id="0" start_line="23" end_line="23" start_column="5" end_column="6" covered="no" />
+          </ranges>
+        </function>
+        <function id="8328" token="0x6000002" name="TestAttributes()" namespace="CoverageDemo" type_name="CoverageTests" block_coverage="100.00" line_coverage="100.00" blocks_covered="5" blocks_not_covered="0" lines_covered="3" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="0" start_line="28" end_line="28" start_column="14" end_column="23" covered="yes" />
+            <range source_id="0" start_line="30" end_line="30" start_column="13" end_column="30" covered="yes" />
+            <range source_id="0" start_line="28" end_line="28" start_column="40" end_column="43" covered="yes" />
+            <range source_id="0" start_line="28" end_line="28" start_column="25" end_column="38" covered="yes" />
+            <range source_id="0" start_line="32" end_line="32" start_column="5" end_column="6" covered="yes" />
+          </ranges>
+        </function>
+        <function id="8360" token="0x6000003" name="TestGenerics()" namespace="CoverageDemo" type_name="CoverageTests" block_coverage="100.00" line_coverage="100.00" blocks_covered="5" blocks_not_covered="0" lines_covered="3" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="0" start_line="37" end_line="37" start_column="14" end_column="23" covered="yes" />
+            <range source_id="0" start_line="39" end_line="39" start_column="13" end_column="28" covered="yes" />
+            <range source_id="0" start_line="37" end_line="37" start_column="40" end_column="43" covered="yes" />
+            <range source_id="0" start_line="37" end_line="37" start_column="25" end_column="38" covered="yes" />
+            <range source_id="0" start_line="41" end_line="41" start_column="5" end_column="6" covered="yes" />
+          </ranges>
+        </function>
+        <function id="8392" token="0x6000004" name="TestLambdas()" namespace="CoverageDemo" type_name="CoverageTests" block_coverage="100.00" line_coverage="100.00" blocks_covered="5" blocks_not_covered="0" lines_covered="3" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="0" start_line="46" end_line="46" start_column="14" end_column="23" covered="yes" />
+            <range source_id="0" start_line="48" end_line="48" start_column="13" end_column="27" covered="yes" />
+            <range source_id="0" start_line="46" end_line="46" start_column="40" end_column="43" covered="yes" />
+            <range source_id="0" start_line="46" end_line="46" start_column="25" end_column="38" covered="yes" />
+            <range source_id="0" start_line="50" end_line="50" start_column="5" end_column="6" covered="yes" />
+          </ranges>
+        </function>
+        <function id="8424" token="0x6000005" name="TestProperties()" namespace="CoverageDemo" type_name="CoverageTests" block_coverage="100.00" line_coverage="100.00" blocks_covered="5" blocks_not_covered="0" lines_covered="3" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="0" start_line="55" end_line="55" start_column="14" end_column="23" covered="yes" />
+            <range source_id="0" start_line="57" end_line="57" start_column="13" end_column="30" covered="yes" />
+            <range source_id="0" start_line="55" end_line="55" start_column="40" end_column="43" covered="yes" />
+            <range source_id="0" start_line="55" end_line="55" start_column="25" end_column="38" covered="yes" />
+            <range source_id="0" start_line="59" end_line="59" start_column="5" end_column="6" covered="yes" />
+          </ranges>
+        </function>
+        <function id="8456" token="0x6000006" name="TestIfConditions()" namespace="CoverageDemo" type_name="CoverageTests" block_coverage="100.00" line_coverage="100.00" blocks_covered="5" blocks_not_covered="0" lines_covered="3" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="0" start_line="64" end_line="64" start_column="14" end_column="23" covered="yes" />
+            <range source_id="0" start_line="66" end_line="66" start_column="13" end_column="32" covered="yes" />
+            <range source_id="0" start_line="64" end_line="64" start_column="40" end_column="43" covered="yes" />
+            <range source_id="0" start_line="64" end_line="64" start_column="25" end_column="38" covered="yes" />
+            <range source_id="0" start_line="68" end_line="68" start_column="5" end_column="6" covered="yes" />
+          </ranges>
+        </function>
+        <function id="8488" token="0x6000007" name="TestLoopConditions()" namespace="CoverageDemo" type_name="CoverageTests" block_coverage="100.00" line_coverage="100.00" blocks_covered="5" blocks_not_covered="0" lines_covered="3" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="0" start_line="73" end_line="73" start_column="14" end_column="23" covered="yes" />
+            <range source_id="0" start_line="75" end_line="75" start_column="13" end_column="34" covered="yes" />
+            <range source_id="0" start_line="73" end_line="73" start_column="40" end_column="43" covered="yes" />
+            <range source_id="0" start_line="73" end_line="73" start_column="25" end_column="38" covered="yes" />
+            <range source_id="0" start_line="77" end_line="77" start_column="5" end_column="6" covered="yes" />
+          </ranges>
+        </function>
+        <function id="8520" token="0x6000008" name="TestNullConditions()" namespace="CoverageDemo" type_name="CoverageTests" block_coverage="100.00" line_coverage="100.00" blocks_covered="5" blocks_not_covered="0" lines_covered="3" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="0" start_line="82" end_line="82" start_column="14" end_column="23" covered="yes" />
+            <range source_id="0" start_line="84" end_line="84" start_column="13" end_column="34" covered="yes" />
+            <range source_id="0" start_line="82" end_line="82" start_column="40" end_column="43" covered="yes" />
+            <range source_id="0" start_line="82" end_line="82" start_column="25" end_column="38" covered="yes" />
+            <range source_id="0" start_line="86" end_line="86" start_column="5" end_column="6" covered="yes" />
+          </ranges>
+        </function>
+        <function id="8552" token="0x6000009" name="TestSwitchConditions()" namespace="CoverageDemo" type_name="CoverageTests" block_coverage="100.00" line_coverage="100.00" blocks_covered="5" blocks_not_covered="0" lines_covered="3" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="0" start_line="91" end_line="91" start_column="14" end_column="23" covered="yes" />
+            <range source_id="0" start_line="93" end_line="93" start_column="13" end_column="36" covered="yes" />
+            <range source_id="0" start_line="91" end_line="91" start_column="40" end_column="43" covered="yes" />
+            <range source_id="0" start_line="91" end_line="91" start_column="25" end_column="38" covered="yes" />
+            <range source_id="0" start_line="95" end_line="95" start_column="5" end_column="6" covered="yes" />
+          </ranges>
+        </function>
+        <function id="8592" token="0x600000b" name="Run()" namespace="CoverageDemo" type_name="PendingTests" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="5" lines_covered="0" lines_partially_covered="0" lines_not_covered="3">
+          <ranges>
+            <range source_id="1" start_line="76" end_line="76" start_column="9" end_column="36" covered="no" />
+            <range source_id="1" start_line="77" end_line="77" start_column="9" end_column="49" covered="no" />
+            <range source_id="1" start_line="78" end_line="78" start_column="5" end_column="6" covered="no" />
+          </ranges>
+        </function>
+        <function id="8687" token="0x600000d" name="TestNothing()" namespace="CoverageDemo" type_name="PendingTests" block_coverage="100.00" line_coverage="100.00" blocks_covered="1" blocks_not_covered="0" lines_covered="1" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="1" start_line="100" end_line="100" start_column="5" end_column="6" covered="yes" />
+          </ranges>
+        </function>
+        <function id="8692" token="0x600000e" name="TestDoesNotReturn()" namespace="CoverageDemo" type_name="PendingTests" block_coverage="66.67" line_coverage="66.67" blocks_covered="2" blocks_not_covered="1" lines_covered="2" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="1" start_line="113" end_line="113" start_column="9" end_column="10" covered="yes" />
+            <range source_id="1" start_line="114" end_line="114" start_column="9" end_column="14" covered="no" />
+            <range source_id="1" start_line="114" end_line="114" start_column="16" end_column="17" covered="no" />
+            <range source_id="1" start_line="115" end_line="115" start_column="5" end_column="6" covered="yes" />
+          </ranges>
+        </function>
+        <function id="8900" token="0x6000013" name="MoveNext()" namespace="CoverageDemo" type_name="PendingTests.&lt;Test4Async&gt;d__1" block_coverage="100.00" line_coverage="100.00" blocks_covered="15" blocks_not_covered="0" lines_covered="6" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="1" start_line="90" end_line="90" start_column="9" end_column="56" covered="yes" />
+            <range source_id="1" start_line="91" end_line="91" start_column="9" end_column="52" covered="yes" />
+            <range source_id="1" start_line="92" end_line="92" start_column="9" end_column="117" covered="yes" />
+            <range source_id="1" start_line="93" end_line="93" start_column="9" end_column="63" covered="yes" />
+            <range source_id="1" start_line="94" end_line="94" start_column="9" end_column="25" covered="yes" />
+            <range source_id="1" start_line="95" end_line="95" start_column="5" end_column="6" covered="yes" />
+          </ranges>
+        </function>
+      </functions>
+      <source_files>
+        <source_file id="0" path="C:\Users\mw\Projects\Learning\codecoverage-lab\ReportComparison\CoverageDemo.Tests\CoverageTests.cs" checksum_type="SHA256" checksum="CD17AA23710FC8CEED229BCB828E43134B54B3DF0976F8BFFCA0088BB99C063E" />
+        <source_file id="1" path="C:\Users\mw\Projects\Learning\codecoverage-lab\ReportComparison\CoverageDemo.Tests\_Pending.cs" checksum_type="SHA256" checksum="373C20433C4F437EDB62BA8CE6DEAD7AC75FD92E4028E4C739724A894528D80E" />
+      </source_files>
+      <skipped_functions>
+        <skipped_function id="8728" original_id="8728" token="0x600000f" name="LiveBackup()" type_name="PendingTests" reason="attribute_excluded" />
+        <skipped_function id="8868" original_id="8868" token="0x6000011" name="Main(string[])" type_name="XunitAutoGeneratedEntryPoint" reason="attribute_excluded" />
+      </skipped_functions>
+    </module>
+    <module id="9EDC4C2F8CC3674CB2596C5A68B51678AE1A81E9" name="CoverageDemo.dll" path="CoverageDemo.dll" block_coverage="69.34" line_coverage="64.30" blocks_covered="692" blocks_not_covered="306" lines_covered="317" lines_partially_covered="43" lines_not_covered="133">
+      <functions>
+        <function id="8458" token="0x6000021" name="Method1(CoverageDemo.MyInt)" type_name="GlobalClass" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="2" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="0" start_line="5" end_line="5" start_column="53" end_column="58" covered="no" />
+          </ranges>
+        </function>
+        <function id="8474" token="0x6000023" name="get_Value()" namespace="CoverageDemo" type_name="MyBool" block_coverage="100.00" line_coverage="100.00" blocks_covered="1" blocks_not_covered="0" lines_covered="1" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="1" start_line="10" end_line="10" start_column="25" end_column="29" covered="yes" />
+          </ranges>
+        </function>
+        <function id="8482" token="0x6000024" name="set_Value(bool)" namespace="CoverageDemo" type_name="MyBool" block_coverage="100.00" line_coverage="100.00" blocks_covered="1" blocks_not_covered="0" lines_covered="1" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="1" start_line="10" end_line="10" start_column="30" end_column="34" covered="yes" />
+          </ranges>
+        </function>
+        <function id="8492" token="0x6000025" name="op_Implicit(bool)" namespace="CoverageDemo" type_name="MyBool" block_coverage="100.00" line_coverage="100.00" blocks_covered="2" blocks_not_covered="0" lines_covered="1" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="1" start_line="11" end_line="11" start_column="59" end_column="82" covered="yes" />
+          </ranges>
+        </function>
+        <function id="8522" token="0x6000026" name="op_Implicit(CoverageDemo.MyBool)" namespace="CoverageDemo" type_name="MyBool" block_coverage="100.00" line_coverage="100.00" blocks_covered="2" blocks_not_covered="0" lines_covered="1" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="1" start_line="12" end_line="12" start_column="59" end_column="70" covered="yes" />
+          </ranges>
+        </function>
+        <function id="8531" token="0x6000027" name="get_Value()" namespace="CoverageDemo" type_name="MyInt" block_coverage="100.00" line_coverage="100.00" blocks_covered="1" blocks_not_covered="0" lines_covered="1" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="2" start_line="10" end_line="10" start_column="24" end_column="28" covered="yes" />
+          </ranges>
+        </function>
+        <function id="8539" token="0x6000028" name="set_Value(int)" namespace="CoverageDemo" type_name="MyInt" block_coverage="100.00" line_coverage="100.00" blocks_covered="1" blocks_not_covered="0" lines_covered="1" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="2" start_line="10" end_line="10" start_column="29" end_column="33" covered="yes" />
+          </ranges>
+        </function>
+        <function id="8548" token="0x6000029" name="op_Implicit(int)" namespace="CoverageDemo" type_name="MyInt" block_coverage="100.00" line_coverage="100.00" blocks_covered="2" blocks_not_covered="0" lines_covered="1" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="2" start_line="11" end_line="11" start_column="57" end_column="80" covered="yes" />
+          </ranges>
+        </function>
+        <function id="8578" token="0x600002a" name="op_Implicit(CoverageDemo.MyInt)" namespace="CoverageDemo" type_name="MyInt" block_coverage="100.00" line_coverage="100.00" blocks_covered="2" blocks_not_covered="0" lines_covered="1" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="2" start_line="12" end_line="12" start_column="57" end_column="68" covered="yes" />
+          </ranges>
+        </function>
+        <function id="8587" token="0x600002b" name="get_Value()" namespace="CoverageDemo" type_name="MyString" block_coverage="100.00" line_coverage="100.00" blocks_covered="1" blocks_not_covered="0" lines_covered="1" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="3" start_line="10" end_line="10" start_column="27" end_column="31" covered="yes" />
+          </ranges>
+        </function>
+        <function id="8595" token="0x600002c" name="set_Value(string)" namespace="CoverageDemo" type_name="MyString" block_coverage="100.00" line_coverage="100.00" blocks_covered="1" blocks_not_covered="0" lines_covered="1" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="3" start_line="10" end_line="10" start_column="32" end_column="36" covered="yes" />
+          </ranges>
+        </function>
+        <function id="8604" token="0x600002d" name="op_Implicit(string)" namespace="CoverageDemo" type_name="MyString" block_coverage="100.00" line_coverage="100.00" blocks_covered="2" blocks_not_covered="0" lines_covered="1" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="3" start_line="11" end_line="11" start_column="63" end_column="86" covered="yes" />
+          </ranges>
+        </function>
+        <function id="8634" token="0x600002e" name="op_Implicit(CoverageDemo.MyString)" namespace="CoverageDemo" type_name="MyString" block_coverage="100.00" line_coverage="100.00" blocks_covered="2" blocks_not_covered="0" lines_covered="1" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="3" start_line="12" end_line="12" start_column="63" end_column="74" covered="yes" />
+          </ranges>
+        </function>
+        <function id="8643" token="0x600002f" name="Method1(CoverageDemo.MyInt)" namespace="CoverageDemo.Naming" type_name="Closures" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="2" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="4" start_line="12" end_line="12" start_column="9" end_column="35" covered="no" />
+          </ranges>
+        </function>
+        <function id="8651" token="0x6000030" name="Method2(CoverageDemo.MyInt)" namespace="CoverageDemo.Naming" type_name="Closures" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="5" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="4" start_line="19" end_line="19" start_column="9" end_column="42" covered="no" />
+          </ranges>
+        </function>
+        <function id="8690" token="0x6000031" name="Method3(CoverageDemo.MyInt)" namespace="CoverageDemo.Naming" type_name="Closures" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="2" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="4" start_line="24" end_line="24" start_column="9" end_column="37" covered="no" />
+          </ranges>
+        </function>
+        <function id="8699" token="0x6000032" name="Method4(CoverageDemo.MyInt)" namespace="CoverageDemo.Naming" type_name="Closures" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="3" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="4" start_line="31" end_line="31" start_column="9" end_column="61" covered="no" />
+          </ranges>
+        </function>
+        <function id="8720" token="0x6000033" name="Method5(CoverageDemo.MyInt)" namespace="CoverageDemo.Naming" type_name="Closures" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="3" lines_covered="0" lines_partially_covered="0" lines_not_covered="2">
+          <ranges>
+            <range source_id="4" start_line="36" end_line="36" start_column="9" end_column="29" covered="no" />
+            <range source_id="4" start_line="37" end_line="37" start_column="9" end_column="36" covered="no" />
+          </ranges>
+        </function>
+        <function id="8756" token="0x6000034" name="Method6(CoverageDemo.MyInt)" namespace="CoverageDemo.Naming" type_name="Closures" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="4" lines_covered="0" lines_partially_covered="0" lines_not_covered="2">
+          <ranges>
+            <range source_id="4" start_line="44" end_line="44" start_column="9" end_column="29" covered="no" />
+            <range source_id="4" start_line="45" end_line="45" start_column="9" end_column="56" covered="no" />
+          </ranges>
+        </function>
+        <function id="8794" token="0x6000035" name="CallLambda(System.Func&lt;CoverageDemo.MyInt, CoverageDemo.MyInt&gt;, CoverageDemo.MyInt)" namespace="CoverageDemo.Naming" type_name="Closures" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="3" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="4" start_line="51" end_line="51" start_column="9" end_column="28" covered="no" />
+          </ranges>
+        </function>
+        <function id="8808" token="0x6000037" name="&lt;Method1&gt;g__LocalStatic|0_0(CoverageDemo.MyInt)" namespace="CoverageDemo.Naming" type_name="Closures" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="2" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="4" start_line="14" end_line="14" start_column="44" end_column="45" covered="no" />
+          </ranges>
+        </function>
+        <function id="8816" token="0x6000038" name="&lt;Method3&gt;g__LocalInstance|2_0(CoverageDemo.MyInt)" namespace="CoverageDemo.Naming" type_name="Closures" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="4" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="4" start_line="26" end_line="26" start_column="39" end_column="59" covered="no" />
+          </ranges>
+        </function>
+        <function id="8829" token="0x6000039" name="&lt;Method4&gt;b__3_0(CoverageDemo.MyInt)" namespace="CoverageDemo.Naming" type_name="Closures" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="4" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="4" start_line="31" end_line="31" start_column="32" end_column="52" covered="no" />
+          </ranges>
+        </function>
+        <function id="8842" token="0x600003a" name="&lt;Method5&gt;g__LocalClosure|4_0(CoverageDemo.MyInt, ref CoverageDemo.Naming.Closures.&lt;&gt;c__DisplayClass4_0)" namespace="CoverageDemo.Naming" type_name="Closures" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="4" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="4" start_line="39" end_line="39" start_column="38" end_column="53" covered="no" />
+          </ranges>
+        </function>
+        <function id="8458" token="0x600003b" name="Method1(CoverageDemo.MyInt)" namespace="CoverageDemo.Naming" type_name="Generics" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="2" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="5" start_line="7" end_line="7" start_column="40" end_column="45" covered="no" />
+          </ranges>
+        </function>
+        <function id="8861" token="0x600003d" name="Method1(TFoo)" namespace="CoverageDemo.Naming" type_name="Generics&lt;TFoo&gt;" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="1" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="5" start_line="12" end_line="12" start_column="40" end_column="45" covered="no" />
+          </ranges>
+        </function>
+        <function id="8864" token="0x600003f" name="Method1(TFoo, TBar)" namespace="CoverageDemo.Naming" type_name="Generics&lt;TFoo, TBar&gt;" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="2" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="5" start_line="22" end_line="22" start_column="61" end_column="76" covered="no" />
+          </ranges>
+        </function>
+        <function id="8873" token="0x6000040" name="Method1&lt;TBuzz&gt;(TFoo, TBar, TBuzz)" namespace="CoverageDemo.Naming" type_name="Generics&lt;TFoo, TBar&gt;" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="2" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="5" start_line="23" end_line="23" start_column="88" end_column="110" covered="no" />
+          </ranges>
+        </function>
+        <function id="8883" token="0x6000043" name="M(bool, byte, sbyte, char)" namespace="CoverageDemo.Naming" type_name="Signatures" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="1" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="6" start_line="11" end_line="11" start_column="57" end_column="58" covered="no" />
+          </ranges>
+        </function>
+        <function id="8883" token="0x6000044" name="M(decimal, double, float)" namespace="CoverageDemo.Naming" type_name="Signatures" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="1" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="6" start_line="12" end_line="12" start_column="53" end_column="54" covered="no" />
+          </ranges>
+        </function>
+        <function id="8883" token="0x6000045" name="M(int, uint, native int, native uint)" namespace="CoverageDemo.Naming" type_name="Signatures" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="1" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="6" start_line="13" end_line="13" start_column="56" end_column="57" covered="no" />
+          </ranges>
+        </function>
+        <function id="8883" token="0x6000046" name="M(long, ulong, short, ushort)" namespace="CoverageDemo.Naming" type_name="Signatures" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="1" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="6" start_line="14" end_line="14" start_column="60" end_column="61" covered="no" />
+          </ranges>
+        </function>
+        <function id="8883" token="0x6000047" name="M(object, string, object)" namespace="CoverageDemo.Naming" type_name="Signatures" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="1" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="6" start_line="15" end_line="15" start_column="54" end_column="55" covered="no" />
+          </ranges>
+        </function>
+        <function id="8883" token="0x6000048" name="M(System.Nullable&lt;int&gt;, object)" namespace="CoverageDemo.Naming" type_name="Signatures" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="1" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="6" start_line="18" end_line="18" start_column="41" end_column="42" covered="no" />
+          </ranges>
+        </function>
+        <function id="8883" token="0x6000049" name="M(System.Nullable&lt;CoverageDemo.MyInt&gt;, System.Version)" namespace="CoverageDemo.Naming" type_name="Signatures" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="1" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="6" start_line="19" end_line="19" start_column="44" end_column="45" covered="no" />
+          </ranges>
+        </function>
+        <function id="8885" token="0x600004a" name="M(ref CoverageDemo.MyInt, ref CoverageDemo.MyInt, out CoverageDemo.MyInt)" namespace="CoverageDemo.Naming" type_name="Signatures" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="1" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="6" start_line="22" end_line="22" start_column="64" end_column="80" covered="no" />
+            <range source_id="6" start_line="22" end_line="22" start_column="81" end_column="82" covered="no" />
+          </ranges>
+        </function>
+        <function id="8883" token="0x600004b" name="M(void*, void**)" namespace="CoverageDemo.Naming" type_name="Signatures" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="1" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="6" start_line="25" end_line="25" start_column="48" end_column="49" covered="no" />
+          </ranges>
+        </function>
+        <function id="8883" token="0x600004c" name="M(CoverageDemo.MyInt*)" namespace="CoverageDemo.Naming" type_name="Signatures" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="1" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="6" start_line="26" end_line="26" start_column="38" end_column="39" covered="no" />
+          </ranges>
+        </function>
+        <function id="8883" token="0x600004d" name="M(System.ValueTuple&lt;CoverageDemo.MyInt, CoverageDemo.MyInt&gt;)" namespace="CoverageDemo.Naming" type_name="Signatures" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="1" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="6" start_line="29" end_line="29" start_column="45" end_column="46" covered="no" />
+          </ranges>
+        </function>
+        <function id="8883" token="0x600004e" name="M(CoverageDemo.MyInt[], CoverageDemo.MyInt[][], CoverageDemo.MyInt[0...,0...])" namespace="CoverageDemo.Naming" type_name="Signatures" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="1" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="6" start_line="32" end_line="32" start_column="59" end_column="60" covered="no" />
+          </ranges>
+        </function>
+        <function id="8883" token="0x600004f" name="M(CoverageDemo.MyInt[])" namespace="CoverageDemo.Naming" type_name="Signatures" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="1" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="6" start_line="33" end_line="33" start_column="39" end_column="40" covered="no" />
+          </ranges>
+        </function>
+        <function id="8883" token="0x6000050" name="M(System.ReadOnlySpan&lt;CoverageDemo.MyInt&gt;)" namespace="CoverageDemo.Naming" type_name="Signatures" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="1" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="6" start_line="34" end_line="34" start_column="51" end_column="52" covered="no" />
+          </ranges>
+        </function>
+        <function id="8883" token="0x6000051" name="M(System.Collections.Generic.IEnumerable&lt;CoverageDemo.MyInt&gt;)" namespace="CoverageDemo.Naming" type_name="Signatures" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="1" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="6" start_line="35" end_line="35" start_column="50" end_column="51" covered="no" />
+          </ranges>
+        </function>
+        <function id="8883" token="0x6000052" name="M(CoverageDemo.Layout.NestedClassSingleFile.Inner)" namespace="CoverageDemo.Naming" type_name="Signatures" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="1" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="6" start_line="38" end_line="38" start_column="72" end_column="73" covered="no" />
+          </ranges>
+        </function>
+        <function id="8883" token="0x6000053" name="M(System.Environment.SpecialFolder)" namespace="CoverageDemo.Naming" type_name="Signatures" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="1" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="6" start_line="39" end_line="39" start_column="57" end_column="58" covered="no" />
+          </ranges>
+        </function>
+        <function id="8894" token="0x6000055" name="get_Default()" namespace="CoverageDemo.Naming" type_name="SpecialMemberNames" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="1" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="7" start_line="9" end_line="9" start_column="49" end_column="58" covered="no" />
+          </ranges>
+        </function>
+        <function id="8901" token="0x6000056" name="get_Data1()" namespace="CoverageDemo.Naming" type_name="SpecialMemberNames" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="1" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="7" start_line="11" end_line="11" start_column="29" end_column="33" covered="no" />
+          </ranges>
+        </function>
+        <function id="8909" token="0x6000057" name="set_Data1(CoverageDemo.MyString)" namespace="CoverageDemo.Naming" type_name="SpecialMemberNames" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="1" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="7" start_line="11" end_line="11" start_column="34" end_column="38" covered="no" />
+          </ranges>
+        </function>
+        <function id="8918" token="0x6000058" name="get_Data2()" namespace="CoverageDemo.Naming" type_name="SpecialMemberNames" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="1" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="7" start_line="15" end_line="15" start_column="9" end_column="13" covered="no" />
+          </ranges>
+        </function>
+        <function id="8926" token="0x6000059" name="set_Data2(CoverageDemo.MyString)" namespace="CoverageDemo.Naming" type_name="SpecialMemberNames" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="1" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="7" start_line="16" end_line="16" start_column="9" end_column="13" covered="no" />
+          </ranges>
+        </function>
+        <function id="8935" token="0x600005a" name="get_Item(CoverageDemo.MyInt)" namespace="CoverageDemo.Naming" type_name="SpecialMemberNames" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="2" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="7" start_line="19" end_line="19" start_column="48" end_column="50" covered="no" />
+          </ranges>
+        </function>
+        <function id="8883" token="0x600005b" name="set_Item(CoverageDemo.MyInt, CoverageDemo.MyString)" namespace="CoverageDemo.Naming" type_name="SpecialMemberNames" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="1" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="7" start_line="19" end_line="19" start_column="59" end_column="68" covered="no" />
+          </ranges>
+        </function>
+        <function id="8935" token="0x600005c" name="get_Item(CoverageDemo.MyString)" namespace="CoverageDemo.Naming" type_name="SpecialMemberNames" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="2" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="7" start_line="23" end_line="23" start_column="16" end_column="18" covered="no" />
+          </ranges>
+        </function>
+        <function id="8883" token="0x600005d" name="set_Item(CoverageDemo.MyString, CoverageDemo.MyString)" namespace="CoverageDemo.Naming" type_name="SpecialMemberNames" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="1" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="7" start_line="24" end_line="24" start_column="16" end_column="25" covered="no" />
+          </ranges>
+        </function>
+        <function id="8947" token="0x600005e" name="SpecialMemberNames()" namespace="CoverageDemo.Naming" type_name="SpecialMemberNames" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="4" lines_covered="0" lines_partially_covered="0" lines_not_covered="3">
+          <ranges>
+            <range source_id="7" start_line="27" end_line="27" start_column="5" end_column="32" covered="no" />
+            <range source_id="7" start_line="29" end_line="29" start_column="9" end_column="20" covered="no" />
+            <range source_id="7" start_line="30" end_line="30" start_column="5" end_column="6" covered="no" />
+          </ranges>
+        </function>
+        <function id="8971" token="0x600005f" name="SpecialMemberNames(CoverageDemo.MyString)" namespace="CoverageDemo.Naming" type_name="SpecialMemberNames" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="3" lines_covered="0" lines_partially_covered="0" lines_not_covered="3">
+          <ranges>
+            <range source_id="7" start_line="32" end_line="32" start_column="5" end_column="46" covered="no" />
+            <range source_id="7" start_line="34" end_line="34" start_column="9" end_column="23" covered="no" />
+            <range source_id="7" start_line="35" end_line="35" start_column="5" end_column="6" covered="no" />
+          </ranges>
+        </function>
+        <function id="8988" token="0x6000060" name="Finalize()" namespace="CoverageDemo.Naming" type_name="SpecialMemberNames" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="6" lines_covered="0" lines_partially_covered="0" lines_not_covered="2">
+          <ranges>
+            <range source_id="7" start_line="39" end_line="39" start_column="9" end_column="20" covered="no" />
+            <range source_id="7" start_line="40" end_line="40" start_column="5" end_column="6" covered="no" />
+          </ranges>
+        </function>
+        <function id="9044" token="0x6000061" name="op_Implicit(CoverageDemo.MyString)" namespace="CoverageDemo.Naming" type_name="SpecialMemberNames" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="2" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="7" start_line="42" end_line="42" start_column="75" end_column="85" covered="no" />
+          </ranges>
+        </function>
+        <function id="9052" token="0x6000062" name="op_Explicit(CoverageDemo.Naming.SpecialMemberNames)" namespace="CoverageDemo.Naming" type_name="SpecialMemberNames" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="2" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="7" start_line="44" end_line="44" start_column="75" end_column="86" covered="no" />
+          </ranges>
+        </function>
+        <function id="9060" token="0x6000063" name="op_Explicit(CoverageDemo.Naming.SpecialMemberNames)" namespace="CoverageDemo.Naming" type_name="SpecialMemberNames" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="4" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="7" start_line="46" end_line="46" start_column="70" end_column="94" covered="no" />
+          </ranges>
+        </function>
+        <function id="9092" token="0x6000064" name="op_Addition(CoverageDemo.Naming.SpecialMemberNames, CoverageDemo.Naming.SpecialMemberNames)" namespace="CoverageDemo.Naming" type_name="SpecialMemberNames" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="8" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="7" start_line="48" end_line="48" start_column="12" end_column="60" covered="no" />
+          </ranges>
+        </function>
+        <function id="9131" token="0x6000065" name="op_Increment(CoverageDemo.Naming.SpecialMemberNames)" namespace="CoverageDemo.Naming" type_name="SpecialMemberNames" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="6" lines_covered="0" lines_partially_covered="0" lines_not_covered="2">
+          <ranges>
+            <range source_id="7" start_line="51" end_line="51" start_column="9" end_column="54" covered="no" />
+            <range source_id="7" start_line="52" end_line="52" start_column="9" end_column="22" covered="no" />
+          </ranges>
+        </function>
+        <function id="9166" token="0x6000066" name="SpecialMemberNames()" namespace="CoverageDemo.Naming" type_name="SpecialMemberNames" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="2" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="7" start_line="7" end_line="7" start_column="5" end_column="66" covered="no" />
+          </ranges>
+        </function>
+        <function id="8458" token="0x600006b" name="Method1(CoverageDemo.MyInt)" namespace="CoverageDemo.Naming.SubNamespace" type_name="SomeClass" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="2" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="0" start_line="14" end_line="14" start_column="48" end_column="53" covered="no" />
+          </ranges>
+        </function>
+        <function id="8458" token="0x600006d" name="Method1(CoverageDemo.MyInt)" namespace="CoverageDemo.Naming.FileScoped" type_name="&lt;FileScopedClass&gt;F22D8432248FFAC08B6A6752E899ADDA3F174CFF5C040D3C453BDDF46D85A0F22__FileScopedClass" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="2" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="8" start_line="7" end_line="7" start_column="40" end_column="45" covered="no" />
+          </ranges>
+        </function>
+        <function id="8458" token="0x600006f" name="Method1(CoverageDemo.MyInt)" namespace="CoverageDemo.Naming.FileScoped" type_name="NotFileScopedClass" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="2" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="9" start_line="7" end_line="7" start_column="40" end_column="45" covered="no" />
+          </ranges>
+        </function>
+        <function id="8458" token="0x6000071" name="Method1(CoverageDemo.MyInt)" namespace="CoverageDemo.Layout" type_name="MultiClassSingleFile" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="2" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="10" start_line="7" end_line="7" start_column="40" end_column="45" covered="no" />
+          </ranges>
+        </function>
+        <function id="8458" token="0x6000073" name="Method1(CoverageDemo.MyInt)" namespace="CoverageDemo.Layout" type_name="AnotherClassSameFile" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="2" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="10" start_line="12" end_line="12" start_column="40" end_column="45" covered="no" />
+          </ranges>
+        </function>
+        <function id="8458" token="0x6000075" name="Method1(CoverageDemo.MyInt)" namespace="CoverageDemo.Layout" type_name="NestedClassMultiFile" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="2" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="11" start_line="7" end_line="7" start_column="40" end_column="45" covered="no" />
+          </ranges>
+        </function>
+        <function id="8458" token="0x6000077" name="Method1(CoverageDemo.MyInt)" namespace="CoverageDemo.Layout" type_name="NestedClassSingleFile" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="2" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="12" start_line="7" end_line="7" start_column="40" end_column="45" covered="no" />
+          </ranges>
+        </function>
+        <function id="8458" token="0x6000079" name="PartialMethod(CoverageDemo.MyInt)" namespace="CoverageDemo.Layout" type_name="PartialMethods" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="2" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="13" start_line="16" end_line="16" start_column="9" end_column="22" covered="no" />
+          </ranges>
+        </function>
+        <function id="8458" token="0x600007b" name="Method1(CoverageDemo.MyInt)" namespace="CoverageDemo.Layout" type_name="SingleClassMultiFile" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="2" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="14" start_line="7" end_line="7" start_column="40" end_column="45" covered="no" />
+          </ranges>
+        </function>
+        <function id="8458" token="0x600007c" name="Method2(CoverageDemo.MyInt)" namespace="CoverageDemo.Layout" type_name="SingleClassMultiFile" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="2" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="15" start_line="7" end_line="7" start_column="40" end_column="45" covered="no" />
+          </ranges>
+        </function>
+        <function id="8458" token="0x600007e" name="Method1(CoverageDemo.MyInt)" namespace="CoverageDemo.Layout" type_name="SingleClassSingleFile" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="2" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="16" start_line="7" end_line="7" start_column="40" end_column="45" covered="no" />
+          </ranges>
+        </function>
+        <function id="8458" token="0x600007f" name="Method2(CoverageDemo.MyInt)" namespace="CoverageDemo.Layout" type_name="SingleClassSingleFile" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="2" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="16" start_line="8" end_line="8" start_column="40" end_column="45" covered="no" />
+          </ranges>
+        </function>
+        <function id="9280" token="0x6000081" name="Run()" namespace="CoverageDemo.Coverage" type_name="Attributes" block_coverage="77.78" line_coverage="50.00" blocks_covered="7" blocks_not_covered="2" lines_covered="2" lines_partially_covered="2" lines_not_covered="0">
+          <ranges>
+            <range source_id="17" start_line="24" end_line="24" start_column="9" end_column="34" covered="yes" />
+            <range source_id="17" start_line="25" end_line="25" start_column="15" end_column="27" covered="yes" />
+            <range source_id="17" start_line="25" end_line="25" start_column="28" end_column="29" covered="no" />
+            <range source_id="17" start_line="25" end_line="25" start_column="30" end_column="35" covered="yes" />
+            <range source_id="17" start_line="25" end_line="25" start_column="38" end_column="39" covered="yes" />
+            <range source_id="17" start_line="26" end_line="26" start_column="15" end_column="27" covered="yes" />
+            <range source_id="17" start_line="26" end_line="26" start_column="28" end_column="29" covered="no" />
+            <range source_id="17" start_line="26" end_line="26" start_column="30" end_column="35" covered="yes" />
+            <range source_id="17" start_line="26" end_line="26" start_column="38" end_column="39" covered="yes" />
+            <range source_id="17" start_line="27" end_line="27" start_column="5" end_column="6" covered="yes" />
+          </ranges>
+        </function>
+        <function id="9352" token="0x6000082" name="Method1()" namespace="CoverageDemo.Coverage" type_name="Attributes" block_coverage="100.00" line_coverage="100.00" blocks_covered="1" blocks_not_covered="0" lines_covered="1" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="17" start_line="31" end_line="31" start_column="9" end_column="31" covered="yes" />
+          </ranges>
+        </function>
+        <function id="9361" token="0x6000083" name="Method2()" namespace="CoverageDemo.Coverage" type_name="Attributes" block_coverage="80.00" line_coverage="66.67" blocks_covered="4" blocks_not_covered="1" lines_covered="2" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="17" start_line="37" end_line="37" start_column="9" end_column="38" covered="yes" />
+            <range source_id="17" start_line="38" end_line="38" start_column="9" end_column="37" covered="yes" />
+            <range source_id="17" start_line="39" end_line="39" start_column="9" end_column="18" covered="no" />
+          </ranges>
+        </function>
+        <function id="8883" token="0x6000086" name="DebuggerStepperBoundaryMethod()" namespace="CoverageDemo.Coverage" type_name="Attributes" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="1" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="17" start_line="44" end_line="44" start_column="77" end_column="78" covered="no" />
+          </ranges>
+        </function>
+        <function id="8883" token="0x6000087" name="CompilerGeneratedMethod()" namespace="CoverageDemo.Coverage" type_name="Attributes" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="1" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="17" start_line="45" end_line="45" start_column="65" end_column="66" covered="no" />
+          </ranges>
+        </function>
+        <function id="9388" token="0x600008a" name="DoesNotReturnMethod()" namespace="CoverageDemo.Coverage" type_name="Attributes" block_coverage="100.00" line_coverage="100.00" blocks_covered="2" blocks_not_covered="0" lines_covered="1" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="17" start_line="52" end_line="52" start_column="9" end_column="47" covered="yes" />
+          </ranges>
+        </function>
+        <function id="9395" token="0x600008b" name="DoesNotReturnIfMethod(CoverageDemo.MyBool)" namespace="CoverageDemo.Coverage" type_name="Attributes" block_coverage="100.00" line_coverage="100.00" blocks_covered="5" blocks_not_covered="0" lines_covered="3" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="17" start_line="57" end_line="57" start_column="9" end_column="23" covered="yes" />
+            <range source_id="17" start_line="59" end_line="59" start_column="13" end_column="51" covered="yes" />
+            <range source_id="17" start_line="61" end_line="61" start_column="5" end_column="6" covered="yes" />
+          </ranges>
+        </function>
+        <function id="9411" token="0x600008d" name="Run()" namespace="CoverageDemo.Coverage" type_name="Generics" block_coverage="100.00" line_coverage="100.00" blocks_covered="7" blocks_not_covered="0" lines_covered="5" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="18" start_line="11" end_line="11" start_column="9" end_column="32" covered="yes" />
+            <range source_id="18" start_line="12" end_line="12" start_column="9" end_column="32" covered="yes" />
+            <range source_id="18" start_line="13" end_line="13" start_column="9" end_column="69" covered="yes" />
+            <range source_id="18" start_line="14" end_line="14" start_column="9" end_column="72" covered="yes" />
+            <range source_id="18" start_line="15" end_line="15" start_column="5" end_column="6" covered="yes" />
+          </ranges>
+        </function>
+        <function id="9463" token="0x600008e" name="TypeOptimized&lt;TItem&gt;(TItem)" namespace="CoverageDemo.Coverage" type_name="Generics" block_coverage="45.45" line_coverage="40.00" blocks_covered="5" blocks_not_covered="6" lines_covered="2" lines_partially_covered="0" lines_not_covered="3">
+          <ranges>
+            <range source_id="18" start_line="19" end_line="19" start_column="9" end_column="42" covered="yes" />
+            <range source_id="18" start_line="21" end_line="21" start_column="13" end_column="22" covered="yes" />
+            <range source_id="18" start_line="23" end_line="23" start_column="9" end_column="43" covered="no" />
+            <range source_id="18" start_line="25" end_line="25" start_column="13" end_column="22" covered="no" />
+            <range source_id="18" start_line="27" end_line="27" start_column="9" end_column="19" covered="no" />
+          </ranges>
+        </function>
+        <function id="9524" token="0x600008f" name="MergedCoverageFromDifferentInstantiations&lt;TItem&gt;(TItem, TItem, CoverageDemo.MyBool)" namespace="CoverageDemo.Coverage" type_name="Generics" block_coverage="100.00" line_coverage="100.00" blocks_covered="4" blocks_not_covered="0" lines_covered="3" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="18" start_line="32" end_line="32" start_column="9" end_column="23" covered="yes" />
+            <range source_id="18" start_line="34" end_line="34" start_column="13" end_column="27" covered="yes" />
+            <range source_id="18" start_line="38" end_line="38" start_column="13" end_column="27" covered="yes" />
+          </ranges>
+        </function>
+        <function id="9540" token="0x6000091" name="Run()" namespace="CoverageDemo.Coverage" type_name="IfConditions" block_coverage="100.00" line_coverage="100.00" blocks_covered="52" blocks_not_covered="0" lines_covered="17" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="19" start_line="11" end_line="11" start_column="9" end_column="36" covered="yes" />
+            <range source_id="19" start_line="12" end_line="12" start_column="9" end_column="34" covered="yes" />
+            <range source_id="19" start_line="13" end_line="13" start_column="9" end_column="34" covered="yes" />
+            <range source_id="19" start_line="14" end_line="14" start_column="9" end_column="34" covered="yes" />
+            <range source_id="19" start_line="15" end_line="15" start_column="9" end_column="34" covered="yes" />
+            <range source_id="19" start_line="16" end_line="16" start_column="9" end_column="34" covered="yes" />
+            <range source_id="19" start_line="17" end_line="17" start_column="9" end_column="36" covered="yes" />
+            <range source_id="19" start_line="18" end_line="18" start_column="9" end_column="36" covered="yes" />
+            <range source_id="19" start_line="19" end_line="19" start_column="9" end_column="36" covered="yes" />
+            <range source_id="19" start_line="20" end_line="20" start_column="9" end_column="36" covered="yes" />
+            <range source_id="19" start_line="21" end_line="21" start_column="9" end_column="36" covered="yes" />
+            <range source_id="19" start_line="22" end_line="22" start_column="9" end_column="43" covered="yes" />
+            <range source_id="19" start_line="23" end_line="23" start_column="9" end_column="43" covered="yes" />
+            <range source_id="19" start_line="24" end_line="24" start_column="9" end_column="43" covered="yes" />
+            <range source_id="19" start_line="25" end_line="25" start_column="9" end_column="43" covered="yes" />
+            <range source_id="19" start_line="26" end_line="26" start_column="9" end_column="43" covered="yes" />
+            <range source_id="19" start_line="27" end_line="27" start_column="5" end_column="6" covered="yes" />
+          </ranges>
+        </function>
+        <function id="9872" token="0x6000092" name="SingleCondition(CoverageDemo.MyInt)" namespace="CoverageDemo.Coverage" type_name="IfConditions" block_coverage="84.78" line_coverage="73.91" blocks_covered="39" blocks_not_covered="7" lines_covered="17" lines_partially_covered="3" lines_not_covered="3">
+          <ranges>
+            <range source_id="19" start_line="31" end_line="31" start_column="9" end_column="24" covered="yes" />
+            <range source_id="19" start_line="34" end_line="34" start_column="9" end_column="23" covered="yes" />
+            <range source_id="19" start_line="36" end_line="36" start_column="13" end_column="22" covered="yes" />
+            <range source_id="19" start_line="40" end_line="40" start_column="13" end_column="22" covered="yes" />
+            <range source_id="19" start_line="42" end_line="42" start_column="9" end_column="23" covered="yes" />
+            <range source_id="19" start_line="44" end_line="44" start_column="13" end_column="25" covered="yes" />
+            <range source_id="19" start_line="46" end_line="46" start_column="9" end_column="23" covered="yes" />
+            <range source_id="19" start_line="46" end_line="46" start_column="24" end_column="40" covered="yes" />
+            <range source_id="19" start_line="47" end_line="47" start_column="9" end_column="39" covered="yes" />
+            <range source_id="19" start_line="50" end_line="50" start_column="9" end_column="23" covered="yes" />
+            <range source_id="19" start_line="52" end_line="52" start_column="13" end_column="22" covered="no" />
+            <range source_id="19" start_line="56" end_line="56" start_column="13" end_column="22" covered="yes" />
+            <range source_id="19" start_line="58" end_line="58" start_column="9" end_column="23" covered="yes" />
+            <range source_id="19" start_line="60" end_line="60" start_column="13" end_column="25" covered="no" />
+            <range source_id="19" start_line="62" end_line="62" start_column="9" end_column="23" covered="yes" />
+            <range source_id="19" start_line="62" end_line="62" start_column="24" end_column="40" covered="no" />
+            <range source_id="19" start_line="63" end_line="63" start_column="9" end_column="39" covered="partial" />
+            <range source_id="19" start_line="66" end_line="66" start_column="9" end_column="24" covered="yes" />
+            <range source_id="19" start_line="68" end_line="68" start_column="13" end_column="22" covered="yes" />
+            <range source_id="19" start_line="72" end_line="72" start_column="13" end_column="22" covered="no" />
+            <range source_id="19" start_line="74" end_line="74" start_column="9" end_column="23" covered="yes" />
+            <range source_id="19" start_line="76" end_line="76" start_column="13" end_column="25" covered="yes" />
+            <range source_id="19" start_line="78" end_line="78" start_column="9" end_column="23" covered="yes" />
+            <range source_id="19" start_line="78" end_line="78" start_column="24" end_column="40" covered="yes" />
+            <range source_id="19" start_line="79" end_line="79" start_column="9" end_column="39" covered="partial" />
+            <range source_id="19" start_line="80" end_line="80" start_column="9" end_column="23" covered="yes" />
+          </ranges>
+        </function>
+        <function id="10096" token="0x6000093" name="MultiCondition(CoverageDemo.MyInt, CoverageDemo.MyInt)" namespace="CoverageDemo.Coverage" type_name="IfConditions" block_coverage="83.87" line_coverage="73.33" blocks_covered="78" blocks_not_covered="15" lines_covered="22" lines_partially_covered="5" lines_not_covered="3">
+          <ranges>
+            <range source_id="19" start_line="85" end_line="85" start_column="9" end_column="24" covered="yes" />
+            <range source_id="19" start_line="88" end_line="88" start_column="9" end_column="38" covered="yes" />
+            <range source_id="19" start_line="90" end_line="90" start_column="13" end_column="22" covered="yes" />
+            <range source_id="19" start_line="94" end_line="94" start_column="13" end_column="22" covered="yes" />
+            <range source_id="19" start_line="96" end_line="96" start_column="9" end_column="38" covered="yes" />
+            <range source_id="19" start_line="98" end_line="98" start_column="13" end_column="25" covered="yes" />
+            <range source_id="19" start_line="100" end_line="100" start_column="9" end_column="38" covered="yes" />
+            <range source_id="19" start_line="100" end_line="100" start_column="39" end_column="56" covered="yes" />
+            <range source_id="19" start_line="101" end_line="101" start_column="9" end_column="54" covered="yes" />
+            <range source_id="19" start_line="104" end_line="104" start_column="9" end_column="39" covered="yes" />
+            <range source_id="19" start_line="106" end_line="106" start_column="13" end_column="22" covered="yes" />
+            <range source_id="19" start_line="110" end_line="110" start_column="13" end_column="22" covered="yes" />
+            <range source_id="19" start_line="112" end_line="112" start_column="9" end_column="38" covered="yes" />
+            <range source_id="19" start_line="114" end_line="114" start_column="13" end_column="25" covered="yes" />
+            <range source_id="19" start_line="116" end_line="116" start_column="9" end_column="38" covered="yes" />
+            <range source_id="19" start_line="116" end_line="116" start_column="39" end_column="56" covered="yes" />
+            <range source_id="19" start_line="117" end_line="117" start_column="9" end_column="54" covered="yes" />
+            <range source_id="19" start_line="120" end_line="120" start_column="9" end_column="38" covered="partial" />
+            <range source_id="19" start_line="122" end_line="122" start_column="13" end_column="22" covered="no" />
+            <range source_id="19" start_line="126" end_line="126" start_column="13" end_column="22" covered="yes" />
+            <range source_id="19" start_line="128" end_line="128" start_column="9" end_column="38" covered="partial" />
+            <range source_id="19" start_line="130" end_line="130" start_column="13" end_column="25" covered="no" />
+            <range source_id="19" start_line="132" end_line="132" start_column="9" end_column="38" covered="partial" />
+            <range source_id="19" start_line="132" end_line="132" start_column="39" end_column="56" covered="no" />
+            <range source_id="19" start_line="133" end_line="133" start_column="9" end_column="54" covered="partial" />
+            <range source_id="19" start_line="136" end_line="136" start_column="9" end_column="40" covered="yes" />
+            <range source_id="19" start_line="138" end_line="138" start_column="13" end_column="22" covered="yes" />
+            <range source_id="19" start_line="142" end_line="142" start_column="13" end_column="22" covered="no" />
+            <range source_id="19" start_line="144" end_line="144" start_column="9" end_column="38" covered="yes" />
+            <range source_id="19" start_line="146" end_line="146" start_column="13" end_column="25" covered="yes" />
+            <range source_id="19" start_line="148" end_line="148" start_column="9" end_column="38" covered="yes" />
+            <range source_id="19" start_line="148" end_line="148" start_column="39" end_column="56" covered="yes" />
+            <range source_id="19" start_line="149" end_line="149" start_column="9" end_column="54" covered="partial" />
+            <range source_id="19" start_line="150" end_line="150" start_column="9" end_column="23" covered="yes" />
+          </ranges>
+        </function>
+        <function id="10536" token="0x6000094" name="PatternMatching(CoverageDemo.MyInt, CoverageDemo.MyInt, CoverageDemo.MyInt, CoverageDemo.MyInt)" namespace="CoverageDemo.Coverage" type_name="IfConditions" block_coverage="83.08" line_coverage="76.47" blocks_covered="54" blocks_not_covered="11" lines_covered="26" lines_partially_covered="5" lines_not_covered="3">
+          <ranges>
+            <range source_id="19" start_line="155" end_line="155" start_column="9" end_column="24" covered="yes" />
+            <range source_id="19" start_line="156" end_line="156" start_column="9" end_column="25" covered="yes" />
+            <range source_id="19" start_line="157" end_line="157" start_column="9" end_column="25" covered="yes" />
+            <range source_id="19" start_line="158" end_line="158" start_column="9" end_column="25" covered="yes" />
+            <range source_id="19" start_line="159" end_line="159" start_column="9" end_column="25" covered="yes" />
+            <range source_id="19" start_line="162" end_line="162" start_column="9" end_column="31" covered="yes" />
+            <range source_id="19" start_line="164" end_line="164" start_column="13" end_column="22" covered="yes" />
+            <range source_id="19" start_line="168" end_line="168" start_column="13" end_column="22" covered="yes" />
+            <range source_id="19" start_line="170" end_line="170" start_column="9" end_column="31" covered="yes" />
+            <range source_id="19" start_line="172" end_line="172" start_column="13" end_column="25" covered="yes" />
+            <range source_id="19" start_line="174" end_line="174" start_column="9" end_column="31" covered="yes" />
+            <range source_id="19" start_line="174" end_line="174" start_column="32" end_column="49" covered="yes" />
+            <range source_id="19" start_line="175" end_line="175" start_column="9" end_column="47" covered="yes" />
+            <range source_id="19" start_line="178" end_line="178" start_column="9" end_column="32" covered="yes" />
+            <range source_id="19" start_line="180" end_line="180" start_column="13" end_column="22" covered="yes" />
+            <range source_id="19" start_line="184" end_line="184" start_column="13" end_column="22" covered="yes" />
+            <range source_id="19" start_line="186" end_line="186" start_column="9" end_column="32" covered="yes" />
+            <range source_id="19" start_line="188" end_line="188" start_column="13" end_column="25" covered="yes" />
+            <range source_id="19" start_line="190" end_line="190" start_column="9" end_column="32" covered="yes" />
+            <range source_id="19" start_line="190" end_line="190" start_column="33" end_column="50" covered="yes" />
+            <range source_id="19" start_line="191" end_line="191" start_column="9" end_column="48" covered="yes" />
+            <range source_id="19" start_line="194" end_line="194" start_column="9" end_column="33" covered="partial" />
+            <range source_id="19" start_line="196" end_line="196" start_column="13" end_column="22" covered="no" />
+            <range source_id="19" start_line="200" end_line="200" start_column="13" end_column="22" covered="yes" />
+            <range source_id="19" start_line="202" end_line="202" start_column="9" end_column="33" covered="partial" />
+            <range source_id="19" start_line="204" end_line="204" start_column="13" end_column="25" covered="no" />
+            <range source_id="19" start_line="206" end_line="206" start_column="9" end_column="33" covered="partial" />
+            <range source_id="19" start_line="206" end_line="206" start_column="34" end_column="51" covered="no" />
+            <range source_id="19" start_line="207" end_line="207" start_column="9" end_column="49" covered="partial" />
+            <range source_id="19" start_line="210" end_line="210" start_column="9" end_column="34" covered="yes" />
+            <range source_id="19" start_line="212" end_line="212" start_column="13" end_column="22" covered="yes" />
+            <range source_id="19" start_line="216" end_line="216" start_column="13" end_column="22" covered="no" />
+            <range source_id="19" start_line="218" end_line="218" start_column="9" end_column="34" covered="yes" />
+            <range source_id="19" start_line="220" end_line="220" start_column="13" end_column="25" covered="yes" />
+            <range source_id="19" start_line="222" end_line="222" start_column="9" end_column="34" covered="yes" />
+            <range source_id="19" start_line="222" end_line="222" start_column="35" end_column="52" covered="yes" />
+            <range source_id="19" start_line="223" end_line="223" start_column="9" end_column="50" covered="partial" />
+            <range source_id="19" start_line="224" end_line="224" start_column="9" end_column="23" covered="yes" />
+          </ranges>
+        </function>
+        <function id="10862" token="0x6000096" name="Run()" namespace="CoverageDemo.Coverage" type_name="Lambdas" block_coverage="100.00" line_coverage="100.00" blocks_covered="8" blocks_not_covered="0" lines_covered="5" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="20" start_line="14" end_line="14" start_column="9" end_column="31" covered="yes" />
+            <range source_id="20" start_line="15" end_line="15" start_column="9" end_column="29" covered="yes" />
+            <range source_id="20" start_line="16" end_line="16" start_column="9" end_column="30" covered="yes" />
+            <range source_id="20" start_line="17" end_line="17" start_column="9" end_column="32" covered="yes" />
+            <range source_id="20" start_line="18" end_line="18" start_column="5" end_column="6" covered="yes" />
+          </ranges>
+        </function>
+        <function id="10908" token="0x6000097" name="LambdaFull(CoverageDemo.MyInt)" namespace="CoverageDemo.Coverage" type_name="Lambdas" block_coverage="100.00" line_coverage="100.00" blocks_covered="17" blocks_not_covered="0" lines_covered="20" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="20" start_line="22" end_line="22" start_column="9" end_column="62" covered="yes" />
+            <range source_id="20" start_line="23" end_line="27" start_column="9" end_column="20" covered="yes" />
+            <range source_id="20" start_line="28" end_line="28" start_column="9" end_column="79" covered="yes" />
+            <range source_id="20" start_line="29" end_line="40" start_column="9" end_column="20" covered="yes" />
+            <range source_id="20" start_line="41" end_line="41" start_column="9" end_column="54" covered="yes" />
+          </ranges>
+        </function>
+        <function id="11080" token="0x6000098" name="LambdaPartial(CoverageDemo.MyInt)" namespace="CoverageDemo.Coverage" type_name="Lambdas" block_coverage="100.00" line_coverage="100.00" blocks_covered="9" blocks_not_covered="0" lines_covered="14" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="20" start_line="47" end_line="47" start_column="9" end_column="79" covered="yes" />
+            <range source_id="20" start_line="48" end_line="59" start_column="9" end_column="20" covered="yes" />
+            <range source_id="20" start_line="60" end_line="60" start_column="9" end_column="34" covered="yes" />
+          </ranges>
+        </function>
+        <function id="8794" token="0x6000099" name="CallLambda(System.Func&lt;CoverageDemo.MyInt, CoverageDemo.MyInt&gt;, CoverageDemo.MyInt)" namespace="CoverageDemo.Coverage" type_name="Lambdas" block_coverage="100.00" line_coverage="100.00" blocks_covered="3" blocks_not_covered="0" lines_covered="1" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="20" start_line="66" end_line="66" start_column="9" end_column="28" covered="yes" />
+          </ranges>
+        </function>
+        <function id="11172" token="0x600009b" name="Run()" namespace="CoverageDemo.Coverage" type_name="LoopConditions" block_coverage="85.71" line_coverage="33.33" blocks_covered="24" blocks_not_covered="4" lines_covered="2" lines_partially_covered="4" lines_not_covered="0">
+          <ranges>
+            <range source_id="21" start_line="15" end_line="15" start_column="9" end_column="38" covered="yes" />
+            <range source_id="21" start_line="16" end_line="16" start_column="15" end_column="31" covered="yes" />
+            <range source_id="21" start_line="16" end_line="16" start_column="32" end_column="33" covered="no" />
+            <range source_id="21" start_line="16" end_line="16" start_column="34" end_column="39" covered="yes" />
+            <range source_id="21" start_line="16" end_line="16" start_column="42" end_column="43" covered="yes" />
+            <range source_id="21" start_line="17" end_line="17" start_column="15" end_column="53" covered="yes" />
+            <range source_id="21" start_line="17" end_line="17" start_column="54" end_column="55" covered="no" />
+            <range source_id="21" start_line="17" end_line="17" start_column="56" end_column="61" covered="yes" />
+            <range source_id="21" start_line="17" end_line="17" start_column="64" end_column="65" covered="yes" />
+            <range source_id="21" start_line="18" end_line="18" start_column="15" end_column="33" covered="yes" />
+            <range source_id="21" start_line="18" end_line="18" start_column="34" end_column="35" covered="no" />
+            <range source_id="21" start_line="18" end_line="18" start_column="36" end_column="41" covered="yes" />
+            <range source_id="21" start_line="18" end_line="18" start_column="44" end_column="45" covered="yes" />
+            <range source_id="21" start_line="19" end_line="19" start_column="15" end_column="32" covered="yes" />
+            <range source_id="21" start_line="19" end_line="19" start_column="33" end_column="34" covered="no" />
+            <range source_id="21" start_line="19" end_line="19" start_column="35" end_column="40" covered="yes" />
+            <range source_id="21" start_line="19" end_line="19" start_column="43" end_column="44" covered="yes" />
+            <range source_id="21" start_line="20" end_line="20" start_column="5" end_column="6" covered="yes" />
+          </ranges>
+        </function>
+        <function id="11416" token="0x600009c" name="ForLoop(CoverageDemo.MyInt, CoverageDemo.MyInt)" namespace="CoverageDemo.Coverage" type_name="LoopConditions" block_coverage="80.00" line_coverage="57.14" blocks_covered="16" blocks_not_covered="4" lines_covered="4" lines_partially_covered="1" lines_not_covered="2">
+          <ranges>
+            <range source_id="21" start_line="25" end_line="25" start_column="14" end_column="23" covered="yes" />
+            <range source_id="21" start_line="27" end_line="27" start_column="13" end_column="30" covered="no" />
+            <range source_id="21" start_line="25" end_line="25" start_column="35" end_column="38" covered="no" />
+            <range source_id="21" start_line="25" end_line="25" start_column="25" end_column="33" covered="yes" />
+            <range source_id="21" start_line="31" end_line="31" start_column="14" end_column="23" covered="yes" />
+            <range source_id="21" start_line="33" end_line="33" start_column="13" end_column="30" covered="yes" />
+            <range source_id="21" start_line="31" end_line="31" start_column="36" end_column="39" covered="yes" />
+            <range source_id="21" start_line="31" end_line="31" start_column="25" end_column="34" covered="yes" />
+            <range source_id="21" start_line="37" end_line="37" start_column="14" end_column="23" covered="yes" />
+            <range source_id="21" start_line="39" end_line="39" start_column="13" end_column="37" covered="yes" />
+            <range source_id="21" start_line="37" end_line="37" start_column="36" end_column="39" covered="yes" />
+            <range source_id="21" start_line="37" end_line="37" start_column="25" end_column="34" covered="yes" />
+            <range source_id="21" start_line="41" end_line="41" start_column="5" end_column="6" covered="no" />
+          </ranges>
+        </function>
+        <function id="11544" token="0x600009d" name="ForeachLoop(System.Collections.Generic.IEnumerable&lt;CoverageDemo.MyInt&gt;, System.Collections.Generic.IEnumerable&lt;CoverageDemo.MyInt&gt;)" namespace="CoverageDemo.Coverage" type_name="LoopConditions" block_coverage="78.57" line_coverage="42.86" blocks_covered="22" blocks_not_covered="6" lines_covered="3" lines_partially_covered="2" lines_not_covered="2">
+          <ranges>
+            <range source_id="21" start_line="46" end_line="46" start_column="27" end_column="32" covered="yes" />
+            <range source_id="21" start_line="46" end_line="46" start_column="18" end_column="23" covered="no" />
+            <range source_id="21" start_line="48" end_line="48" start_column="13" end_column="30" covered="no" />
+            <range source_id="21" start_line="46" end_line="46" start_column="24" end_column="26" covered="yes" />
+            <range source_id="21" start_line="52" end_line="52" start_column="27" end_column="33" covered="yes" />
+            <range source_id="21" start_line="52" end_line="52" start_column="18" end_column="23" covered="yes" />
+            <range source_id="21" start_line="54" end_line="54" start_column="13" end_column="30" covered="yes" />
+            <range source_id="21" start_line="52" end_line="52" start_column="24" end_column="26" covered="yes" />
+            <range source_id="21" start_line="58" end_line="58" start_column="27" end_column="33" covered="yes" />
+            <range source_id="21" start_line="58" end_line="58" start_column="18" end_column="23" covered="yes" />
+            <range source_id="21" start_line="60" end_line="60" start_column="13" end_column="29" covered="yes" />
+            <range source_id="21" start_line="58" end_line="58" start_column="24" end_column="26" covered="partial" />
+            <range source_id="21" start_line="62" end_line="62" start_column="5" end_column="6" covered="no" />
+          </ranges>
+        </function>
+        <function id="11776" token="0x600009e" name="WhileLoop(CoverageDemo.MyInt, CoverageDemo.MyInt)" namespace="CoverageDemo.Coverage" type_name="LoopConditions" block_coverage="80.00" line_coverage="76.92" blocks_covered="16" blocks_not_covered="4" lines_covered="10" lines_partially_covered="0" lines_not_covered="3">
+          <ranges>
+            <range source_id="21" start_line="67" end_line="67" start_column="9" end_column="19" covered="yes" />
+            <range source_id="21" start_line="70" end_line="70" start_column="13" end_column="30" covered="no" />
+            <range source_id="21" start_line="71" end_line="71" start_column="13" end_column="17" covered="no" />
+            <range source_id="21" start_line="68" end_line="68" start_column="9" end_column="25" covered="yes" />
+            <range source_id="21" start_line="75" end_line="75" start_column="9" end_column="15" covered="yes" />
+            <range source_id="21" start_line="78" end_line="78" start_column="13" end_column="30" covered="yes" />
+            <range source_id="21" start_line="79" end_line="79" start_column="13" end_column="17" covered="yes" />
+            <range source_id="21" start_line="76" end_line="76" start_column="9" end_column="26" covered="yes" />
+            <range source_id="21" start_line="83" end_line="83" start_column="9" end_column="15" covered="yes" />
+            <range source_id="21" start_line="86" end_line="86" start_column="13" end_column="37" covered="yes" />
+            <range source_id="21" start_line="87" end_line="87" start_column="13" end_column="17" covered="yes" />
+            <range source_id="21" start_line="84" end_line="84" start_column="9" end_column="26" covered="yes" />
+            <range source_id="21" start_line="89" end_line="89" start_column="5" end_column="6" covered="no" />
+          </ranges>
+        </function>
+        <function id="11904" token="0x600009f" name="DoWhileLoop(CoverageDemo.MyInt)" namespace="CoverageDemo.Coverage" type_name="LoopConditions" block_coverage="91.67" line_coverage="88.89" blocks_covered="11" blocks_not_covered="1" lines_covered="8" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="21" start_line="94" end_line="94" start_column="9" end_column="20" covered="yes" />
+            <range source_id="21" start_line="97" end_line="97" start_column="13" end_column="17" covered="yes" />
+            <range source_id="21" start_line="98" end_line="98" start_column="13" end_column="30" covered="yes" />
+            <range source_id="21" start_line="99" end_line="99" start_column="11" end_column="29" covered="yes" />
+            <range source_id="21" start_line="102" end_line="102" start_column="9" end_column="16" covered="yes" />
+            <range source_id="21" start_line="105" end_line="105" start_column="13" end_column="17" covered="yes" />
+            <range source_id="21" start_line="106" end_line="106" start_column="13" end_column="37" covered="yes" />
+            <range source_id="21" start_line="107" end_line="107" start_column="11" end_column="29" covered="yes" />
+            <range source_id="21" start_line="108" end_line="108" start_column="5" end_column="6" covered="no" />
+          </ranges>
+        </function>
+        <function id="9395" token="0x60000a0" name="ThrowIf(CoverageDemo.MyBool)" namespace="CoverageDemo.Coverage" type_name="LoopConditions" block_coverage="100.00" line_coverage="100.00" blocks_covered="5" blocks_not_covered="0" lines_covered="3" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="21" start_line="114" end_line="114" start_column="9" end_column="23" covered="yes" />
+            <range source_id="21" start_line="116" end_line="116" start_column="13" end_column="51" covered="yes" />
+            <range source_id="21" start_line="118" end_line="118" start_column="5" end_column="6" covered="yes" />
+          </ranges>
+        </function>
+        <function id="11992" token="0x60000a2" name="Run()" namespace="CoverageDemo.Coverage" type_name="NullConditions" block_coverage="100.00" line_coverage="100.00" blocks_covered="24" blocks_not_covered="0" lines_covered="15" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="22" start_line="11" end_line="11" start_column="9" end_column="38" covered="yes" />
+            <range source_id="22" start_line="12" end_line="12" start_column="9" end_column="57" covered="yes" />
+            <range source_id="22" start_line="13" end_line="13" start_column="9" end_column="52" covered="yes" />
+            <range source_id="22" start_line="14" end_line="14" start_column="9" end_column="58" covered="yes" />
+            <range source_id="22" start_line="15" end_line="15" start_column="9" end_column="53" covered="yes" />
+            <range source_id="22" start_line="16" end_line="16" start_column="9" end_column="46" covered="yes" />
+            <range source_id="22" start_line="17" end_line="17" start_column="9" end_column="43" covered="yes" />
+            <range source_id="22" start_line="18" end_line="18" start_column="9" end_column="52" covered="yes" />
+            <range source_id="22" start_line="19" end_line="19" start_column="9" end_column="49" covered="yes" />
+            <range source_id="22" start_line="20" end_line="20" start_column="9" end_column="39" covered="yes" />
+            <range source_id="22" start_line="21" end_line="21" start_column="9" end_column="51" covered="yes" />
+            <range source_id="22" start_line="22" end_line="22" start_column="9" end_column="51" covered="yes" />
+            <range source_id="22" start_line="23" end_line="23" start_column="9" end_column="51" covered="yes" />
+            <range source_id="22" start_line="24" end_line="24" start_column="9" end_column="55" covered="yes" />
+            <range source_id="22" start_line="25" end_line="25" start_column="5" end_column="6" covered="yes" />
+          </ranges>
+        </function>
+        <function id="12255" token="0x60000a3" name="get_Next()" namespace="CoverageDemo.Coverage" type_name="NullConditions" block_coverage="100.00" line_coverage="100.00" blocks_covered="1" blocks_not_covered="0" lines_covered="1" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="22" start_line="27" end_line="27" start_column="35" end_column="39" covered="yes" />
+          </ranges>
+        </function>
+        <function id="12263" token="0x60000a4" name="set_Next(CoverageDemo.Coverage.NullConditions)" namespace="CoverageDemo.Coverage" type_name="NullConditions" block_coverage="100.00" line_coverage="100.00" blocks_covered="1" blocks_not_covered="0" lines_covered="1" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="22" start_line="27" end_line="27" start_column="40" end_column="44" covered="yes" />
+          </ranges>
+        </function>
+        <function id="12272" token="0x60000a5" name="get_Value()" namespace="CoverageDemo.Coverage" type_name="NullConditions" block_coverage="100.00" line_coverage="100.00" blocks_covered="1" blocks_not_covered="0" lines_covered="1" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="22" start_line="28" end_line="28" start_column="29" end_column="33" covered="yes" />
+          </ranges>
+        </function>
+        <function id="12280" token="0x60000a6" name="set_Value(CoverageDemo.MyString)" namespace="CoverageDemo.Coverage" type_name="NullConditions" block_coverage="100.00" line_coverage="100.00" blocks_covered="1" blocks_not_covered="0" lines_covered="1" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="22" start_line="28" end_line="28" start_column="34" end_column="38" covered="yes" />
+          </ranges>
+        </function>
+        <function id="12292" token="0x60000a7" name="NullCoalescingUnary(CoverageDemo.MyString, CoverageDemo.MyString, CoverageDemo.MyString)" namespace="CoverageDemo.Coverage" type_name="NullConditions" block_coverage="90.91" line_coverage="85.71" blocks_covered="10" blocks_not_covered="1" lines_covered="6" lines_partially_covered="1" lines_not_covered="0">
+          <ranges>
+            <range source_id="22" start_line="32" end_line="32" start_column="9" end_column="35" covered="yes" />
+            <range source_id="22" start_line="33" end_line="33" start_column="9" end_column="35" covered="yes" />
+            <range source_id="22" start_line="34" end_line="34" start_column="9" end_column="35" covered="yes" />
+            <range source_id="22" start_line="36" end_line="36" start_column="9" end_column="19" covered="yes" />
+            <range source_id="22" start_line="38" end_line="38" start_column="9" end_column="19" covered="yes" />
+            <range source_id="22" start_line="40" end_line="40" start_column="9" end_column="19" covered="partial" />
+            <range source_id="22" start_line="41" end_line="41" start_column="9" end_column="29" covered="yes" />
+          </ranges>
+        </function>
+        <function id="12364" token="0x60000a8" name="NullCoalescingBinary(CoverageDemo.MyString, CoverageDemo.MyString, CoverageDemo.MyString)" namespace="CoverageDemo.Coverage" type_name="NullConditions" block_coverage="90.91" line_coverage="75.00" blocks_covered="10" blocks_not_covered="1" lines_covered="3" lines_partially_covered="1" lines_not_covered="0">
+          <ranges>
+            <range source_id="22" start_line="47" end_line="47" start_column="9" end_column="40" covered="yes" />
+            <range source_id="22" start_line="49" end_line="49" start_column="9" end_column="40" covered="yes" />
+            <range source_id="22" start_line="51" end_line="51" start_column="9" end_column="40" covered="partial" />
+            <range source_id="22" start_line="52" end_line="52" start_column="9" end_column="29" covered="yes" />
+          </ranges>
+        </function>
+        <function id="12436" token="0x60000a9" name="NullConditional(CoverageDemo.Coverage.NullConditions, CoverageDemo.Coverage.NullConditions, CoverageDemo.Coverage.NullConditions)" namespace="CoverageDemo.Coverage" type_name="NullConditions" block_coverage="79.31" line_coverage="50.00" blocks_covered="23" blocks_not_covered="6" lines_covered="2" lines_partially_covered="2" lines_not_covered="0">
+          <ranges>
+            <range source_id="22" start_line="58" end_line="58" start_column="9" end_column="34" covered="yes" />
+            <range source_id="22" start_line="60" end_line="60" start_column="9" end_column="34" covered="partial" />
+            <range source_id="22" start_line="62" end_line="62" start_column="9" end_column="34" covered="partial" />
+            <range source_id="22" start_line="63" end_line="63" start_column="9" end_column="29" covered="yes" />
+          </ranges>
+        </function>
+        <function id="12608" token="0x60000aa" name="NullConditionalAssignment(CoverageDemo.Coverage.NullConditions, CoverageDemo.Coverage.NullConditions, CoverageDemo.Coverage.NullConditions)" namespace="CoverageDemo.Coverage" type_name="NullConditions" block_coverage="80.00" line_coverage="75.00" blocks_covered="8" blocks_not_covered="2" lines_covered="3" lines_partially_covered="1" lines_not_covered="0">
+          <ranges>
+            <range source_id="22" start_line="69" end_line="69" start_column="9" end_column="26" covered="yes" />
+            <range source_id="22" start_line="71" end_line="71" start_column="9" end_column="26" covered="partial" />
+            <range source_id="22" start_line="73" end_line="73" start_column="9" end_column="26" covered="yes" />
+            <range source_id="22" start_line="74" end_line="74" start_column="5" end_column="6" covered="yes" />
+          </ranges>
+        </function>
+        <function id="12668" token="0x60000ab" name="ChainedNullConditionals(CoverageDemo.Coverage.NullConditions, CoverageDemo.Coverage.NullConditions, CoverageDemo.Coverage.NullConditions, CoverageDemo.Coverage.NullConditions)" namespace="CoverageDemo.Coverage" type_name="NullConditions" block_coverage="56.00" line_coverage="20.00" blocks_covered="28" blocks_not_covered="22" lines_covered="1" lines_partially_covered="4" lines_not_covered="0">
+          <ranges>
+            <range source_id="22" start_line="83" end_line="83" start_column="9" end_column="59" covered="partial" />
+            <range source_id="22" start_line="85" end_line="85" start_column="9" end_column="59" covered="partial" />
+            <range source_id="22" start_line="87" end_line="87" start_column="9" end_column="59" covered="partial" />
+            <range source_id="22" start_line="89" end_line="89" start_column="9" end_column="59" covered="partial" />
+            <range source_id="22" start_line="90" end_line="90" start_column="9" end_column="33" covered="yes" />
+          </ranges>
+        </function>
+        <function id="12888" token="0x60000ad" name="Run()" namespace="CoverageDemo.Coverage" type_name="Properties" block_coverage="100.00" line_coverage="100.00" blocks_covered="14" blocks_not_covered="0" lines_covered="8" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="23" start_line="15" end_line="15" start_column="9" end_column="34" covered="yes" />
+            <range source_id="23" start_line="16" end_line="16" start_column="9" end_column="23" covered="yes" />
+            <range source_id="23" start_line="16" end_line="16" start_column="24" end_column="41" covered="yes" />
+            <range source_id="23" start_line="17" end_line="17" start_column="9" end_column="24" covered="yes" />
+            <range source_id="23" start_line="18" end_line="18" start_column="9" end_column="27" covered="yes" />
+            <range source_id="23" start_line="19" end_line="19" start_column="9" end_column="23" covered="yes" />
+            <range source_id="23" start_line="19" end_line="19" start_column="24" end_column="41" covered="yes" />
+            <range source_id="23" start_line="20" end_line="20" start_column="9" end_column="24" covered="yes" />
+            <range source_id="23" start_line="21" end_line="21" start_column="9" end_column="27" covered="yes" />
+            <range source_id="23" start_line="22" end_line="22" start_column="5" end_column="6" covered="yes" />
+          </ranges>
+        </function>
+        <function id="12981" token="0x60000ae" name="get_GetSet1()" namespace="CoverageDemo.Coverage" type_name="Properties" block_coverage="100.00" line_coverage="100.00" blocks_covered="1" blocks_not_covered="0" lines_covered="1" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="23" start_line="24" end_line="24" start_column="29" end_column="33" covered="yes" />
+          </ranges>
+        </function>
+        <function id="12989" token="0x60000af" name="set_GetSet1(CoverageDemo.MyBool)" namespace="CoverageDemo.Coverage" type_name="Properties" block_coverage="100.00" line_coverage="100.00" blocks_covered="1" blocks_not_covered="0" lines_covered="1" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="23" start_line="24" end_line="24" start_column="34" end_column="38" covered="yes" />
+          </ranges>
+        </function>
+        <function id="12998" token="0x60000b0" name="get_GetOnly1()" namespace="CoverageDemo.Coverage" type_name="Properties" block_coverage="100.00" line_coverage="100.00" blocks_covered="1" blocks_not_covered="0" lines_covered="1" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="23" start_line="25" end_line="25" start_column="30" end_column="34" covered="yes" />
+          </ranges>
+        </function>
+        <function id="13006" token="0x60000b1" name="set_GetOnly1(CoverageDemo.MyBool)" namespace="CoverageDemo.Coverage" type_name="Properties" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="1" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="23" start_line="25" end_line="25" start_column="35" end_column="39" covered="no" />
+          </ranges>
+        </function>
+        <function id="13015" token="0x60000b2" name="get_SetOnly1()" namespace="CoverageDemo.Coverage" type_name="Properties" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="1" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="23" start_line="26" end_line="26" start_column="30" end_column="34" covered="no" />
+          </ranges>
+        </function>
+        <function id="13023" token="0x60000b3" name="set_SetOnly1(CoverageDemo.MyBool)" namespace="CoverageDemo.Coverage" type_name="Properties" block_coverage="100.00" line_coverage="100.00" blocks_covered="1" blocks_not_covered="0" lines_covered="1" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="23" start_line="26" end_line="26" start_column="35" end_column="39" covered="yes" />
+          </ranges>
+        </function>
+        <function id="13032" token="0x60000b4" name="get_GetSet2()" namespace="CoverageDemo.Coverage" type_name="Properties" block_coverage="100.00" line_coverage="100.00" blocks_covered="1" blocks_not_covered="0" lines_covered="1" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="23" start_line="29" end_line="29" start_column="9" end_column="13" covered="yes" />
+          </ranges>
+        </function>
+        <function id="13040" token="0x60000b5" name="set_GetSet2(CoverageDemo.MyBool)" namespace="CoverageDemo.Coverage" type_name="Properties" block_coverage="100.00" line_coverage="100.00" blocks_covered="1" blocks_not_covered="0" lines_covered="1" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="23" start_line="30" end_line="30" start_column="9" end_column="13" covered="yes" />
+          </ranges>
+        </function>
+        <function id="13049" token="0x60000b6" name="get_GetOnly2()" namespace="CoverageDemo.Coverage" type_name="Properties" block_coverage="100.00" line_coverage="100.00" blocks_covered="1" blocks_not_covered="0" lines_covered="1" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="23" start_line="34" end_line="34" start_column="9" end_column="13" covered="yes" />
+          </ranges>
+        </function>
+        <function id="13057" token="0x60000b7" name="set_GetOnly2(CoverageDemo.MyBool)" namespace="CoverageDemo.Coverage" type_name="Properties" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="1" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="23" start_line="35" end_line="35" start_column="9" end_column="13" covered="no" />
+          </ranges>
+        </function>
+        <function id="13066" token="0x60000b8" name="get_SetOnly2()" namespace="CoverageDemo.Coverage" type_name="Properties" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="1" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="23" start_line="39" end_line="39" start_column="9" end_column="13" covered="no" />
+          </ranges>
+        </function>
+        <function id="13074" token="0x60000b9" name="set_SetOnly2(CoverageDemo.MyBool)" namespace="CoverageDemo.Coverage" type_name="Properties" block_coverage="100.00" line_coverage="100.00" blocks_covered="1" blocks_not_covered="0" lines_covered="1" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="23" start_line="40" end_line="40" start_column="9" end_column="13" covered="yes" />
+          </ranges>
+        </function>
+        <function id="13084" token="0x60000bb" name="Run()" namespace="CoverageDemo.Coverage" type_name="SwitchConditions" block_coverage="100.00" line_coverage="100.00" blocks_covered="18" blocks_not_covered="0" lines_covered="8" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="24" start_line="11" end_line="11" start_column="9" end_column="40" covered="yes" />
+            <range source_id="24" start_line="12" end_line="12" start_column="14" end_column="23" covered="yes" />
+            <range source_id="24" start_line="14" end_line="14" start_column="13" end_column="42" covered="yes" />
+            <range source_id="24" start_line="15" end_line="15" start_column="13" end_column="43" covered="yes" />
+            <range source_id="24" start_line="16" end_line="16" start_column="13" end_column="29" covered="yes" />
+            <range source_id="24" start_line="18" end_line="18" start_column="17" end_column="49" covered="yes" />
+            <range source_id="24" start_line="19" end_line="19" start_column="17" end_column="50" covered="yes" />
+            <range source_id="24" start_line="12" end_line="12" start_column="33" end_column="36" covered="yes" />
+            <range source_id="24" start_line="12" end_line="12" start_column="25" end_column="31" covered="yes" />
+            <range source_id="24" start_line="22" end_line="22" start_column="5" end_column="6" covered="yes" />
+          </ranges>
+        </function>
+        <function id="13184" token="0x60000bc" name="SwitchStatementFull(CoverageDemo.MyInt)" namespace="CoverageDemo.Coverage" type_name="SwitchConditions" block_coverage="100.00" line_coverage="100.00" blocks_covered="16" blocks_not_covered="0" lines_covered="14" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="24" start_line="26" end_line="26" start_column="9" end_column="24" covered="yes" />
+            <range source_id="24" start_line="27" end_line="27" start_column="9" end_column="23" covered="yes" />
+            <range source_id="24" start_line="30" end_line="30" start_column="17" end_column="32" covered="yes" />
+            <range source_id="24" start_line="31" end_line="31" start_column="17" end_column="23" covered="yes" />
+            <range source_id="24" start_line="33" end_line="33" start_column="17" end_column="29" covered="yes" />
+            <range source_id="24" start_line="34" end_line="34" start_column="17" end_column="23" covered="yes" />
+            <range source_id="24" start_line="36" end_line="36" start_column="17" end_column="33" covered="yes" />
+            <range source_id="24" start_line="37" end_line="37" start_column="17" end_column="23" covered="yes" />
+            <range source_id="24" start_line="39" end_line="39" start_column="17" end_column="36" covered="yes" />
+            <range source_id="24" start_line="40" end_line="40" start_column="17" end_column="23" covered="yes" />
+            <range source_id="24" start_line="42" end_line="42" start_column="17" end_column="37" covered="yes" />
+            <range source_id="24" start_line="43" end_line="43" start_column="17" end_column="23" covered="yes" />
+            <range source_id="24" start_line="45" end_line="45" start_column="17" end_column="29" covered="yes" />
+            <range source_id="24" start_line="48" end_line="48" start_column="9" end_column="31" covered="yes" />
+          </ranges>
+        </function>
+        <function id="13304" token="0x60000bd" name="SwitchStatementPartial(CoverageDemo.MyInt)" namespace="CoverageDemo.Coverage" type_name="SwitchConditions" block_coverage="50.00" line_coverage="50.00" blocks_covered="8" blocks_not_covered="8" lines_covered="7" lines_partially_covered="0" lines_not_covered="7">
+          <ranges>
+            <range source_id="24" start_line="53" end_line="53" start_column="9" end_column="24" covered="yes" />
+            <range source_id="24" start_line="54" end_line="54" start_column="9" end_column="23" covered="yes" />
+            <range source_id="24" start_line="57" end_line="57" start_column="17" end_column="32" covered="no" />
+            <range source_id="24" start_line="58" end_line="58" start_column="17" end_column="23" covered="no" />
+            <range source_id="24" start_line="60" end_line="60" start_column="17" end_column="29" covered="no" />
+            <range source_id="24" start_line="61" end_line="61" start_column="17" end_column="23" covered="no" />
+            <range source_id="24" start_line="63" end_line="63" start_column="17" end_column="33" covered="yes" />
+            <range source_id="24" start_line="64" end_line="64" start_column="17" end_column="23" covered="yes" />
+            <range source_id="24" start_line="66" end_line="66" start_column="17" end_column="36" covered="yes" />
+            <range source_id="24" start_line="67" end_line="67" start_column="17" end_column="23" covered="yes" />
+            <range source_id="24" start_line="69" end_line="69" start_column="17" end_column="37" covered="no" />
+            <range source_id="24" start_line="70" end_line="70" start_column="17" end_column="23" covered="no" />
+            <range source_id="24" start_line="72" end_line="72" start_column="17" end_column="29" covered="no" />
+            <range source_id="24" start_line="75" end_line="75" start_column="9" end_column="31" covered="yes" />
+          </ranges>
+        </function>
+        <function id="13424" token="0x60000be" name="SwitchExpressionFull(CoverageDemo.MyInt)" namespace="CoverageDemo.Coverage" type_name="SwitchConditions" block_coverage="100.00" line_coverage="100.00" blocks_covered="15" blocks_not_covered="0" lines_covered="11" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="24" start_line="80" end_line="80" start_column="9" end_column="23" covered="yes" />
+            <range source_id="24" start_line="81" end_line="89" start_column="9" end_column="11" covered="yes" />
+            <range source_id="24" start_line="83" end_line="83" start_column="18" end_column="23" covered="yes" />
+            <range source_id="24" start_line="84" end_line="84" start_column="18" end_column="28" covered="yes" />
+            <range source_id="24" start_line="85" end_line="85" start_column="18" end_column="24" covered="yes" />
+            <range source_id="24" start_line="86" end_line="86" start_column="18" end_column="27" covered="yes" />
+            <range source_id="24" start_line="87" end_line="87" start_column="18" end_column="28" covered="yes" />
+            <range source_id="24" start_line="88" end_line="88" start_column="18" end_column="20" covered="yes" />
+            <range source_id="24" start_line="90" end_line="90" start_column="9" end_column="23" covered="yes" />
+          </ranges>
+        </function>
+        <function id="13532" token="0x60000bf" name="SwitchExpressionPartial(CoverageDemo.MyInt)" namespace="CoverageDemo.Coverage" type_name="SwitchConditions" block_coverage="46.67" line_coverage="18.18" blocks_covered="7" blocks_not_covered="8" lines_covered="2" lines_partially_covered="9" lines_not_covered="0">
+          <ranges>
+            <range source_id="24" start_line="95" end_line="95" start_column="9" end_column="23" covered="yes" />
+            <range source_id="24" start_line="96" end_line="104" start_column="9" end_column="11" covered="partial" />
+            <range source_id="24" start_line="98" end_line="98" start_column="18" end_column="23" covered="no" />
+            <range source_id="24" start_line="99" end_line="99" start_column="18" end_column="28" covered="no" />
+            <range source_id="24" start_line="100" end_line="100" start_column="18" end_column="24" covered="yes" />
+            <range source_id="24" start_line="101" end_line="101" start_column="18" end_column="27" covered="yes" />
+            <range source_id="24" start_line="102" end_line="102" start_column="18" end_column="28" covered="no" />
+            <range source_id="24" start_line="103" end_line="103" start_column="18" end_column="20" covered="no" />
+            <range source_id="24" start_line="105" end_line="105" start_column="9" end_column="23" covered="yes" />
+          </ranges>
+        </function>
+        <function id="13637" token="0x60000c1" name="Class17CoverageDemoStateMachines(int)" namespace="CoverageDemo.Coverage" type_name="Class17CoverageDemoStateMachines" block_coverage="100.00" line_coverage="100.00" blocks_covered="2" blocks_not_covered="0" lines_covered="1" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="25" start_line="13" end_line="13" start_column="5" end_column="59" covered="yes" />
+            <range source_id="25" start_line="13" end_line="13" start_column="63" end_column="81" covered="yes" />
+          </ranges>
+        </function>
+        <function id="13776" token="0x60000c5" name="Run()" namespace="CoverageDemo.Coverage" type_name="MiscStuff" block_coverage="87.50" line_coverage="80.00" blocks_covered="7" blocks_not_covered="1" lines_covered="4" lines_partially_covered="1" lines_not_covered="0">
+          <ranges>
+            <range source_id="25" start_line="74" end_line="74" start_column="9" end_column="33" covered="yes" />
+            <range source_id="25" start_line="75" end_line="75" start_column="15" end_column="27" covered="yes" />
+            <range source_id="25" start_line="75" end_line="75" start_column="28" end_column="29" covered="no" />
+            <range source_id="25" start_line="75" end_line="75" start_column="30" end_column="35" covered="yes" />
+            <range source_id="25" start_line="75" end_line="75" start_column="38" end_column="39" covered="yes" />
+            <range source_id="25" start_line="76" end_line="76" start_column="9" end_column="21" covered="yes" />
+            <range source_id="25" start_line="77" end_line="77" start_column="9" end_column="21" covered="yes" />
+            <range source_id="25" start_line="78" end_line="78" start_column="5" end_column="6" covered="yes" />
+          </ranges>
+        </function>
+        <function id="13836" token="0x60000c6" name="Method1()" namespace="CoverageDemo.Coverage" type_name="MiscStuff" block_coverage="60.00" line_coverage="0.00" blocks_covered="3" blocks_not_covered="2" lines_covered="0" lines_partially_covered="1" lines_not_covered="1">
+          <ranges>
+            <range source_id="25" start_line="82" end_line="82" start_column="9" end_column="19" covered="yes" />
+            <range source_id="25" start_line="82" end_line="82" start_column="20" end_column="34" covered="yes" />
+            <range source_id="25" start_line="82" end_line="82" start_column="35" end_column="45" covered="no" />
+            <range source_id="25" start_line="83" end_line="83" start_column="5" end_column="6" covered="no" />
+          </ranges>
+        </function>
+        <function id="8883" token="0x60000c7" name="Method2()" namespace="CoverageDemo.Coverage" type_name="MiscStuff" block_coverage="100.00" line_coverage="100.00" blocks_covered="1" blocks_not_covered="0" lines_covered="1" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="25" start_line="85" end_line="85" start_column="29" end_column="30" covered="yes" />
+          </ranges>
+        </function>
+        <function id="8883" token="0x60000c8" name="Method3()" namespace="CoverageDemo.Coverage" type_name="MiscStuff" block_coverage="100.00" line_coverage="100.00" blocks_covered="1" blocks_not_covered="0" lines_covered="1" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="25" start_line="87" end_line="87" start_column="29" end_column="30" covered="yes" />
+          </ranges>
+        </function>
+        <function id="8883" token="0x60000c9" name="Method4()" namespace="CoverageDemo.Coverage" type_name="MiscStuff" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="1" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="25" start_line="87" end_line="87" start_column="55" end_column="56" covered="no" />
+          </ranges>
+        </function>
+        <function id="8883" token="0x60000ca" name="Method5()" namespace="CoverageDemo.Coverage" type_name="MiscStuff" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="1" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="25" start_line="88" end_line="88" start_column="29" end_column="30" covered="no" />
+          </ranges>
+        </function>
+        <function id="8883" token="0x60000cb" name="Method6()" namespace="CoverageDemo.Coverage" type_name="MiscStuff" block_coverage="100.00" line_coverage="100.00" blocks_covered="1" blocks_not_covered="0" lines_covered="1" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="25" start_line="88" end_line="88" start_column="55" end_column="56" covered="yes" />
+          </ranges>
+        </function>
+        <function id="13861" token="0x60000cc" name="ThrowIf(CoverageDemo.MyBool)" namespace="CoverageDemo.Coverage" type_name="MiscStuff" block_coverage="80.00" line_coverage="50.00" blocks_covered="4" blocks_not_covered="1" lines_covered="1" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="25" start_line="93" end_line="93" start_column="9" end_column="23" covered="yes" />
+            <range source_id="25" start_line="93" end_line="93" start_column="24" end_column="62" covered="yes" />
+            <range source_id="25" start_line="94" end_line="94" start_column="5" end_column="6" covered="no" />
+          </ranges>
+        </function>
+        <function id="8861" token="0x60000d0" name="&lt;Method2&gt;b__1_0(CoverageDemo.MyInt)" namespace="CoverageDemo.Naming" type_name="Closures.&lt;&gt;c" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="1" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="4" start_line="19" end_line="19" start_column="32" end_column="33" covered="no" />
+          </ranges>
+        </function>
+        <function id="13889" token="0x60000d2" name="&lt;Method6&gt;b__0(CoverageDemo.MyInt)" namespace="CoverageDemo.Naming" type_name="Closures.&lt;&gt;c__DisplayClass5_0" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="4" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="4" start_line="45" end_line="45" start_column="32" end_column="47" covered="no" />
+          </ranges>
+        </function>
+        <function id="8861" token="0x60000d3" name="Method2(TBar)" namespace="CoverageDemo.Naming" type_name="Generics.Inner&lt;TFoo, TBar&gt;" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="1" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="5" start_line="16" end_line="16" start_column="44" end_column="49" covered="no" />
+          </ranges>
+        </function>
+        <function id="8861" token="0x60000d5" name="Method2(TBar)" namespace="CoverageDemo.Naming" type_name="Generics.Inner&lt;TFoo, TBar&gt;" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="1" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="5" start_line="29" end_line="29" start_column="44" end_column="49" covered="no" />
+          </ranges>
+        </function>
+        <function id="8458" token="0x60000d7" name="Method1(CoverageDemo.MyInt)" namespace="CoverageDemo.Naming" type_name="HolderClass.Inner" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="2" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="0" start_line="24" end_line="24" start_column="48" end_column="53" covered="no" />
+          </ranges>
+        </function>
+        <function id="13908" token="0x60000d9" name="MoveNext()" namespace="CoverageDemo.Naming" type_name="StateMachines.&lt;Method1&gt;d__0" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="7" lines_covered="0" lines_partially_covered="0" lines_not_covered="3">
+          <ranges>
+            <range source_id="26" start_line="12" end_line="12" start_column="9" end_column="51" covered="no" />
+            <range source_id="26" start_line="13" end_line="13" start_column="9" end_column="22" covered="no" />
+            <range source_id="26" start_line="14" end_line="14" start_column="5" end_column="6" covered="no" />
+          </ranges>
+        </function>
+        <function id="14156" token="0x60000dc" name="MoveNext()" namespace="CoverageDemo.Naming" type_name="StateMachines.&lt;Method2&gt;d__1" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="7" lines_covered="0" lines_partially_covered="0" lines_not_covered="3">
+          <ranges>
+            <range source_id="26" start_line="18" end_line="18" start_column="9" end_column="51" covered="no" />
+            <range source_id="26" start_line="19" end_line="19" start_column="9" end_column="28" covered="no" />
+            <range source_id="26" start_line="20" end_line="20" start_column="5" end_column="6" covered="no" />
+          </ranges>
+        </function>
+        <function id="14892" token="0x60000ea" name="MoveNext()" namespace="CoverageDemo.Naming" type_name="StateMachines.&lt;Method3&gt;d__2" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="3" lines_covered="0" lines_partially_covered="0" lines_not_covered="2">
+          <ranges>
+            <range source_id="26" start_line="24" end_line="24" start_column="9" end_column="28" covered="no" />
+            <range source_id="26" start_line="25" end_line="25" start_column="5" end_column="6" covered="no" />
+          </ranges>
+        </function>
+        <function id="8458" token="0x60000f0" name="Method1(CoverageDemo.MyInt)" namespace="CoverageDemo.Layout" type_name="NestedClassMultiFile.Inner" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="2" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="27" start_line="9" end_line="9" start_column="44" end_column="49" covered="no" />
+          </ranges>
+        </function>
+        <function id="8458" token="0x60000f1" name="Method2(CoverageDemo.MyInt)" namespace="CoverageDemo.Layout" type_name="NestedClassMultiFile.Inner" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="2" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="27" start_line="10" end_line="10" start_column="44" end_column="49" covered="no" />
+          </ranges>
+        </function>
+        <function id="8458" token="0x60000f3" name="Method1(CoverageDemo.MyInt)" namespace="CoverageDemo.Layout" type_name="NestedClassSingleFile.Inner" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="2" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="12" start_line="11" end_line="11" start_column="44" end_column="49" covered="no" />
+          </ranges>
+        </function>
+        <function id="8458" token="0x60000f4" name="Method2(CoverageDemo.MyInt)" namespace="CoverageDemo.Layout" type_name="NestedClassSingleFile.Inner" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="2" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="12" start_line="12" end_line="12" start_column="44" end_column="49" covered="no" />
+          </ranges>
+        </function>
+        <function id="15071" token="0x60000f8" name="&lt;LambdaFull&gt;b__1_0(CoverageDemo.MyInt)" namespace="CoverageDemo.Coverage" type_name="Lambdas.&lt;&gt;c" block_coverage="100.00" line_coverage="100.00" blocks_covered="3" blocks_not_covered="0" lines_covered="1" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="20" start_line="22" end_line="22" start_column="48" end_column="53" covered="yes" />
+          </ranges>
+        </function>
+        <function id="15086" token="0x60000f9" name="&lt;LambdaFull&gt;b__1_1(CoverageDemo.MyInt)" namespace="CoverageDemo.Coverage" type_name="Lambdas.&lt;&gt;c" block_coverage="100.00" line_coverage="100.00" blocks_covered="3" blocks_not_covered="0" lines_covered="1" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="20" start_line="25" end_line="25" start_column="17" end_column="30" covered="yes" />
+          </ranges>
+        </function>
+        <function id="15101" token="0x60000fa" name="&lt;LambdaFull&gt;b__1_2(CoverageDemo.MyInt)" namespace="CoverageDemo.Coverage" type_name="Lambdas.&lt;&gt;c" block_coverage="100.00" line_coverage="100.00" blocks_covered="8" blocks_not_covered="0" lines_covered="1" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="20" start_line="28" end_line="28" start_column="48" end_column="70" covered="yes" />
+          </ranges>
+        </function>
+        <function id="15135" token="0x60000fb" name="&lt;LambdaFull&gt;b__1_3(CoverageDemo.MyInt)" namespace="CoverageDemo.Coverage" type_name="Lambdas.&lt;&gt;c" block_coverage="100.00" line_coverage="100.00" blocks_covered="8" blocks_not_covered="0" lines_covered="3" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="20" start_line="31" end_line="31" start_column="17" end_column="28" covered="yes" />
+            <range source_id="20" start_line="33" end_line="33" start_column="21" end_column="34" covered="yes" />
+            <range source_id="20" start_line="37" end_line="37" start_column="21" end_column="34" covered="yes" />
+          </ranges>
+        </function>
+        <function id="15101" token="0x60000fc" name="&lt;LambdaPartial&gt;b__2_0(CoverageDemo.MyInt)" namespace="CoverageDemo.Coverage" type_name="Lambdas.&lt;&gt;c" block_coverage="75.00" line_coverage="0.00" blocks_covered="6" blocks_not_covered="2" lines_covered="0" lines_partially_covered="1" lines_not_covered="0">
+          <ranges>
+            <range source_id="20" start_line="47" end_line="47" start_column="48" end_column="70" covered="partial" />
+          </ranges>
+        </function>
+        <function id="15135" token="0x60000fd" name="&lt;LambdaPartial&gt;b__2_1(CoverageDemo.MyInt)" namespace="CoverageDemo.Coverage" type_name="Lambdas.&lt;&gt;c" block_coverage="62.50" line_coverage="66.67" blocks_covered="5" blocks_not_covered="3" lines_covered="2" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="20" start_line="50" end_line="50" start_column="17" end_column="28" covered="yes" />
+            <range source_id="20" start_line="52" end_line="52" start_column="21" end_column="34" covered="yes" />
+            <range source_id="20" start_line="56" end_line="56" start_column="21" end_column="34" covered="no" />
+          </ranges>
+        </function>
+        <function id="15212" token="0x6000100" name="MoveNext()" namespace="CoverageDemo.Coverage" type_name="Class17CoverageDemoStateMachines.&lt;Method01YieldEnumerable&gt;d__2" block_coverage="80.00" line_coverage="75.00" blocks_covered="8" blocks_not_covered="2" lines_covered="6" lines_partially_covered="0" lines_not_covered="2">
+          <ranges>
+            <range source_id="25" start_line="17" end_line="17" start_column="9" end_column="36" covered="yes" />
+            <range source_id="25" start_line="18" end_line="18" start_column="14" end_column="23" covered="yes" />
+            <range source_id="25" start_line="20" end_line="20" start_column="13" end_column="36" covered="yes" />
+            <range source_id="25" start_line="18" end_line="18" start_column="32" end_column="35" covered="yes" />
+            <range source_id="25" start_line="18" end_line="18" start_column="25" end_column="30" covered="yes" />
+            <range source_id="25" start_line="22" end_line="22" start_column="9" end_column="38" covered="yes" />
+            <range source_id="25" start_line="23" end_line="23" start_column="9" end_column="23" covered="yes" />
+            <range source_id="25" start_line="25" end_line="25" start_column="13" end_column="25" covered="yes" />
+            <range source_id="25" start_line="27" end_line="27" start_column="9" end_column="38" covered="no" />
+            <range source_id="25" start_line="28" end_line="28" start_column="5" end_column="6" covered="no" />
+          </ranges>
+        </function>
+        <function id="15588" token="0x6000107" name="MoveNext()" namespace="CoverageDemo.Coverage" type_name="Class17CoverageDemoStateMachines.&lt;Method02YieldAsyncEnumerable&gt;d__3" block_coverage="77.27" line_coverage="81.82" blocks_covered="17" blocks_not_covered="5" lines_covered="9" lines_partially_covered="0" lines_not_covered="2">
+          <ranges>
+            <range source_id="25" start_line="32" end_line="32" start_column="9" end_column="36" covered="yes" />
+            <range source_id="25" start_line="33" end_line="33" start_column="14" end_column="23" covered="yes" />
+            <range source_id="25" start_line="35" end_line="35" start_column="13" end_column="55" covered="yes" />
+            <range source_id="25" start_line="36" end_line="36" start_column="13" end_column="36" covered="yes" />
+            <range source_id="25" start_line="33" end_line="33" start_column="32" end_column="35" covered="yes" />
+            <range source_id="25" start_line="33" end_line="33" start_column="25" end_column="30" covered="yes" />
+            <range source_id="25" start_line="38" end_line="38" start_column="9" end_column="51" covered="yes" />
+            <range source_id="25" start_line="39" end_line="39" start_column="9" end_column="38" covered="yes" />
+            <range source_id="25" start_line="40" end_line="40" start_column="9" end_column="23" covered="yes" />
+            <range source_id="25" start_line="42" end_line="42" start_column="13" end_column="25" covered="yes" />
+            <range source_id="25" start_line="45" end_line="45" start_column="9" end_column="51" covered="no" />
+            <range source_id="25" start_line="46" end_line="46" start_column="9" end_column="38" covered="no" />
+            <range source_id="25" start_line="47" end_line="47" start_column="5" end_column="6" covered="yes" />
+          </ranges>
+        </function>
+        <function id="16740" token="0x6000113" name="MoveNext()" namespace="CoverageDemo.Coverage" type_name="Class17CoverageDemoStateMachines.&lt;Method03AsyncTask&gt;d__4" block_coverage="75.00" line_coverage="83.33" blocks_covered="15" blocks_not_covered="5" lines_covered="10" lines_partially_covered="0" lines_not_covered="2">
+          <ranges>
+            <range source_id="25" start_line="51" end_line="51" start_column="9" end_column="24" covered="yes" />
+            <range source_id="25" start_line="52" end_line="52" start_column="9" end_column="36" covered="yes" />
+            <range source_id="25" start_line="53" end_line="53" start_column="14" end_column="23" covered="yes" />
+            <range source_id="25" start_line="55" end_line="55" start_column="13" end_column="55" covered="yes" />
+            <range source_id="25" start_line="56" end_line="56" start_column="13" end_column="42" covered="yes" />
+            <range source_id="25" start_line="53" end_line="53" start_column="32" end_column="35" covered="yes" />
+            <range source_id="25" start_line="53" end_line="53" start_column="25" end_column="30" covered="yes" />
+            <range source_id="25" start_line="58" end_line="58" start_column="9" end_column="51" covered="yes" />
+            <range source_id="25" start_line="59" end_line="59" start_column="9" end_column="35" covered="yes" />
+            <range source_id="25" start_line="60" end_line="60" start_column="9" end_column="24" covered="yes" />
+            <range source_id="25" start_line="63" end_line="63" start_column="13" end_column="55" covered="no" />
+            <range source_id="25" start_line="64" end_line="64" start_column="13" end_column="39" covered="no" />
+            <range source_id="25" start_line="66" end_line="66" start_column="9" end_column="23" covered="yes" />
+            <range source_id="25" start_line="67" end_line="67" start_column="5" end_column="6" covered="yes" />
+          </ranges>
+        </function>
+      </functions>
+      <source_files>
+        <source_file id="0" path="C:\Users\mw\Projects\Learning\codecoverage-lab\ReportComparison\CoverageDemo\Naming\Namespaces.cs" checksum_type="SHA256" checksum="A3515EB327B12578123D5192F7C24AE9AAA3B8B5D35ACA47183622A2523DE471" />
+        <source_file id="1" path="C:\Users\mw\Projects\Learning\codecoverage-lab\ReportComparison\CoverageDemo\MyBool.cs" checksum_type="SHA256" checksum="F030A56EC3F8B7CB9DDB2FC3CD3719125A163438E63F87B0441665A1D7B44774" />
+        <source_file id="2" path="C:\Users\mw\Projects\Learning\codecoverage-lab\ReportComparison\CoverageDemo\MyInt.cs" checksum_type="SHA256" checksum="4C8F2232979D7E64E122E0B3078EA8EF9F32CC43FD4385C5F69B99AC1C02887F" />
+        <source_file id="3" path="C:\Users\mw\Projects\Learning\codecoverage-lab\ReportComparison\CoverageDemo\MyString.cs" checksum_type="SHA256" checksum="05022C43CA650922D6AEB7246FD2374E19AA15160063BA131F0FA57CD457E728" />
+        <source_file id="4" path="C:\Users\mw\Projects\Learning\codecoverage-lab\ReportComparison\CoverageDemo\Naming\Closures.cs" checksum_type="SHA256" checksum="51D3C59D9CF3667C0AF4063B4B7E6F2B44A7362DDC665067DCF2CD1DC9CCD1D6" />
+        <source_file id="5" path="C:\Users\mw\Projects\Learning\codecoverage-lab\ReportComparison\CoverageDemo\Naming\Generics.cs" checksum_type="SHA256" checksum="D552170E33B96B56CFB72B250250F94D6CEDC4FEBB3B0D11ECD8DD0BFC546E60" />
+        <source_file id="6" path="C:\Users\mw\Projects\Learning\codecoverage-lab\ReportComparison\CoverageDemo\Naming\Signatures.cs" checksum_type="SHA256" checksum="2BBEE5495E6A0E4885C2DF770A2F2925221088E4E95A2E92508BF38DD2D20B2A" />
+        <source_file id="7" path="C:\Users\mw\Projects\Learning\codecoverage-lab\ReportComparison\CoverageDemo\Naming\SpecialMemberNames.cs" checksum_type="SHA256" checksum="1D7203D1056BA922C48B16C7672986DD9E40A8C78D5558221CDD9616C20C0E87" />
+        <source_file id="8" path="C:\Users\mw\Projects\Learning\codecoverage-lab\ReportComparison\CoverageDemo\Naming\Filescoped\FileScopedClass.cs" checksum_type="SHA256" checksum="6D8A6B2A4A75C70D68E6711503C787DC9B83F66DDB50A82EB9AD2333DAE64106" />
+        <source_file id="9" path="C:\Users\mw\Projects\Learning\codecoverage-lab\ReportComparison\CoverageDemo\Naming\Filescoped\NotFileScopedClass.cs" checksum_type="SHA256" checksum="9F089233402B70104105FFDAD876295338BC6398BD295412DD67EC76F2684DA7" />
+        <source_file id="10" path="C:\Users\mw\Projects\Learning\codecoverage-lab\ReportComparison\CoverageDemo\Layout\MultiClassSingleFile.cs" checksum_type="SHA256" checksum="E8E5C93CB0EC3959392A365B321F211A06B4A4389A644EA7FCBE2ADC9F21D0F3" />
+        <source_file id="11" path="C:\Users\mw\Projects\Learning\codecoverage-lab\ReportComparison\CoverageDemo\Layout\NestedClassMultiFile.cs" checksum_type="SHA256" checksum="D40438AFCB881E5687F3AC59EE70E97DA93C81D6A6374259815D05BC2A5BA8CE" />
+        <source_file id="12" path="C:\Users\mw\Projects\Learning\codecoverage-lab\ReportComparison\CoverageDemo\Layout\NestedClassSingleFile.cs" checksum_type="SHA256" checksum="2555ABDC0A14A136C4C90206A13DC8695B7D548ED361E22B2C65FD79288B1B2B" />
+        <source_file id="13" path="C:\Users\mw\Projects\Learning\codecoverage-lab\ReportComparison\CoverageDemo\Layout\PartialMethods.cs" checksum_type="SHA256" checksum="77782DEADE9E82816F7B1FB9E13754D9F8772E28E872C48036F7ACCC5F3B6379" />
+        <source_file id="14" path="C:\Users\mw\Projects\Learning\codecoverage-lab\ReportComparison\CoverageDemo\Layout\SingleClassMultiFile.cs" checksum_type="SHA256" checksum="F6448A1DADC8198747346A78441E52F5929A26C9954AB8049C23CF581C35FAFD" />
+        <source_file id="15" path="C:\Users\mw\Projects\Learning\codecoverage-lab\ReportComparison\CoverageDemo\Layout\SingleClassMultiFile.Part2.cs" checksum_type="SHA256" checksum="BDB51014DFE21A1FA1967CC30AACDCB7578A964EA2A4597E71322A5D7094D270" />
+        <source_file id="16" path="C:\Users\mw\Projects\Learning\codecoverage-lab\ReportComparison\CoverageDemo\Layout\SingleClassSingleFile.cs" checksum_type="SHA256" checksum="FEA6E106B86D658C2977E509CDAF883B349C093E79F0B219D948AEA73363D72F" />
+        <source_file id="17" path="C:\Users\mw\Projects\Learning\codecoverage-lab\ReportComparison\CoverageDemo\Coverage\Attributes.cs" checksum_type="SHA256" checksum="8EFAE2F826A751BBF4725EC41E7CFD0940584A935771E5E5828F6C81518108F6" />
+        <source_file id="18" path="C:\Users\mw\Projects\Learning\codecoverage-lab\ReportComparison\CoverageDemo\Coverage\Generics.cs" checksum_type="SHA256" checksum="6D30655B515B65A67E2077E82CC85852D6E36AAE0C0DD5C75F527181F9646124" />
+        <source_file id="19" path="C:\Users\mw\Projects\Learning\codecoverage-lab\ReportComparison\CoverageDemo\Coverage\IfConditions.cs" checksum_type="SHA256" checksum="60FBA726C7D1F739E408EEAD46EA8D063BBC3EA5FB7A1FC6E8EF8C3D27675883" />
+        <source_file id="20" path="C:\Users\mw\Projects\Learning\codecoverage-lab\ReportComparison\CoverageDemo\Coverage\Lambdas.cs" checksum_type="SHA256" checksum="44FEE64800EA28DA9CB2DECCCA762D5C12A72BF42A2BFE3710E8D957AFC9D014" />
+        <source_file id="21" path="C:\Users\mw\Projects\Learning\codecoverage-lab\ReportComparison\CoverageDemo\Coverage\LoopConditions.cs" checksum_type="SHA256" checksum="38216AED927AF869502CB0C9AE401EAF4F686F0D840AF0CEDDAF145226D38C10" />
+        <source_file id="22" path="C:\Users\mw\Projects\Learning\codecoverage-lab\ReportComparison\CoverageDemo\Coverage\NullConditions.cs" checksum_type="SHA256" checksum="FB27B83D11AD8D16B9B299AD4D4BE2C58073235C47C12E0B1DA7AD56DF4F134D" />
+        <source_file id="23" path="C:\Users\mw\Projects\Learning\codecoverage-lab\ReportComparison\CoverageDemo\Coverage\Properties.cs" checksum_type="SHA256" checksum="FD3439B4C6E7387FA2FF4A9A68C4EB69C7CC6761D92F0B1CB5363D986D5A8C6E" />
+        <source_file id="24" path="C:\Users\mw\Projects\Learning\codecoverage-lab\ReportComparison\CoverageDemo\Coverage\SwitchConditions.cs" checksum_type="SHA256" checksum="1240606A6A8C15D3F5370A8ED35AD124B61F16E9F65B78D173637EBFAB12A7BB" />
+        <source_file id="25" path="C:\Users\mw\Projects\Learning\codecoverage-lab\ReportComparison\CoverageDemo\Coverage\_Pending.cs" checksum_type="SHA256" checksum="B80F571686058EAD69492C56B8ED60E297DC4FB2190FF66E002546EAB269AAED" />
+        <source_file id="26" path="C:\Users\mw\Projects\Learning\codecoverage-lab\ReportComparison\CoverageDemo\Naming\StateMachines.cs" checksum_type="SHA256" checksum="FEDF095587083F5962D0C63B37D79193947476ADFE0094ACD043066E90C83940" />
+        <source_file id="27" path="C:\Users\mw\Projects\Learning\codecoverage-lab\ReportComparison\CoverageDemo\Layout\NestedClassMultiFile.Inner.cs" checksum_type="SHA256" checksum="0E2D7965FA88B02EB94EDC70C0CC40056031C8799298265410F9428DD8BDA322" />
+      </source_files>
+      <skipped_functions>
+        <skipped_function id="8883" original_id="8883" token="0x6000084" name="DebuggerHiddenMethod()" type_name="Attributes" reason="attribute_excluded" />
+        <skipped_function id="8883" original_id="8883" token="0x6000085" name="DebuggerNonUserCodeMethod()" type_name="Attributes" reason="attribute_excluded" />
+        <skipped_function id="8883" original_id="8883" token="0x6000088" name="GeneratedCodeMethod()" type_name="Attributes" reason="attribute_excluded" />
+        <skipped_function id="8883" original_id="8883" token="0x6000089" name="ExcludeFromCodeCoverageMethod()" type_name="Attributes" reason="attribute_excluded" />
+      </skipped_functions>
+    </module>
+  </modules>
+  <skipped_modules>
+    <skipped_module name="system.private.corelib.dll" path="system.private.corelib.dll" reason="path_is_excluded" />
+    <skipped_module name="testhost.dll" path="testhost.dll" reason="path_is_excluded" />
+    <skipped_module name="system.runtime.dll" path="system.runtime.dll" reason="path_is_excluded" />
+    <skipped_module name="microsoft.testplatform.coreutilities.dll" path="microsoft.testplatform.coreutilities.dll" reason="path_is_excluded" />
+    <skipped_module name="system.diagnostics.tracing.dll" path="system.diagnostics.tracing.dll" reason="path_is_excluded" />
+    <skipped_module name="system.diagnostics.process.dll" path="system.diagnostics.process.dll" reason="path_is_excluded" />
+    <skipped_module name="system.componentmodel.primitives.dll" path="system.componentmodel.primitives.dll" reason="path_is_excluded" />
+    <skipped_module name="microsoft.testplatform.platformabstractions.dll" path="microsoft.testplatform.platformabstractions.dll" reason="path_is_excluded" />
+    <skipped_module name="system.collections.dll" path="system.collections.dll" reason="path_is_excluded" />
+    <skipped_module name="microsoft.testplatform.crossplatengine.dll" path="microsoft.testplatform.crossplatengine.dll" reason="path_is_excluded" />
+    <skipped_module name="netstandard.dll" path="netstandard.dll" reason="path_is_excluded" />
+    <skipped_module name="microsoft.testplatform.communicationutilities.dll" path="microsoft.testplatform.communicationutilities.dll" reason="path_is_excluded" />
+    <skipped_module name="microsoft.visualstudio.testplatform.objectmodel.dll" path="microsoft.visualstudio.testplatform.objectmodel.dll" reason="path_is_excluded" />
+    <skipped_module name="microsoft.visualstudio.testplatform.common.dll" path="microsoft.visualstudio.testplatform.common.dll" reason="path_is_excluded" />
+    <skipped_module name="newtonsoft.json.dll" path="newtonsoft.json.dll" reason="path_is_excluded" />
+    <skipped_module name="system.runtime.serialization.formatters.dll" path="system.runtime.serialization.formatters.dll" reason="path_is_excluded" />
+    <skipped_module name="system.collections.concurrent.dll" path="system.collections.concurrent.dll" reason="path_is_excluded" />
+    <skipped_module name="system.diagnostics.tracesource.dll" path="system.diagnostics.tracesource.dll" reason="path_is_excluded" />
+    <skipped_module name="system.threading.dll" path="system.threading.dll" reason="path_is_excluded" />
+    <skipped_module name="system.collections.specialized.dll" path="system.collections.specialized.dll" reason="path_is_excluded" />
+    <skipped_module name="system.diagnostics.textwritertracelistener.dll" path="system.diagnostics.textwritertracelistener.dll" reason="path_is_excluded" />
+    <skipped_module name="system.collections.nongeneric.dll" path="system.collections.nongeneric.dll" reason="path_is_excluded" />
+    <skipped_module name="microsoft.win32.primitives.dll" path="microsoft.win32.primitives.dll" reason="path_is_excluded" />
+    <skipped_module name="system.runtime.interopservices.dll" path="system.runtime.interopservices.dll" reason="path_is_excluded" />
+    <skipped_module name="system.memory.dll" path="system.memory.dll" reason="path_is_excluded" />
+    <skipped_module name="system.text.encoding.extensions.dll" path="system.text.encoding.extensions.dll" reason="path_is_excluded" />
+    <skipped_module name="system.threading.threadpool.dll" path="system.threading.threadpool.dll" reason="path_is_excluded" />
+    <skipped_module name="system.net.primitives.dll" path="system.net.primitives.dll" reason="path_is_excluded" />
+    <skipped_module name="system.net.sockets.dll" path="system.net.sockets.dll" reason="path_is_excluded" />
+    <skipped_module name="system.private.uri.dll" path="system.private.uri.dll" reason="path_is_excluded" />
+    <skipped_module name="system.threading.overlapped.dll" path="system.threading.overlapped.dll" reason="path_is_excluded" />
+    <skipped_module name="system.runtime.intrinsics.dll" path="system.runtime.intrinsics.dll" reason="path_is_excluded" />
+    <skipped_module name="system.diagnostics.diagnosticsource.dll" path="system.diagnostics.diagnosticsource.dll" reason="path_is_excluded" />
+    <skipped_module name="system.linq.expressions.dll" path="system.linq.expressions.dll" reason="path_is_excluded" />
+    <skipped_module name="system.runtime.numerics.dll" path="system.runtime.numerics.dll" reason="path_is_excluded" />
+    <skipped_module name="system.linq.dll" path="system.linq.dll" reason="path_is_excluded" />
+    <skipped_module name="system.componentmodel.typeconverter.dll" path="system.componentmodel.typeconverter.dll" reason="path_is_excluded" />
+    <skipped_module name="system.objectmodel.dll" path="system.objectmodel.dll" reason="path_is_excluded" />
+    <skipped_module name="system.runtime.serialization.primitives.dll" path="system.runtime.serialization.primitives.dll" reason="path_is_excluded" />
+    <skipped_module name="system.data.common.dll" path="system.data.common.dll" reason="path_is_excluded" />
+    <skipped_module name="system.xml.readerwriter.dll" path="system.xml.readerwriter.dll" reason="path_is_excluded" />
+    <skipped_module name="system.private.xml.dll" path="system.private.xml.dll" reason="path_is_excluded" />
+    <skipped_module name="system.componentmodel.dll" path="system.componentmodel.dll" reason="path_is_excluded" />
+    <skipped_module name="system.reflection.emit.ilgeneration.dll" path="system.reflection.emit.ilgeneration.dll" reason="path_is_excluded" />
+    <skipped_module name="system.reflection.emit.lightweight.dll" path="system.reflection.emit.lightweight.dll" reason="path_is_excluded" />
+    <skipped_module name="system.reflection.primitives.dll" path="system.reflection.primitives.dll" reason="path_is_excluded" />
+    <skipped_module name="system.numerics.vectors.dll" path="system.numerics.vectors.dll" reason="path_is_excluded" />
+    <skipped_module name="system.runtime.loader.dll" path="system.runtime.loader.dll" reason="path_is_excluded" />
+    <skipped_module name="system.reflection.metadata.dll" path="system.reflection.metadata.dll" reason="path_is_excluded" />
+    <skipped_module name="system.io.memorymappedfiles.dll" path="system.io.memorymappedfiles.dll" reason="path_is_excluded" />
+    <skipped_module name="system.collections.immutable.dll" path="system.collections.immutable.dll" reason="path_is_excluded" />
+    <skipped_module name="xunit.runner.visualstudio.testadapter.dll" path="xunit.runner.visualstudio.testadapter.dll" reason="path_is_excluded" />
+    <skipped_module name="system.threading.tasks.extensions.dll" path="system.threading.tasks.extensions.dll" reason="path_is_excluded" />
+    <skipped_module name="system.net.http.dll" path="system.net.http.dll" reason="path_is_excluded" />
+    <skipped_module name="xunit.abstractions.dll" path="xunit.abstractions.dll" reason="path_is_excluded" />
+    <skipped_module name="system.xml.xdocument.dll" path="system.xml.xdocument.dll" reason="path_is_excluded" />
+    <skipped_module name="system.private.xml.linq.dll" path="system.private.xml.linq.dll" reason="path_is_excluded" />
+    <skipped_module name="system.threading.thread.dll" path="system.threading.thread.dll" reason="path_is_excluded" />
+    <skipped_module name="system.text.regularexpressions.dll" path="system.text.regularexpressions.dll" reason="path_is_excluded" />
+    <skipped_module name="system.io.compression.dll" path="system.io.compression.dll" reason="path_is_excluded" />
+    <skipped_module name="xunit.v3.runner.inproc.console.dll" path="xunit.v3.runner.inproc.console.dll" reason="path_is_excluded" />
+    <skipped_module name="xunit.v3.common.dll" path="xunit.v3.common.dll" reason="path_is_excluded" />
+    <skipped_module name="xunit.v3.core.dll" path="xunit.v3.core.dll" reason="path_is_excluded" />
+    <skipped_module name="xunit.v3.runner.common.dll" path="xunit.v3.runner.common.dll" reason="path_is_excluded" />
+    <skipped_module name="microsoft.bcl.asyncinterfaces.dll" path="microsoft.bcl.asyncinterfaces.dll" reason="path_is_excluded" />
+    <skipped_module name="system.console.dll" path="system.console.dll" reason="path_is_excluded" />
+    <skipped_module name="system.security.cryptography.dll" path="system.security.cryptography.dll" reason="path_is_excluded" />
+  </skipped_modules>
+</results>

@@ -1,0 +1,16 @@
+--targetdir
+C:\Users\mw\Projects\Learning\codecoverage-lab\ReportComparison\artifacts/Results/comparison\Debug\dnc-xml-vs-multi
+--homelink
+../../index.html
+
+C:\Users\mw\Projects\Learning\codecoverage-lab\ReportComparison\artifacts\Results\report-xml\Debug\dnc(18.5.2).xml
+C:\Users\mw\Projects\Learning\codecoverage-lab\ReportComparison\artifacts\Results\report-xml\Debug\dnc(18.5.2)-multi(coverage+cobertura+xml).xml
+C:\Users\mw\Projects\Learning\codecoverage-lab\ReportComparison\artifacts\Results\report-xml\Debug\dnc(18.5.2)-multi(coverage+xml).xml
+C:\Users\mw\Projects\Learning\codecoverage-lab\ReportComparison\artifacts\Results\report-xml\Debug\dnc(18.5.2)-multi(cobertura+xml+coverage).xml
+C:\Users\mw\Projects\Learning\codecoverage-lab\ReportComparison\artifacts\Results\report-xml\Debug\dnc(18.5.2)-multi(coverage+xml+cobertura).xml
+C:\Users\mw\Projects\Learning\codecoverage-lab\ReportComparison\artifacts\Results\report-xml\Debug\dnc(18.5.2)-multi(cobertura+coverage+xml).xml
+C:\Users\mw\Projects\Learning\codecoverage-lab\ReportComparison\artifacts\Results\report-xml\Debug\dnc(18.5.2)-multi(cobertura+xml).xml
+C:\Users\mw\Projects\Learning\codecoverage-lab\ReportComparison\artifacts\Results\report-xml\Debug\dnc(18.5.2)-multi(xml+coverage).xml
+C:\Users\mw\Projects\Learning\codecoverage-lab\ReportComparison\artifacts\Results\report-xml\Debug\dnc(18.5.2)-multi(xml+coverage+cobertura).xml
+C:\Users\mw\Projects\Learning\codecoverage-lab\ReportComparison\artifacts\Results\report-xml\Debug\dnc(18.5.2)-multi(xml+cobertura+coverage).xml
+C:\Users\mw\Projects\Learning\codecoverage-lab\ReportComparison\artifacts\Results\report-xml\Debug\dnc(18.5.2)-multi(xml+cobertura).xml

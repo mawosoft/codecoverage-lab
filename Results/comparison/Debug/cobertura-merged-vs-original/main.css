@@ -1,0 +1,197 @@
+/* Copyright (c) Matthias Wolf, Mawosoft. */
+
+:root {
+    color-scheme: light dark;
+    --back: light-dark(hsl(0 0% 95%), hsl(0 0% 15%));
+    --altback: light-dark(hsl(0 0% 90%), hsl(0 0% 20%));
+    --hoverback: light-dark(hsl(0 0% 85%), hsl(0 0% 25%));
+    --border: light-dark(hsl(0 0% 60%), hsl(0 0% 40%));
+    --text: light-dark(hsl(0 0% 10%), hsl(0 0% 90%));
+    --link: light-dark(hsl(206, 100%, 35%), hsl(206, 100%, 80%));
+    --redtext: light-dark(hsl(0 100% 40%), hsl(0 50% 70%));
+    --green: light-dark(hsl(120 40% 60%), hsl(120 40% 30%));
+    --red: light-dark(hsl(0 50% 60%), hsl(0 50% 40%));
+    --yellow: light-dark(hsl(45 70% 60%), hsl(45 50% 50%));
+    --blank: light-dark(hsl(0 0% 70%), hsl(0 0% 60%));
+    --blue: light-dark(hsl(210 70% 90%), hsl(210 50% 35%));
+    --altblue: light-dark(hsl(210 50% 80%), hsl(210 70% 25%));
+    background-color: var(--back);
+    color: var(--text);
+
+    font-family: sans-serif;
+    font-size: 0.875em;
+    line-height: 1.286;
+
+    --h1size: 1.5em; /* default 2em, 0.67em margin */
+    --h2size: 1.3em; /* default 1.5em, 0.83em margin */
+    --h3size: 1.15em; /* default 1.17em, 1em margin */
+    --h2margin-factor: 0.83;
+    --h3margin-factor: 1;
+
+    --helpwidth: 900px;
+}
+
+a {
+    text-decoration: none;
+    color: var(--link);
+    &:hover { text-decoration: underline; }
+    table & {
+        &:not(:hover) { color: var(--text); }
+    }
+}
+
+button {
+    font-family: inherit;
+    background-color: var(--back);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    &:hover:not(:active) { background-color: var(--hoverback); }
+}
+
+footer { font-size: 0.86em; }
+
+pre {
+  font-family: monospace, monospace;
+  font-size: 1em;
+}
+
+h1 { font-size: var(--h1size); }
+h2 { font-size: var(--h2size); }
+h3 { font-size: var(--h3size); }
+
+details:has(> summary:first-of-type > :is(h2, h3)) {
+    --size: var(--h2size);
+    --margin: calc(var(--h2size) * var(--h2margin-factor));
+    &:has(> summary:first-of-type > h3) {
+        --size: var(--h3size);
+        --margin: calc(var(--h3size) * var(--h3margin-factor));
+    }
+    > summary:first-of-type {
+        margin-block-start: var(--margin);
+        > :is(h2, h3) { display: inline; }
+        &::marker { font-size: var(--size); }
+        details[open] & {
+            margin-block-end: var(--margin);
+        }
+    }
+    &:not([open]) { margin-block-end: var(--margin); }
+}
+
+.hidden { display: none; }
+
+.left { text-align: left; }
+.right { text-align: right; }
+.center { text-align: center; }
+.top { vertical-align: top; }
+
+.altback { background-color: var(--altback); }
+.green { background-color: var(--green); }
+.red { background-color: var(--red); }
+.yellow { background-color: var(--yellow); }
+.blank { background-color: var(--blank); }
+.blue { background-color: var(--blue); }
+.altblue { background-color: var(--altblue); }
+.redtext { color: var(--redtext); }
+
+button.small {
+    font-size: 0.65em;
+    padding: 1px 2px;
+}
+
+button.plus {
+    font-size: 0.65em;
+    min-width: 1rem;
+    min-height: 1rem;
+    padding: 0px;
+}
+
+button.help {
+    font-family: serif;
+    font-size: 1rem;
+    width: 1.3em;
+    height: 1.3em;
+    padding: 0px;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+
+col.number { width: 6em; }
+
+p.help { max-width: var(--helpwidth); }
+
+table.help {
+    margin-block: 1em;
+    border-collapse: collapse;
+    > tbody > tr > td {
+        border: 1px solid var(--border);
+        padding: 3px 8px;
+        &:last-child { max-width: var(--helpwidth); }
+    }
+}
+
+table.datagrid {
+    margin-block: 1em;
+    border-collapse: collapse;
+    > thead > tr > th,
+    > tbody > tr > td {
+        border: 1px solid var(--border);
+        padding: 3px 8px;
+    }
+    > tbody > tr > td { vertical-align: top; }
+    > tbody > tr:not(:last-child) { height: 0px; }
+    > colgroup > col.detailGlyph { width: 11px; }
+    > tbody > tr > td.detailGlyph {
+        padding-block: 3px 2px;
+        padding-inline: 3px 2px;
+        background-clip: content-box;
+    }
+}
+
+table.zebra {
+    > tbody:nth-of-type(odd) { background-color: var(--altback); }
+}
+
+tbody.zebra {
+    > tr:nth-child(odd) { background-color: var(--altback); }
+}
+
+thead.sticky {
+    position: sticky;
+    inset-block-start: -1px;
+    > tr > th {
+        background-color: var(--back);
+        background-clip: padding-box;
+    }
+    @supports (container-type: scroll-state) {
+        container-type: scroll-state;
+        @container scroll-state(stuck: top) {
+            th { box-shadow: inset 0px -1px var(--border); }
+        }
+    }
+    @supports not (container-type: scroll-state) {
+        > tr > th { box-shadow: inset 0px -1px var(--border); }
+    }
+}
+
+table.sourceLines {
+    border-collapse: collapse;
+    pre {
+        margin-block: 0px;
+        tab-size: 4;
+    }
+    > tbody > tr > td {
+        line-height: normal;
+        vertical-align: top;
+        &:nth-child(3) {
+            padding-inline: 8px;
+            text-align: right;
+        }
+    }
+    &::highlight(line-range) { background-color: var(--blue); }
+}
+
+table.lineMarginGlyphs {
+    border-collapse: separate;
+    border-spacing: 2px 0px;
+}

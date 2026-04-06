@@ -1,0 +1,13 @@
+--targetdir
+C:\Users\mw\Projects\Learning\codecoverage-lab\ReportComparison\artifacts/Results/comparison\Debug\coverlet-singlehit-cobertura-vs-multi
+--homelink
+../../index.html
+
+C:\Users\mw\Projects\Learning\codecoverage-lab\ReportComparison\artifacts\Results\report-xml\Debug\coverlet(6.0.4)-singlehit.cobertura.xml
+C:\Users\mw\Projects\Learning\codecoverage-lab\ReportComparison\artifacts\Results\report-xml\Debug\coverlet(8.0.1)-singlehit.cobertura.xml
+C:\Users\mw\Projects\Learning\codecoverage-lab\ReportComparison\artifacts\Results\report-xml\Debug\coverlet(6.0.4)-singlehit-multi(json+lcov+cobertura+opencover+teamcity).cobertura.xml
+C:\Users\mw\Projects\Learning\codecoverage-lab\ReportComparison\artifacts\Results\report-xml\Debug\coverlet(8.0.1)-singlehit-multi(json+lcov+cobertura+opencover+teamcity).cobertura.xml
+C:\Users\mw\Projects\Learning\codecoverage-lab\ReportComparison\artifacts\Results\report-xml\Debug\coverlet(8.0.1)-singlehit-multi(json+cobertura).cobertura.xml
+C:\Users\mw\Projects\Learning\codecoverage-lab\ReportComparison\artifacts\Results\report-xml\Debug\coverlet(6.0.4)-singlehit-multi(cobertura+json).cobertura.xml
+C:\Users\mw\Projects\Learning\codecoverage-lab\ReportComparison\artifacts\Results\report-xml\Debug\coverlet(6.0.4)-singlehit-multi(json+cobertura).cobertura.xml
+C:\Users\mw\Projects\Learning\codecoverage-lab\ReportComparison\artifacts\Results\report-xml\Debug\coverlet(8.0.1)-singlehit-multi(cobertura+json).cobertura.xml
