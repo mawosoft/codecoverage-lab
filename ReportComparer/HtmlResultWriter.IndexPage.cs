@@ -52,54 +52,36 @@ internal sealed partial class HtmlResultWriter
             the same group are identical.
             </p>
             """);
-        IEnumerable<IEnumerable<ParsedReport>> group = _reportComparison.Reports.GroupBy(r => r, ParsedReport.FullEqualityComparer.Instance);
-        WriteReportGroupTable(group);
+        WriteReportGroupTable(_reportComparison.ContentGroups);
         _writer.WriteLine("</details>");
 
-        // This produces the same grouping as Coverage details.
-        //_writer.WriteLine("""
-        //    <details open><summary><h3>By Core Content <button class="help" data-for="help_corecontent">i</button></h3></summary>
-        //    <p id="help_corecontent" class="help hidden">
-        //    Same as <i>Content</i>, but supplemental infos (source roots, skipped functions/modules) are excluded from comparison.
-        //    </p>
-        //    """);
-        //group = _reportComparison.Reports.GroupBy(r => r, ParsedReport.CoreEqualityComparer.Instance);
-        //WriteReportGroupTable(group);
-        //_writer.WriteLine("</details>");
+        _writer.WriteLine("""
+            <details open><summary><h3>By Core Content <button class="help" data-for="help_corecontent">i</button></h3></summary>
+            <p id="help_corecontent" class="help hidden">
+            Same as <i>Content</i>, but supplemental infos (source roots, skipped functions/modules) are excluded from comparison.
+            </p>
+            """);
+        WriteReportGroupTable(_reportComparison.CoreContentGroups);
+        _writer.WriteLine("</details>");
 
         _writer.WriteLine("<details open><summary><h3>By Type and Method Names</h3></summary>");
-        group = _reportComparison.Reports.Select(report => (
-                report,
-                set: report.Assemblies.SelectMany(a => a.Types)
-                    .SelectMany(t => t.Methods)
-                    .Select(m => (m.RealMethod, m.ParentType.Name, m.Name))
-                    .ToEquatableSet()))
-            .GroupBy(vt => vt.set, (_, g) => g.Select(vt => vt.report));
-        WriteReportGroupTable(group);
+        WriteReportGroupTable(_reportComparison.NameGroups);
         _writer.WriteLine("</details>");
 
         _writer.WriteLine("<details open><summary><h3>By Coverage Details</h3></summary>");
-        group = _reportComparison.Reports.Select(report => (
-                report,
-                sequence: report.Assemblies.SelectMany(a => a.Sources)
-                    .Select(s => (
-                        s.RealSource,
-                        s.LinesCoverage.ToEquatableSequence()))
-                    .ToEquatableSequence()))
-            .GroupBy(vt => vt.sequence, (_, g) => g.Select(vt => vt.report));
-        WriteReportGroupTable(group);
+        if (_reportComparison.CoreContentGroups.Select(g => g.ToEquatableSequence())
+            .SequenceEqual(_reportComparison.CoverageGroups.Select(g => g.ToEquatableSequence())))
+        {
+            _writer.WriteLine("<p>Same report groups as in <i>Core Content</i> above.</p>");
+        }
+        else
+        {
+            WriteReportGroupTable(_reportComparison.CoverageGroups);
+        }
         _writer.WriteLine("</details>");
 
         _writer.WriteLine("<details open><summary><h3>By Line Status</h3></summary>");
-        group = _reportComparison.Reports.Select(report => (
-                report,
-                sequence: report.Assemblies.SelectMany(a => a.Sources)
-                    .Select(s => (
-                        s.RealSource,
-                        s.LinesCoverage.Select(line => ParsedRange.AggregateStatus(line.Values)).ToEquatableSequence()))
-                    .ToEquatableSequence()))
-            .GroupBy(vt => vt.sequence, (_, g) => g.Select(vt => vt.report));
-        WriteReportGroupTable(group);
+        WriteReportGroupTable(_reportComparison.LineStatusGroups);
         _writer.WriteLine("</details>");
 
         _writer.WriteLine("""
