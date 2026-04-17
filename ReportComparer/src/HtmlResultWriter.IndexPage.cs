@@ -16,8 +16,8 @@ internal sealed partial class HtmlResultWriter
         WriteReportTypes();
 
         _writer.WriteLine("""
-            <details open><summary><h2>Source Files per Assembly <button class="help" data-for="help1">i</button></h2></summary>
-            <div id="help1" class="hidden"><table class="help"><tbody>
+            <details open><summary><h2>Source Files per Assembly <button class="help" data-for="help_source">i</button></h2></summary>
+            <div id="help_source" class="hidden"><table class="help"><tbody>
             <tr>
               <td>Range Overlaps</td>
               <td>Whether at least one of the reports contains overlapping coverage ranges.</td>
@@ -32,7 +32,7 @@ internal sealed partial class HtmlResultWriter
             </tr>
             <tr>
               <td>Coverage Groups</td>
-              <td>Number of report groups with the same coverage data.</td>
+              <td>Number of report groups with the same coverage details.</td>
             </tr>
             <tr>
               <td>Line Status Groups</td>
@@ -45,14 +45,48 @@ internal sealed partial class HtmlResultWriter
 
         _writer.WriteLine("""
             <h2>Report Groups</h2>
-            <details open><summary><h3>By Content <button class="help" data-for="help2">i</button></h3></summary>
-            <p id="help2" class="help hidden">
+            <details open><summary><h3>By Content <button class="help" data-for="help_content">i</button></h3></summary>
+            <p id="help_content" class="help hidden">
             Assembly names, source file names, nested type separators, parameter spacing, reported metrics, and the order
             of data elements have been normalized before comparing the reports. Aside from these normalizations, reports in
-            the same group are identical. Consider removing the duplicates for better readability of the comparison results.
+            the same group are identical.
             </p>
             """);
-        IEnumerable<IEnumerable<ParsedReport>> group = _reportComparison.Reports.GroupBy(r => r, ParsedReport.EqualityComparer.Instance);
+        IEnumerable<IEnumerable<ParsedReport>> group = _reportComparison.Reports.GroupBy(r => r, ParsedReport.FullEqualityComparer.Instance);
+        WriteReportGroupTable(group);
+        _writer.WriteLine("</details>");
+
+        // This produces the same grouping as Coverage details.
+        //_writer.WriteLine("""
+        //    <details open><summary><h3>By Core Content <button class="help" data-for="help_corecontent">i</button></h3></summary>
+        //    <p id="help_corecontent" class="help hidden">
+        //    Same as <i>Content</i>, but supplemental infos (source roots, skipped functions/modules) are excluded from comparison.
+        //    </p>
+        //    """);
+        //group = _reportComparison.Reports.GroupBy(r => r, ParsedReport.CoreEqualityComparer.Instance);
+        //WriteReportGroupTable(group);
+        //_writer.WriteLine("</details>");
+
+        _writer.WriteLine("<details open><summary><h3>By Type and Method Names</h3></summary>");
+        group = _reportComparison.Reports.Select(report => (
+                report,
+                set: report.Assemblies.SelectMany(a => a.Types)
+                    .SelectMany(t => t.Methods)
+                    .Select(m => (m.RealMethod, m.ParentType.Name, m.Name))
+                    .ToEquatableSet()))
+            .GroupBy(vt => vt.set, (_, g) => g.Select(vt => vt.report));
+        WriteReportGroupTable(group);
+        _writer.WriteLine("</details>");
+
+        _writer.WriteLine("<details open><summary><h3>By Coverage Details</h3></summary>");
+        group = _reportComparison.Reports.Select(report => (
+                report,
+                sequence: report.Assemblies.SelectMany(a => a.Sources)
+                    .Select(s => (
+                        s.RealSource,
+                        s.LinesCoverage.ToEquatableSequence()))
+                    .ToEquatableSequence()))
+            .GroupBy(vt => vt.sequence, (_, g) => g.Select(vt => vt.report));
         WriteReportGroupTable(group);
         _writer.WriteLine("</details>");
 
@@ -68,54 +102,33 @@ internal sealed partial class HtmlResultWriter
         WriteReportGroupTable(group);
         _writer.WriteLine("</details>");
 
-        _writer.WriteLine("<details><summary><h3>By Type Names</h3></summary>");
-        group = _reportComparison.Reports.Select(report => (
-                report,
-                set: report.Assemblies.SelectMany(a => a.Types)
-                    .Select(t => (t.RealType, t.Name))
-                    .ToEquatableSet()))
-            .GroupBy(vt => vt.set, (_, g) => g.Select(vt => vt.report));
-        WriteReportGroupTable(group);
-        _writer.WriteLine("</details>");
-
-        _writer.WriteLine("<details><summary><h3>By Method Names</h3></summary>");
-        group = _reportComparison.Reports.Select(report => (
-                report,
-                set: report.Assemblies.SelectMany(a => a.Types)
-                    .SelectMany(t => t.Methods)
-                    .Select(m => (m.RealMethod, m.Name))
-                    .ToEquatableSet()))
-            .GroupBy(vt => vt.set, (_, g) => g.Select(vt => vt.report).ToArray());
-        WriteReportGroupTable(group);
-        _writer.WriteLine("</details>");
-
         _writer.WriteLine("""
             <h2>Reported Metrics</h2>
-            <details><summary><h3>Per Report</h3></summary>
+            <details open><summary><h3>Per Report</h3></summary>
             """);
         WriteReportMetrics();
         _writer.WriteLine("</details>");
 
-        _writer.WriteLine("<details><summary><h3>Per Assembly</h3></summary>");
+        _writer.WriteLine("<details open><summary><h3>Per Assembly</h3></summary>");
         WriteAssemblyMetrics();
         _writer.WriteLine("</details>");
 
         _writer.WriteLine("""
             <h2>Miscellaneous</h2>
-            <details><summary><h3>Sources</h3></summary>
+            <details open><summary><h3>Sources</h3></summary>
             """);
         var sequenceGroups = _reportComparison.Reports.Select(report => (report, sequence: report.SourceRoots.ToEquatableSet(StringComparer.OrdinalIgnoreCase)))
             .GroupBy(vt => vt.sequence, (sequence, g) => (sequence: sequence.Values.AsEnumerable(), reports: g.Select(vt => vt.report).ToArray()));
         WriteSequenceGroupTable("Sources", sequenceGroups);
         _writer.WriteLine("</details>");
 
-        _writer.WriteLine("<details><summary><h3>Skipped Modules</h3></summary>");
+        _writer.WriteLine("<details open><summary><h3>Skipped Modules</h3></summary>");
         sequenceGroups = _reportComparison.Reports.Select(report => (report, sequence: EquatableSequence.Create(report.SkippedModules)))
             .GroupBy(vt => vt.sequence, (sequence, g) => (sequence.Values.AsEnumerable(), reports: g.Select(vt => vt.report).ToArray()));
         WriteSequenceGroupTable("Skipped Modules", sequenceGroups);
         _writer.WriteLine("</details>");
 
-        _writer.WriteLine("<details><summary><h3>Skipped Functions per Assembly</h3></summary>");
+        _writer.WriteLine("<details open><summary><h3>Skipped Functions per Assembly</h3></summary>");
         WriteAssembliesAndSkippedFunctions();
         _writer.WriteLine("</details>");
         WriteHtmlEnd();
@@ -198,9 +211,9 @@ internal sealed partial class HtmlResultWriter
                         >{Encode(realSource.FileName)}</a></td>
                     <td{rowSpan} class="center">{(realSource.HasRangeOverlaps ? "yes" : "")}</td>
                     <td{rowSpan} class="center">{(realSource.TypesAreAmbiguous ? "yes" : "")}</td>
-                    <td{rowSpan}>{realSource.NameGroupCount}</td>
-                    <td{rowSpan}>{realSource.CoverageGroupCount}</td>
-                    <td{rowSpan}>{realSource.StatusGroupCount}</td>
+                    <td{rowSpan}>{realSource.NameGroups.Count}</td>
+                    <td{rowSpan}>{realSource.CoverageGroups.Count}</td>
+                    <td{rowSpan}>{realSource.LineStatusGroups.Count}</td>
                     <td class="left">{ReportGroup(realSource.Reports)}</td>
                     </tr>
                     """);
@@ -262,14 +275,12 @@ internal sealed partial class HtmlResultWriter
                 <tbody><tr><td colspan="2">{Encode(realAssembly.Name)}</td></tr></tbody>
                 <tbody>
                 """);
-            foreach ((EquatableSequence<string> sequence, IEnumerable<ParsedReport> reports) in realAssembly.ParsedAssemblies.GroupBy(
-                pa => EquatableSequence.Create(pa.SkippedFunctions),
-                (sequence, g) => (sequence, reports: g.Select(pa => pa.ParentReport))))
+            foreach (var reportGroup in realAssembly.Reports.GroupBy(r => EquatableSequence.Create(r.SkippedFunctionsForAssembly(realAssembly))))
             {
                 _writer.WriteLine($"""
-                    <tr><td>{Expandable(sequence.Values)}</td>
-                    <td>{ReportGroup(reports)}</td></tr>
-                    """);
+                        <tr><td>{Expandable(reportGroup.Key.Values)}</td>
+                        <td>{ReportGroup(reportGroup)}</td></tr>
+                        """);
             }
             _writer.WriteLine("</tbody>");
         }
@@ -294,20 +305,6 @@ internal sealed partial class HtmlResultWriter
             _writer.WriteLine($"""
                     <tr><td>{Expandable(sequence)}</td>
                     <td>{ReportGroup(reports)}</td></tr>
-                    """);
-        }
-        _writer.WriteLine("</tbody></table>");
-    }
-
-    private void WriteReportGroupTable(IEnumerable<IEnumerable<ParsedReport>> reportGroups)
-    {
-        _writer.WriteLine("""<table class="datagrid"><tbody>""");
-        int index = 0;
-        foreach (var reportGroup in reportGroups)
-        {
-            _writer.WriteLine($"""
-                    <tr><td class="right">{++index}</td>
-                    <td>{ReportGroup(reportGroup)}</td></tr>
                     """);
         }
         _writer.WriteLine("</tbody></table>");

@@ -1,6 +1,7 @@
 // Copyright (c) Matthias Wolf, Mawosoft.
 
 using System.Collections.Generic;
+using System.Linq;
 using System.Xml.Linq;
 
 namespace ReportComparer;
@@ -25,18 +26,15 @@ internal static partial class ReportParser
                     ParseDynamicCoverageMetrics(function));
                 ParseDynamicCoverageRanges(function, method, sources);
             }
-            foreach (var function in module.Elements(s_skipped_functions).Elements(s_skipped_function))
+            report.AddSkippedFunctions(assembly, module.Elements(s_skipped_functions).Elements(s_skipped_function).Select(f =>
             {
-                string name = (string)function.Attribute(s_name)!;
-                string? typeName = (string?)function.Attribute(s_type_name);
+                string name = (string)f.Attribute(s_name)!;
+                string? typeName = (string?)f.Attribute(s_type_name);
                 if (!string.IsNullOrEmpty(typeName)) name = typeName + '.' + name;
-                assembly.AddSkippedFunction(name);
-            }
+                return name;
+            }));
         }
-        foreach (var module in root.Elements(s_skipped_modules).Elements(s_skipped_module))
-        {
-            report.AddSkippedModule((string)module.Attribute(s_name)!);
-        }
+        report.AddSkippedModules(root.Elements(s_skipped_modules).Elements(s_skipped_module).Select(m => (string)m.Attribute(s_name)!));
     }
 
     private static Dictionary<int, ParsedSource> ParseDynamicCoverageSources(XElement module, ParsedAssembly assembly)

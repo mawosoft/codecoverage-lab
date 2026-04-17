@@ -14,7 +14,6 @@ internal sealed class ParsedAssembly : IEquatable<ParsedAssembly>
 {
     private Dictionary<RealSource, ParsedSource> _sources = new(ReferenceEqualityComparer.Instance);
     private Dictionary<string, ParsedType> _types = [];
-    private HashSet<string> _skippedFunctions = [];
     private bool _frozen;
 
     public ParsedReport ParentReport { get; }
@@ -23,7 +22,6 @@ internal sealed class ParsedAssembly : IEquatable<ParsedAssembly>
     public IReadOnlyCollection<ParsedSource> Sources => _sources.Values;
     public IReadOnlyCollection<ParsedType> Types => _types.Values;
     public ReportedMetrics? ReportedMetrics { get; set; }
-    public IReadOnlyCollection<string> SkippedFunctions => _skippedFunctions; // DynamicCoverage only
 
     public ParsedAssembly(ParsedReport parentReport, RealAssembly realAssembly, string name)
     {
@@ -38,7 +36,6 @@ internal sealed class ParsedAssembly : IEquatable<ParsedAssembly>
         Debug.Assert(_sources.All(kvp => kvp.Key.Order != 0));
         _sources = _sources.OrderBy(kvp => kvp.Key.Order).ToDictionary(_sources.Comparer);
         _types = _types.OrderBy(kvp => kvp.Key).ToDictionary(_types.Comparer);
-        _skippedFunctions = _skippedFunctions.Order().ToHashSet();
         foreach (var type in _types.Values) type.Freeze();
         foreach (var source in _sources.Values) source.Freeze();
         _frozen = true;
@@ -67,12 +64,6 @@ internal sealed class ParsedAssembly : IEquatable<ParsedAssembly>
         return parsedType;
     }
 
-    public void AddSkippedFunction(string name)
-    {
-        Debug.Assert(!_frozen);
-        _skippedFunctions.Add(name);
-    }
-
     public bool Equals([NotNullWhen(true)] ParsedAssembly? other)
     {
         Debug.Assert(_frozen);
@@ -80,7 +71,6 @@ internal sealed class ParsedAssembly : IEquatable<ParsedAssembly>
         if (other is null) return false;
         if (!ReferenceEquals(RealAssembly, other.RealAssembly)) return false;
         if (ReportedMetrics != other.ReportedMetrics) return false;
-        if (!_skippedFunctions.SequenceEqual(other._skippedFunctions)) return false;
         return _types.SequenceEqual(other._types);
     }
 
@@ -92,7 +82,6 @@ internal sealed class ParsedAssembly : IEquatable<ParsedAssembly>
         return HashCode.Combine(
             RealAssembly,
             ReportedMetrics,
-            EquatableSequence.Create(_types),
-            EquatableSequence.Create(_skippedFunctions));
+            EquatableSequence.Create(_types));
     }
 }
