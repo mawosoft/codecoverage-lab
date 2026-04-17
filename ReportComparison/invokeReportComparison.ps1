@@ -17,7 +17,7 @@ try {
     $diffableCoberturaPath = "$resultPath/diffable/cobertura"
     $diffableMsccxmlPath = "$resultPath/diffable/mscc-xml"
     $reportPath = "$resultPath/report"
-    $projectPath = "$PSScriptRoot/ReportComparison.csproj"
+    $projectPath = "$PSScriptRoot/CoverageDemo.Tests/CoverageDemo.Tests.csproj"
 
     $reportParam = @('-reporttypes:Html,Markdown,Cobertura', "-targetdir:$reportPath")
     $testParam = @('--no-build', '--collect')

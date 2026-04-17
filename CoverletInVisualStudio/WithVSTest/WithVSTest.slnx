@@ -1,0 +1,8 @@
+<Solution>
+  <Project Path="../CoverageDemo/CoverageDemo.csproj" />
+  <Project Path="NoMitigations/NoMitigations.csproj" />
+  <Project Path="PreserveCompContextAndCopyLockFiles/PreserveCompContextAndCopyLockFiles.csproj" />
+  <Project Path="PreserveCompContextAndCopyLockFilesAndOutputExe/PreserveCompContextAndCopyLockFilesAndOutputExe.csproj" />
+  <Project Path="UseCopyForCoverletTarget/UseCopyForCoverletTarget.csproj" />
+  <Project Path="UseExcludeByFileForGeneratedCode/UseExcludeByFileForGeneratedCode.csproj" />
+</Solution>

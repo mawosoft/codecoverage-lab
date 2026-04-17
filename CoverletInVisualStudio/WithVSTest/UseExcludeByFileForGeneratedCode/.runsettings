@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <RunSettings>
   <RunConfiguration>
-    <ResultsDirectory>./../../TestResults/logs</ResultsDirectory>
-    <TestAdaptersPaths>C:\Users\mw\.nuget\packages\coverlet.collector\6.0.4\build\netstandard2.0</TestAdaptersPaths>
+    <ResultsDirectory>./../TestResults/logs</ResultsDirectory>
+    <TestAdaptersPaths>C:\Users\mw\.nuget\packages\coverlet.collector\8.0.0\build\netstandard2.0</TestAdaptersPaths>
     <SkipDefaultAdapters>true</SkipDefaultAdapters>
   </RunConfiguration>
   <DataCollectionRunSettings>
