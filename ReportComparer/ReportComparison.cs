@@ -17,6 +17,11 @@ internal sealed class ReportComparison
 
     public IReadOnlyCollection<ParsedReport> Reports => _reports.Values;
     public IReadOnlyCollection<RealAssembly> RealAssemblies => _realAssemblies.Values;
+    public IReadOnlyCollection<IEnumerable<ParsedReport>> ContentGroups { get; private set; } = null!;
+    public IReadOnlyCollection<IEnumerable<ParsedReport>> CoreContentGroups { get; private set; } = null!;
+    public IReadOnlyCollection<IEnumerable<ParsedReport>> NameGroups { get; private set; } = null!;
+    public IReadOnlyCollection<IEnumerable<ParsedReport>> CoverageGroups { get; private set; } = null!;
+    public IReadOnlyCollection<IEnumerable<ParsedReport>> LineStatusGroups { get; private set; } = null!;
     public bool Frozen => _frozen;
 
     public void Freeze()
@@ -47,6 +52,23 @@ internal sealed class ReportComparison
 
         foreach (var report in _reports.Values) report.Freeze();
         foreach (var assembly in _realAssemblies.Values) assembly.Freeze();
+        ContentGroups = _reports.Values.GroupBy(r => r, ParsedReport.FullEqualityComparer.Instance).ToArray();
+        CoreContentGroups = _reports.Values.GroupBy(r => r, ParsedReport.CoreEqualityComparer.Instance).ToArray();
+        NameGroups = _reports.Values.GroupBy(r => r.Assemblies.SelectMany(a => a.Types)
+                .SelectMany(t => t.Methods)
+                .Select(m => (m.RealMethod, m.ParentType.Name, m.Name))
+                .ToEquatableSet())
+            .ToArray();
+        CoverageGroups = _reports.Values.GroupBy(r => r.Assemblies.SelectMany(a => a.Sources)
+                .Select(s => (s.RealSource, s.LinesCoverage.ToEquatableSequence()))
+                .ToEquatableSet())
+            .ToArray();
+        LineStatusGroups = _reports.Values.GroupBy(r => r.Assemblies.SelectMany(a => a.Sources)
+                .Select(s => (
+                    s.RealSource,
+                    s.LinesCoverage.Select(line => ParsedRange.AggregateStatus(line.Values)).ToEquatableSequence()))
+                .ToEquatableSet())
+            .ToArray();
         _frozen = true;
     }
 

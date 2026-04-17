@@ -2,7 +2,7 @@
   "profiles": {
     "ReportComparer": {
       "commandName": "Project",
-      "commandLineArgs": "@args.response.txt",
+      "commandLineArgs": "@args.rsp",
       "workingDirectory": "$(SolutionDir)",
       "hotReloadEnabled": false
     }
