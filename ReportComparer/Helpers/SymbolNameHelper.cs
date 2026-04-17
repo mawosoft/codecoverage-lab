@@ -254,23 +254,28 @@ internal static class SymbolNameHelper
     /// </summary>
     public static int LevenshteinDistance(ReadOnlySpan<char> left, ReadOnlySpan<char> right)
     {
-#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
-        int[,] m = new int[left.Length + 1, right.Length + 1];
-#pragma warning restore CA1814 // Prefer jagged arrays over multidimensional
-        for (int i = 0; i <= left.Length; i++) m[i, 0] = i;
-        for (int i = 0; i <= right.Length; i++) m[0, i] = i;
-        for (int i = 1; i <= left.Length; i++)
+        if (left.SequenceEqual(right))
+        {
+            return 0;
+        }
+        int w = right.Length + 1;
+        int size = (left.Length + 1) * w;
+        int[] m = ArrayPool<int>.Shared.Rent(size);
+        for (int i = 0, i2 = 0; i <= left.Length; i++, i2 += w) m[i2] = i;
+        for (int i = 0; i <= right.Length; i++) m[i] = i;
+        for (int i = 1, i2 = w; i <= left.Length; i++, i2 += w)
         {
             for (int k = 1; k <= right.Length; k++)
             {
                 int diff = (left[i - 1] == right[k - 1]) ? 0 : 1;
-                m[i, k] = Math.Min(
+                m[i2 + k] = Math.Min(
                             Math.Min(
-                                m[i - 1, k] + 1,
-                                m[i, k - 1] + 1),
-                            m[i - 1, k - 1] + diff);
+                                m[i2 - w + k] + 1,
+                                m[i2 + k - 1] + 1),
+                            m[i2 - w + k - 1] + diff);
             }
         }
-        return m[left.Length, right.Length];
+        ArrayPool<int>.Shared.Return(m);
+        return m[size - 1];
     }
 }
