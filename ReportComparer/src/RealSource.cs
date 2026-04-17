@@ -30,9 +30,9 @@ internal sealed partial class RealSource
     public IReadOnlyCollection<RealMethod> Methods => _methods;
     public bool HasRangeOverlaps { get; private set; }
     public bool TypesAreAmbiguous { get; private set; }
-    public int NameGroupCount { get; private set; }
-    public int CoverageGroupCount { get; private set; }
-    public int StatusGroupCount { get; private set; }
+    public IReadOnlyCollection<IEnumerable<ParsedReport>> NameGroups { get; private set; } = null!;
+    public IReadOnlyCollection<IEnumerable<ParsedReport>> CoverageGroups { get; private set; } = null!;
+    public IReadOnlyCollection<IEnumerable<ParsedReport>> LineStatusGroups { get; private set; } = null!;
 
     public IReadOnlyCollection<ParsedReport> Reports { get; private set; } = null!;
 
@@ -54,13 +54,15 @@ internal sealed partial class RealSource
         _methods = _methods.OrderBy(m => m.BoundingRange).ToList();
         HasRangeOverlaps = _linesCoverage.Any(line => line.HasOverlaps);
         TypesAreAmbiguous = _methods.Any(m => m.TypesAreAmbiguous);
-        NameGroupCount = _parsedSources.DistinctBy(
-            s => s.Methods.Select(m => (m.RealMethod, m.ParentType.Name, m.Name)).ToEquatableSequence())
-            .Count();
-        CoverageGroupCount = _parsedSources.DistinctBy(s => EquatableSequence.Create(s.LinesCoverage)).Count();
-        StatusGroupCount = _parsedSources.DistinctBy(
-            s => s.LinesCoverage.Select(line => ParsedRange.AggregateStatus(line.Values)).ToEquatableSequence())
-            .Count();
+        NameGroups = _parsedSources.GroupBy(
+            s => s.Methods.Select(m => (m.RealMethod, m.ParentType.Name, m.Name)).ToEquatableSequence(),
+            (_, g) => g.Select(s => s.ParentReport)).ToArray();
+        CoverageGroups = _parsedSources.GroupBy(
+            s => EquatableSequence.Create(s.LinesCoverage),
+            (_, g) => g.Select(s => s.ParentReport)).ToArray();
+        LineStatusGroups = _parsedSources.GroupBy(
+            s => s.LinesCoverage.Select(line => ParsedRange.AggregateStatus(line.Values)).ToEquatableSequence(),
+            (_, g) => g.Select(s => s.ParentReport)).ToArray();
         Reports = _parsedSources.Select(s => s.ParentReport).ToArray();
         Debug.Assert(Reports.Count == Reports.Distinct().Count());
         _frozen = true;

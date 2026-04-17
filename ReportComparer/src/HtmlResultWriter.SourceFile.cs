@@ -30,6 +30,15 @@ internal sealed partial class HtmlResultWriter
         }
         _writer.WriteLine("</tbody></table>");
 
+        _writer.WriteLine("<details><summary><h2>Report Groups</h2></summary>");
+        _writer.WriteLine("<h3>By Names</h3>");
+        WriteReportGroupTable(_realSource.NameGroups);
+        _writer.WriteLine("<h3>By Coverage Details</h3>");
+        WriteReportGroupTable(_realSource.CoverageGroups);
+        _writer.WriteLine("<h3>By Line Status</h3>");
+        WriteReportGroupTable(_realSource.LineStatusGroups);
+        _writer.WriteLine("</details>");
+
         _writer.WriteLine("""
             <details><summary><h2>Type and Method Names <button class="help" data-for="help1">i</button></h2></summary>
             <p id="help1" class="help hidden">

@@ -113,7 +113,7 @@ button.help {
     height: 1.3em;
     padding: 0px;
     border-radius: 50%;
-    vertical-align: super;
+    vertical-align: middle;
 }
 
 col.number { width: 6em; }

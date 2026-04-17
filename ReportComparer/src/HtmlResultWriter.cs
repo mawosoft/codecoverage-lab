@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -11,6 +12,8 @@ using ReportComparer.Helpers;
 
 namespace ReportComparer;
 
+[SuppressMessage("Design", "CA1001:Types that own disposable fields should be disposable",
+    Justification = "Created and disposed in WriteResult().")]
 internal sealed partial class HtmlResultWriter
 {
     private readonly ReportComparison _reportComparison;
@@ -23,7 +26,7 @@ internal sealed partial class HtmlResultWriter
     private int _uniqueId;
     private RealSource _realSource = null!;
     private StreamWriter _writer = null!;
-    private StreamReader _reader = null!;
+    private TextReader _reader = null!;
 
     public HtmlResultWriter(ReportComparison reportComparison, string targetDirectoryPath, string? homeLink, string? homeText)
     {
@@ -65,7 +68,14 @@ internal sealed partial class HtmlResultWriter
                 _uniqueId = 0;
                 _realSource = source;
                 _writer = File.CreateText(Path.Combine(_targetDirectoryPath, _sourceFileTargetNames[source]));
-                _reader = File.OpenText(source.FullName);
+                try
+                {
+                    _reader = File.OpenText(source.FullName);
+                }
+                catch (Exception e) when (e is IOException or UnauthorizedAccessException)
+                {
+                    _reader = new StringReader(e.Message);
+                }
                 WriteSourceFile();
                 _reader.Close();
                 _writer.Close();
@@ -123,6 +133,20 @@ internal sealed partial class HtmlResultWriter
             </body>
             </html>
             """);
+    }
+
+    private void WriteReportGroupTable(IEnumerable<IEnumerable<ParsedReport>> reportGroups)
+    {
+        _writer.WriteLine("""<table class="datagrid"><tbody>""");
+        int index = 0;
+        foreach (var reportGroup in reportGroups)
+        {
+            _writer.WriteLine($"""
+                    <tr><td class="right">{++index}</td>
+                    <td>{ReportGroup(reportGroup)}</td></tr>
+                    """);
+        }
+        _writer.WriteLine("</tbody></table>");
     }
 
     private string ReportGroup(IEnumerable<ParsedReport> reports)
