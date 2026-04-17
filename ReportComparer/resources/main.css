@@ -157,6 +157,7 @@ tbody.zebra {
 }
 
 thead.sticky {
+    position: -webkit-sticky;
     position: sticky;
     inset-block-start: -1px;
     > tr > th {
