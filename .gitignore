@@ -342,6 +342,8 @@ ASALocalRun/
 # MSBuild Binary and Structured Log plus logs directory when controlled via environment variables
 *.binlog
 MSBuild_Logs/
+.MSBuild_Logs/
+
 
 # NVidia Nsight GPU debugger configuration file
 *.nvuser
@@ -363,3 +365,7 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+## Repo specific settings
+/.nuget/
+/.worktrees/
