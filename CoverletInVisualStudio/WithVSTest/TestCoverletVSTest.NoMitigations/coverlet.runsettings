@@ -2,7 +2,7 @@
 <RunSettings>
   <RunConfiguration>
     <ResultsDirectory>./TestResults/logs</ResultsDirectory>
-    <TestAdaptersPaths>C:\Users\mw\.nuget\packages\coverlet.collector\8.0.0\build\netstandard2.0</TestAdaptersPaths>
+    <TestAdaptersPaths>C:\Users\mw\.nuget\packages\coverlet.collector\8.0.0\build\net8.0\</TestAdaptersPaths>
     <SkipDefaultAdapters>true</SkipDefaultAdapters>
   </RunConfiguration>
   <DataCollectionRunSettings>

@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <UseMicrosoftTestingPlatformRunner>true</UseMicrosoftTestingPlatformRunner>
+    <TestingPlatformCaptureOutput>false</TestingPlatformCaptureOutput>
+    <!--
+      When running tests in Visual Studio, it uses neither the arguments from a launchSettings.json,
+      nor the ones specified here. And there is no way to enable coverlet via the configuration file.
+    -->
+    <TestingPlatformCommandLineArguments>--coverlet</TestingPlatformCommandLineArguments>
+    <RunArguments Condition="'$(RunArguments)' == ''">--coverlet</RunArguments>
+  </PropertyGroup>
+
+  <ItemGroup>
+  </ItemGroup>
+
+</Project>

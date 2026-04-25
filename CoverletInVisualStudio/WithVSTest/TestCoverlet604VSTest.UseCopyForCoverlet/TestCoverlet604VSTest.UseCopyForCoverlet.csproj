@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RunSettingsFilePath>$(MSBuildThisFileDirectory)coverlet.runsettings</RunSettingsFilePath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="coverlet.collector" VersionOverride="6.0.4">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFrameworkIdentifier)' != '.NETFramework'">
+      <CopyForCoverletFiles Include="System.Private.CoreLib" />
+      <CopyForCoverletFiles Include="System.Runtime" />
+      <CopyForCoverletFiles Include="System.Runtime.InteropServices" />
+      <!-- <CopyForCoverletFiles Include="System.Text.Json" /> -->
+      <CopyForCoverletFiles Include="System.Text.RegularExpressions" />
+  </ItemGroup>
+
+  <Import Project="$(MSBuildThisFileDirectory)../CopyForCoverlet.targets" />
+
+</Project>
