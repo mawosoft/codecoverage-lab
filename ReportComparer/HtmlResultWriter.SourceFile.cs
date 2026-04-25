@@ -157,6 +157,12 @@ internal sealed partial class HtmlResultWriter
             .GroupBy(vt => vt.realType.Namespace);
         (int columnMask, int fractionMask) = GetMetricsMask(
             namespaceGroups.SelectMany(g => g.SelectMany(vt => vt.typeMetrics.Select(vt => vt.metrics))));
+        if (columnMask == 0)
+        {
+            WriteNotAvailable();
+            return;
+        }
+
         int columnCount = int.PopCount(columnMask) + 2;
         _writer.WriteLine("""<table class="datagrid zebra">""");
         WriteMetricsHeaders(columnMask, "Type");
@@ -179,6 +185,12 @@ internal sealed partial class HtmlResultWriter
     private void WriteMethodMetrics()
     {
         (int columnMask, int fractionMask) = GetMetricsMask(_realSource.Methods.SelectMany(rm => rm.ParsedMethods).Select(pm => pm.ReportedMetrics));
+        if (columnMask == 0)
+        {
+            WriteNotAvailable();
+            return;
+        }
+
         int columnCount = int.PopCount(columnMask) + 4;
         _writer.WriteLine("""<table class="datagrid zebra">""");
         WriteMetricsHeaders(columnMask, "Line", "Type", "Method");

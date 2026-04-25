@@ -135,6 +135,11 @@ internal sealed partial class HtmlResultWriter
             """);
     }
 
+    private void WriteNotAvailable()
+    {
+        _writer.WriteLine("<p>Not available.</p>");
+    }
+
     private void WriteReportGroupTable(IEnumerable<IEnumerable<ParsedReport>> reportGroups)
     {
         _writer.WriteLine("""<table class="datagrid"><tbody>""");
