@@ -215,6 +215,12 @@ internal sealed partial class HtmlResultWriter
     {
         var reportGroups = _reportComparison.Reports.GroupBy(r => r.ReportedMetrics, (metrics, g) => (metrics, g.AsEnumerable()));
         (int columnMask, int fractionMask) = GetMetricsMask(reportGroups.Select(vt => vt.metrics));
+        if (columnMask == 0)
+        {
+            WriteNotAvailable();
+            return;
+        }
+
         _writer.WriteLine("""<table class="datagrid">""");
         WriteMetricsHeaders(columnMask);
         _writer.WriteLine("""<tbody class="right">""");
@@ -231,6 +237,12 @@ internal sealed partial class HtmlResultWriter
                     (metrics, g) => (metrics, reports: g.Select(pa => pa.ParentReport)))
                 .ToArray()));
         (int columnMask, int fractionMask) = GetMetricsMask(assemblyGroups.SelectMany(vt => vt.data).Select(d => d.metrics));
+        if (columnMask == 0)
+        {
+            WriteNotAvailable();
+            return;
+        }
+
         _writer.WriteLine("""<table class="datagrid zebra">""");
         WriteMetricsHeaders(columnMask, "Assembly");
         foreach ((string name, (ReportedMetrics? metrics, IEnumerable<ParsedReport> reports)[] data) in assemblyGroups)
