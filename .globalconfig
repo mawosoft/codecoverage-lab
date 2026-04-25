@@ -163,3 +163,8 @@ dotnet_diagnostic.IDE0290.severity = silent
 
 # IDE0305: Simplify collection initialization
 dotnet_diagnostic.IDE0305.severity = silent
+
+###########################################################################
+# Bug in .NET SDK >= 10.0.201 (for props initialized with null!).
+# IDE0370: Remove unnecessary suppression
+dotnet_diagnostic.IDE0370.severity = silent

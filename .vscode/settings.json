@@ -1,4 +1,5 @@
 {
     "explorer.sortOrderLexicographicOptions": "upper",
     "editor.suggest.showWords": false,
+    "git.detectWorktrees": true,
 }

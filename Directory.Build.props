@@ -10,9 +10,11 @@
     <LangVersion>latest</LangVersion>
     <Nullable>enable</Nullable>
     <NeutralLanguage>en-US</NeutralLanguage>
+    <SatelliteResourceLanguages>en-US</SatelliteResourceLanguages>
     <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
     <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
+    <MSBuildEnableWorkloadResolver>false</MSBuildEnableWorkloadResolver>
     <ContinuousIntegrationBuild>$(CI)</ContinuousIntegrationBuild>
     <Deterministic>$(CI)</Deterministic>
     <TreatWarningsAsErrors>$(CI)</TreatWarningsAsErrors>
