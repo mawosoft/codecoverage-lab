@@ -6,25 +6,27 @@
 
   <Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.targets', '$(MSBuildThisFileDirectory)../'))" />
 
-  <Target Name="UpdateRunSettings"
+  <Target Name="UpdateCoverletRunSettings"
           AfterTargets="ResolvePackageAssets"
-          Condition="'$(RunSettingsFilePath)' != '' and Exists('$(RunSettingsFilePath)')">
-    <ItemGroup>
-      <_Adapters Include="@(_PackageDependenciesDesignTime)" Condition="'%(Path)' != '' and ('%(Name)' == 'coverlet.collector' or '%(Name)' == 'microsoft.codecoverage')" />
-      <_Adapters Update="@(_Adapters)" Path="$([MSBuild]::NormalizePath('%(Path)', 'build/netstandard2.0'))" />
-    </ItemGroup>
-    <PropertyGroup>
-      <_Adapters>@(_Adapters->'%(Path)', '%3b')</_Adapters>
-    </PropertyGroup>
+          Condition="'$(RunSettingsFilePath)' != '' and Exists('$(RunSettingsFilePath)') and '$(_CoverletSdkNETCoreSdkVersion)' != ''">
+
+    <CallTarget Targets="GetCoverletAdaperPath" Condition="'$(CoverletToolsPath)' == ''">
+      <Output TaskParameter="TargetOutputs" PropertyName="CoverletToolsPath" />
+    </CallTarget>
+
     <XmlPeek XmlInputPath="$(RunSettingsFilePath)"
             Query="/RunSettings/RunConfiguration/TestAdaptersPaths/text()"
-            Condition="'$(_Adapters)' != ''">
+            Condition="'$(CoverletToolsPath)' != ''">
       <Output TaskParameter="Result" PropertyName="_value" />
     </XmlPeek>
+
     <XmlPoke XmlInputPath="$(RunSettingsFilePath)"
             Query="/RunSettings/RunConfiguration/TestAdaptersPaths"
-            Value="$(_Adapters)"
-            Condition="'$(_Adapters)' != '' and '$(_value)' != '$(_Adapters)'" />
+            Value="$(CoverletToolsPath)"
+            Condition="'$(CoverletToolsPath)' != '' and '$(_value)' != '$(CoverletToolsPath)'" />
+
   </Target>
+
+  <Target Name="GetCoverletAdaperPath" DependsOnTargets="SetXPlatDataCollectorPath" Returns="$(VSTestTestAdapterPath)" />
 
 </Project>

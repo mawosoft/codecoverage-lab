@@ -1,8 +1,8 @@
 <Solution>
-  <Project Path="../CoverageDemo/CoverageDemo.csproj" />
-  <Project Path="NoMitigations/NoMitigations.csproj" />
-  <Project Path="PreserveCompContextAndCopyLockFiles/PreserveCompContextAndCopyLockFiles.csproj" />
-  <Project Path="PreserveCompContextAndCopyLockFilesAndOutputExe/PreserveCompContextAndCopyLockFilesAndOutputExe.csproj" />
-  <Project Path="UseCopyForCoverletTarget/UseCopyForCoverletTarget.csproj" />
-  <Project Path="UseExcludeByFileForGeneratedCode/UseExcludeByFileForGeneratedCode.csproj" />
+  <Project Path="../DemoLib/DemoLib.csproj" />
+  <Project Path="TestCoverlet604VSTest.FailedMitigations/TestCoverlet604VSTest.FailedMitigations.csproj" />
+  <Project Path="TestCoverlet604VSTest.NoMitigations/TestCoverlet604VSTest.NoMitigations.csproj" />
+  <Project Path="TestCoverlet604VSTest.SelfContained/TestCoverlet604VSTest.SelfContained.csproj" />
+  <Project Path="TestCoverlet604VSTest.UseCopyForCoverlet/TestCoverlet604VSTest.UseCopyForCoverlet.csproj" />
+  <Project Path="TestCoverletVSTest.NoMitigations/TestCoverletVSTest.NoMitigations.csproj" />
 </Solution>

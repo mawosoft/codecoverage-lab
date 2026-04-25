@@ -4,23 +4,85 @@
 -->
 <Project>
 
-  <!-- Define file names (no extension) of runtime assemblies to copy to TargetDir, e.g.
-         <ItemGroup>
-           <CopyForCoverletFiles Include="System.Text.RegularExpressions" />
-         </ItemGroup>
-  -->
+  <!--
+    For .NET targets, define file names (no extension) of runtime assemblies to copy to TargetDir, e.g.
+        <ItemGroup>
+          <CopyForCoverletFiles Include="System.Text.RegularExpressions" />
+        </ItemGroup>
 
+    For .NETFramework targets, we need to copy either the installed mscorlib.dll or at least its
+    reference assembly.
+  -->
   <Target Name="CopyForCoverlet"
-          AfterTargets="ResolveFrameworkReferences">
+          AfterTargets="ResolveFrameworkReferences"
+          Condition="'$(TargetFrameworkIdentifier)' != '.NETFramework' and
+                     @(CopyForCoverletFiles->Count()) != 0">
     <PropertyGroup>
-      <_DotnetSharedDirectory>$([System.IO.Path]::Combine($(NetCoreRoot), 'shared', %(ResolvedFrameworkReference.OriginalItemSpec), %(ResolvedFrameworkReference.TargetingPackVersion)))</_DotnetSharedDirectory>
+      <_CFCFramework>%(ResolvedFrameworkReference.OriginalItemSpec)</_CFCFramework>
+      <!-- TargetingPackVersion is the latest version known to the current SDK, whether that version is installed or not.
+           Below we pick the latest installed version instead. -->
+      <_CFCVersion>%(ResolvedFrameworkReference.TargetingPackVersion)</_CFCVersion>
+      <_DotnetSharedDirectory Condition="'$(_DotnetSharedDirectory)' == ''"
+        >$([System.IO.Path]::Combine($(NetCoreRoot), 'shared', $(_CFCFramework), $(_CFCVersion)))</_DotnetSharedDirectory>
     </PropertyGroup>
+
+    <Exec Command="dotnet --list-runtimes"
+          ConsoleToMSBuild="true"
+          IgnoreExitCode="false"
+          StandardErrorImportance="high"
+          StandardOutputImportance="low"
+          Condition="'$(CopyForCoverletCheckRuntimeVersion)' != 'false' and
+                     '$(_CFCVersion)' != '$(BundledNETCoreAppPackageVersion)'">
+      <Output TaskParameter="ExitCode" PropertyName="MSBuildLastExitCode" />
+      <Output Condition="'$(MSBuildLastExitCode)' == '0'"
+              TaskParameter="ConsoleOutput" ItemName="_CFCRuntimes" />
+    </Exec>
+
+    <PropertyGroup Condition="'$(CopyForCoverletCheckRuntimeVersion)' != 'false' and
+                              '$(_CFCVersion)' != '$(BundledNETCoreAppPackageVersion)'">
+      <_CFCRegex>^$(_CFCFramework) ($([MSBuild]::GetTargetFrameworkVersion($(TargetFramework)).Replace('.', '\.'))\.\d+) \[(.*)\]$</_CFCRegex>
+      <_DotnetSharedDirectory Condition="$([System.Text.RegularExpressions.Regex]::IsMatch(%(_CFCRuntimes.Identity), $(_CFCRegex)))"
+        >$([System.Text.RegularExpressions.Regex]::Replace(%(_CFCRuntimes.Identity), $(_CFCRegex), '$2/$1'))</_DotnetSharedDirectory>
+    </PropertyGroup>
+
     <ItemGroup>
       <_DotnetSharedFiles Include="$(_DotnetSharedDirectory)/*" />
     </ItemGroup>
+
     <JoinItems Left="@(CopyForCoverletFiles)" Right="@(_DotnetSharedFiles)" RightKey="FileName" ItemSpecToUse="Right">
       <Output TaskParameter="JoinResult" ItemName="_CopyForCoverletFiles" />
     </JoinItems>
+
+    <Error Condition="@(_CopyForCoverletFiles->Count()) == 0"
+           Text="CopyForCoverletFiles not found." />
+
+    <!-- If unelevated hard- or symlinks are supported, change corresponding parameters. -->
+    <Copy SourceFiles="@(_CopyForCoverletFiles)"
+          DestinationFolder="$(TargetDir)"
+          UseHardlinksIfPossible="false"
+          UseSymbolicLinksIfPossible="false"
+          SkipUnchangedFiles="true">
+      <!-- Don't add to FileWrites if copied files should persist during Clean. -->
+      <Output TaskParameter="CopiedFiles" ItemName="FileWrites" />
+    </Copy>
+  </Target>
+
+  <Target Name="CopyForCoverletFx"
+          AfterTargets="ResolveReferences"
+          Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">
+    <PropertyGroup>
+      <_CFCMscorlib Condition="'$(PlatformTarget)' == 'x64'">$([System.IO.Path]::Combine($(SystemRoot), 'Microsoft.NET/Framework64/v4.0.30319/mscorlib.dll'))</_CFCMscorlib>
+      <_CFCMscorlib Condition="'$(PlatformTarget)' != 'x64'">$([System.IO.Path]::Combine($(SystemRoot), 'Microsoft.NET/Framework/v4.0.30319/mscorlib.dll'))</_CFCMscorlib>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <_CopyForCoverletFiles Condition="Exists($(_CFCMscorlib))" Include="$(_CFCMscorlib)" />
+      <_CopyForCoverletFiles Condition="@(_CopyForCoverletFiles->Count()) == 0" Include="@(_ExplicitReference)" />
+    </ItemGroup>
+
+    <Error Condition="@(_CopyForCoverletFiles->Count()) == 0"
+           Text="CopyForCoverletFiles not found." />
+
     <!-- If unelevated hard- or symlinks are supported, change corresponding parameters. -->
     <Copy SourceFiles="@(_CopyForCoverletFiles)"
           DestinationFolder="$(TargetDir)"

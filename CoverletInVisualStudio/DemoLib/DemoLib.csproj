@@ -1,8 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <RootNamespace>CoverageDemo</RootNamespace>
-    <TargetFramework>net8.0</TargetFramework>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
@@ -14,6 +12,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'" Include="System.Text.Json" />
   </ItemGroup>
 
 </Project>

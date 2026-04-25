@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "TestCoverletMTP.NoMitigations": {
+      "commandName": "Project",
+      "commandLineArgs": "--coverlet"
+    }
+  }
+}

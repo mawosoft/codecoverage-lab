@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="../DemoLib/DemoLib.csproj" />
+  <Project Path="TestCoverletMTP.NoMitigations/TestCoverletMTP.NoMitigations.csproj" />
+  <Project Path="TestCoverletMTP.UseStartupObject/TestCoverletMTP.UseStartupObject.csproj" />
+</Solution>
