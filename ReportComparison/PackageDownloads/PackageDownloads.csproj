@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (c) Matthias Wolf, Mawosoft.
+-->
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- This is a restore-only project -->
+  <PropertyGroup>
+    <NoBuild>true</NoBuild>
+  </PropertyGroup>
+
+  <!-- We don't actually publish R2R or build for a specific RID, but we need the crossgen2 tool. -->
+  <PropertyGroup>
+    <PublishReadyToRun>true</PublishReadyToRun>
+    <RuntimeIdentifier>$(NETCoreSdkPortableRuntimeIdentifier)</RuntimeIdentifier>
+  </PropertyGroup>
+
+  <!-- We reference all collector packages here and inject them in the actual test project as needed.
+       This is possible because these packages don't affect the build process itself (except for
+       source root mapping, but we don't really need that or can replicate it). -->
+  <ItemGroup>
+    <PackageReference Include="coverlet.collector" GeneratePathProperty="true">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="coverlet.msbuild" GeneratePathProperty="true">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.CodeCoverage" GeneratePathProperty="true" />
+  </ItemGroup>
+
+  <!-- Include additional package versions and dotnet tools. -->
+  <ItemGroup>
+    <PackageDownload Include="coverlet.collector" />
+    <PackageDownload Include="coverlet.msbuild" />
+    <PackageDownload Include="Microsoft.CodeCoverage" />
+    <PackageDownload Include="dotnet-coverage" />
+    <PackageDownload Include="dotnet-reportgenerator-globaltool" />
+    <PackageDownload Include="ilspycmd" />
+    <PackageDownload Update="@(PackageDownloadVersion)" Version="%(PackageDownloadVersion.Version)" />
+  </ItemGroup>
+
+  <!--
+    Call this target via MSBuild to resolve the crossgen2 tool without publishing.
+    Returns the @(Crossgen2Tool) item with metadata TargetOS, TargetArch, and RuntimeRefArgsResponse.
+    The latter is a string that can be saved into a response file.
+
+    This only works if the project has been restored with PublishReadyToRun=true and an explicit RID.
+    We take care of that automatically by using the SDK RID.
+
+    PowerShell scenario:
+      dotnet restore
+      $result = dotnet msbuild -getTargetResult:ResolveCrossgen2Tool | ConvertFrom-Json
+      $toolItem = $result.TargetResults.ResolveCrossgen2Tool.Items[0]
+      $toolItem.RuntimeRefArgsResponse | Set-Content -Path 'tool.rsp'
+      $params = @(
+          '‐‐targetos', $toolItem.TargetOS
+          '‐‐targetarch', $toolItem.TargetArch
+          '@tool.rsp'
+          '-r', '<other refs>'
+          '-o', '<outputfile>'
+          '<inputfile>'
+      )
+      & $toolItem.FullPath $params
+  -->
+
+  <Target Name="ResolveCrossgen2Tool"
+          Returns="@(Crossgen2Tool)"
+          DependsOnTargets="
+            ProcessFrameworkReferences;
+            ResolveRuntimePackAssets;
+            ResolveReadyToRunCompilers;
+            _ComputeManagedRuntimePackAssemblies;"
+    >
+    <ItemGroup>
+      <Crossgen2Tool Update="*">
+        <RuntimeRefArgsResponse>"-r:@(_ManagedRuntimePackAssembly, '%22%0A%22-r:')"</RuntimeRefArgsResponse>
+      </Crossgen2Tool>
+    </ItemGroup>
+  </Target>
+
+</Project>

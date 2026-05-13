@@ -1,27 +1,65 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (c) Matthias Wolf, Mawosoft.
+-->
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    With VSTest, code coverage packages don't affect the build process itself (*1),
+    only the test run. By not referencing them directly, we can inject any package
+    and version during test, without requiring different builds.
+
+    To do so, the following additional properties need to be defined when invoking
+    dotnet test:
+
+    CoverageProps    - The matching .props file for the package to use (if any).
+    CoverageTargets  - The matching .targets file for the package to use.
+
+    (1) Except for generating the source root mapping, which is only needed for
+        deterministic builds. We replicate this here for completeness.
+  -->
+  <Import Project="$(CoverageProps)" Condition="'$(CoverageProps)' != ''" />
 
   <PropertyGroup>
-    <RunSettingsFilePath>$(MSBuildThisFileDirectory)../.runsettings</RunSettingsFilePath>
+    <OutputType>exe</OutputType>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(MSBuildThisFileDirectory)../CoverageDemo/CoverageDemo.csproj" />
+    <ProjectReference Include="../CoverageDemo/CoverageDemo.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" />
-    <PackageReference Include="xunit.v3" />
+    <!-- Microsoft.NET.Test.Sdk has a dependency on Microsoft.CodeCoverage, but we don't want that here. -->
+    <PackageReference Include="Microsoft.CodeCoverage" ExcludeAssets="all" />
+    <PackageReference Include="xunit.v3.mtp-off" />
     <PackageReference Include="xunit.runner.visualstudio">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="coverlet.collector">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.CodeCoverage" />
   </ItemGroup>
 
-  <Import Project="$(MSBuildThisFileDirectory)../UpdateRunSettings.targets" />
+  <!-- This is a modified version of the logic found in coverlet and MSCC packages. -->
+  <Target Name="GenerateSourceRootMapping"
+          Condition="'$(NETCoreSdkVersion)' != '' and $(DeterministicSourcePaths) == 'true'"
+          BeforeTargets="CoreCompile"
+          DependsOnTargets="ResolveProjectReferences;InitializeSourceRootMappedPaths" >
+    <ItemGroup>
+      <_byProject Include="@(AnnotatedProjects->'%(FullPath)')" OriginalPath="%(SourceRoot.Identity)" MappedPath="%(SourceRoot.MappedPath)"/>
+      <_mappings Include="@(_byProject->'%(Identity)|%(OriginalPath)=%(MappedPath)')" />
+      <_mappingFilePaths Include="$(TargetDir)CoverletSourceRootsMapping_$(AssemblyName)" />
+      <_mappingFilePaths Include="$(TargetDir).msCoverageSourceRootsMapping_$(AssemblyName)" />
+      <!-- <_mappingFilePaths Include="$(TargetDir).msCoverageExtensionSourceRootsMapping_$(AssemblyName)" /> -->
+    </ItemGroup>
+    <WriteLinesToFile File="%(_mappingFilePaths.Identity)" Lines="@(_mappings)"
+                      Overwrite="true" Encoding="Unicode"
+                      WriteOnlyWhenDifferent="true"
+                      Condition="@(_mappings->Count()) != 0" />
+    <ItemGroup>
+      <FileWrites Include="@(_mappingFilePaths)" Condition="@(_mappings->Count()) != 0" />
+    </ItemGroup>
+  </Target>
+
+  <Import Project="$(CoverageTargets)" Condition="'$(CoverageTargets)' != ''" />
 
 </Project>

@@ -1,0 +1,62 @@
+is_global = true
+global_level = 1
+
+# CA1031: Do not catch general exception types
+dotnet_diagnostic.CA1031.severity = silent
+
+# CA1034: Nested types should not be visible
+dotnet_diagnostic.CA1034.severity = silent
+
+# CA1043: Use Integral Or String Argument For Indexers
+dotnet_diagnostic.CA1043.severity = silent
+
+# CA1050: Declare types in namespaces
+dotnet_diagnostic.CA1050.severity = silent
+
+# CA1062: Validate arguments of public methods
+dotnet_diagnostic.CA1062.severity = silent
+
+# CA1305: Specify IFormatProvider
+dotnet_diagnostic.CA1305.severity = silent
+
+# CA1515: Consider making public types internal
+dotnet_diagnostic.CA1515.severity = silent
+
+# CA1810: Initialize reference type static fields inline
+dotnet_diagnostic.CA1810.severity = silent
+
+# CA1812: Avoid uninstantiated internal classes
+dotnet_diagnostic.CA1812.severity = silent
+
+# CA1814: Prefer jagged arrays over multidimensional
+dotnet_diagnostic.CA1814.severity = silent
+
+# CA1815: Override equals and operator equals on value types
+dotnet_diagnostic.CA1815.severity = silent
+
+# CA1822: Mark members as static
+dotnet_diagnostic.CA1822.severity = silent
+
+# CA1851: Possible multiple enumerations of 'IEnumerable' collection
+dotnet_diagnostic.CA1851.severity = silent
+
+# CA2225: Operator overloads have named alternates
+dotnet_diagnostic.CA2225.severity = silent
+
+# CA5392: Use DefaultDllImportSearchPaths attribute for P/Invokes
+dotnet_diagnostic.CA5392.severity = silent
+
+# CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type
+dotnet_diagnostic.CS8500.severity = silent
+
+# IDE0001: Simplify Names
+dotnet_diagnostic.IDE0001.severity = silent
+
+# IDE0330: Use 'System.Threading.Lock'
+dotnet_diagnostic.IDE0330.severity = silent
+
+# SYSLIB1045: Convert to 'GeneratedRegexAttribute'.
+dotnet_diagnostic.SYSLIB1045.severity = silent
+
+# SYSLIB1054: Use 'LibraryImportAttribute' instead of 'DllImportAttribute' to generate P/Invoke marshalling code at compile time
+dotnet_diagnostic.SYSLIB1054.severity = silent

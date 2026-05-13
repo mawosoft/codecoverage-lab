@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>exe</OutputType>
+    <AssemblyName>CoverageDemo.Tests</AssemblyName>
+    <UseMicrosoftTestingPlatformRunner>true</UseMicrosoftTestingPlatformRunner>
+    <TestingPlatformCaptureOutput>false</TestingPlatformCaptureOutput>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="../CoverageDemo.Tests/*.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../CoverageDemo/CoverageDemo.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="xunit.v3.mtp-v2" />
+    <PackageReference Include="Microsoft.Testing.Extensions.CodeCoverage" GeneratePathProperty="true" /> 
+  </ItemGroup>
+
+</Project>
