@@ -1,4 +1,6 @@
 <Solution>
   <Project Path="CoverageDemo/CoverageDemo.csproj" />
   <Project Path="CoverageDemo.Tests/CoverageDemo.Tests.csproj" />
+  <Project Path="WithCoverletMTP/WithCoverletMTP.csproj" />
+  <Project Path="WithMsCodeCoverageMTP/WithMsCodeCoverageMTP.csproj" />
 </Solution>

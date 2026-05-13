@@ -1,0 +1,12 @@
+<Project>
+
+  <Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))" />
+
+  <PropertyGroup>
+    <RootNamespace>CoverageDemo</RootNamespace>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Product>Coverage Demo</Product>
+    <EnableGitCommitCount>false</EnableGitCommitCount>
+  </PropertyGroup>
+
+</Project>
