@@ -34,6 +34,7 @@
   <ItemGroup>
     <PackageDownload Include="coverlet.collector" />
     <PackageDownload Include="coverlet.msbuild" />
+    <PackageDownload Include="coverlet.console" />
     <PackageDownload Include="Microsoft.CodeCoverage" />
     <PackageDownload Include="dotnet-coverage" />
     <PackageDownload Include="dotnet-reportgenerator-globaltool" />
