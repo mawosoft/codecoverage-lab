@@ -6,7 +6,7 @@
 
   <!--
     With VSTest, code coverage packages don't affect the build process itself (*1),
-    only the test run. By not referencing them directly, we can inject any package
+    only the test run. By not referencing them directly (*2), we can inject any package
     and version during test, without requiring different builds.
 
     To do so, the following additional properties need to be defined when invoking
@@ -17,6 +17,8 @@
 
     (1) Except for generating the source root mapping, which is only needed for
         deterministic builds. We replicate this here for completeness.
+    (2) Because Microsoft.NET.Test.Sdk has a dependency on Microsoft.CodeCoverage,
+        we do need to reference the latter, but exclude all of its assets.
   -->
   <Import Project="$(CoverageProps)" Condition="'$(CoverageProps)' != ''" />
 
@@ -30,7 +32,6 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" />
-    <!-- Microsoft.NET.Test.Sdk has a dependency on Microsoft.CodeCoverage, but we don't want that here. -->
     <PackageReference Include="Microsoft.CodeCoverage" ExcludeAssets="all" />
     <PackageReference Include="xunit.v3.mtp-off" />
     <PackageReference Include="xunit.runner.visualstudio">

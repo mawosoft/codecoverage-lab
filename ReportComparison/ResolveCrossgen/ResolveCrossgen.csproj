@@ -15,33 +15,6 @@
     <RuntimeIdentifier>$(NETCoreSdkPortableRuntimeIdentifier)</RuntimeIdentifier>
   </PropertyGroup>
 
-  <!-- We reference all collector packages here and inject them in the actual test project as needed.
-       This is possible because these packages don't affect the build process itself (except for
-       source root mapping, but we don't really need that or can replicate it). -->
-  <ItemGroup>
-    <PackageReference Include="coverlet.collector" GeneratePathProperty="true">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="coverlet.msbuild" GeneratePathProperty="true">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.CodeCoverage" GeneratePathProperty="true" />
-  </ItemGroup>
-
-  <!-- Include additional package versions and dotnet tools. -->
-  <ItemGroup>
-    <PackageDownload Include="coverlet.collector" />
-    <PackageDownload Include="coverlet.msbuild" />
-    <PackageDownload Include="coverlet.console" />
-    <PackageDownload Include="Microsoft.CodeCoverage" />
-    <PackageDownload Include="dotnet-coverage" />
-    <PackageDownload Include="dotnet-reportgenerator-globaltool" />
-    <PackageDownload Include="ilspycmd" />
-    <PackageDownload Update="@(PackageDownloadVersion)" Version="%(PackageDownloadVersion.Version)" />
-  </ItemGroup>
-
   <!--
     Call this target via MSBuild to resolve the crossgen2 tool without publishing.
     Returns the @(Crossgen2Tool) item with metadata TargetOS, TargetArch, and RuntimeRefArgsResponse.

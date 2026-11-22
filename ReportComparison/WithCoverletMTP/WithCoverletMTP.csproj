@@ -17,7 +17,9 @@
 
   <ItemGroup>
     <PackageReference Include="xunit.v3.mtp-v2" />
-    <PackageReference Include="coverlet.MTP" GeneratePathProperty="true" />
+    <PackageReference Include="coverlet.MTP">
+      <VersionOverride Condition="'$(CoverageMTPVersion)' != ''">$(CoverageMTPVersion)</VersionOverride>
+    </PackageReference>
   </ItemGroup>
 
 </Project>

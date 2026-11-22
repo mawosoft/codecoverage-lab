@@ -1,0 +1,72 @@
+coverlet-vstest 8.0.1 -- cobertura.xml
+coverlet-vstest 8.0.1 -singlehit cobertura.xml
+mscc-vstest 18.3.0 -- cobertura.xml
+mscc-vstest 18.3.0 -- mscc-xml.xml
+mscc-vstest 18.3.0 -merge -- cobertura → mscc-xml.xml
+mscc-vstest 18.3.0 -merge -- mscc-bin → cobertura.xml
+mscc-vstest 18.3.0 -merge -- mscc-bin → mscc-xml.xml
+mscc-vstest 18.3.0 -merge -- mscc-xml → cobertura.xml
+mscc-vstest 18.3.0 -merge -static cobertura → mscc-xml.xml
+mscc-vstest 18.3.0 -merge -static mscc-bin → cobertura.xml
+mscc-vstest 18.3.0 -merge -static mscc-bin → mscc-xml.xml
+mscc-vstest 18.3.0 -merge -static mscc-xml → cobertura.xml
+mscc-vstest 18.3.0 -static cobertura.xml
+mscc-vstest 18.3.0 -static mscc-xml.xml
+msccio-netsdk 10.0.403 -merge --, mscc-vstest 18.3.0 -- mscc-xml → mscc-xml.xml
+rpg 5.5.4 -merge --, coverlet-vstest 8.0.1 -- cobertura → cobertura.xml
+rpg 5.5.4 -merge --, mscc-vstest 18.3.0 -- cobertura → cobertura.xml
+rpg 5.5.4 -merge --, mscc-vstest 18.3.0 -- mscc-xml → cobertura.xml
+rpg 5.5.4 -merge -raw, coverlet-vstest 8.0.1 -singlehit cobertura → cobertura.xml
+rpg 5.5.4 -merge -raw, mscc-vstest 18.3.0 -- cobertura → cobertura.xml
+
+------------------------------------------------------------
+
+c/coverlet-vstest 8.0.1 -- cobertura.xml
+c/coverlet-vstest 8.0.1 -singlehit cobertura.xml
+c/mscc-vstest 18.3.0 -- cobertura.xml
+c/mscc-vstest 18.3.0 -- mscc-bin.coverage
+c/mscc-vstest 18.3.0 -- mscc-xml.xml
+c/mscc-vstest 18.3.0 -static cobertura.xml
+c/mscc-vstest 18.3.0 -static mscc-xml.xml
+m/mscc-vstest 18.3.0 -- cobertura → mscc-xml.xml
+m/mscc-vstest 18.3.0 -- mscc-bin → cobertura.xml
+m/mscc-vstest 18.3.0 -- mscc-bin → mscc-xml.xml
+m/mscc-vstest 18.3.0 -- mscc-xml → cobertura.xml
+m/mscc-vstest 18.3.0 -static cobertura → mscc-xml.xml
+m/mscc-vstest 18.3.0 -static mscc-bin → cobertura.xml
+m/mscc-vstest 18.3.0 -static mscc-bin → mscc-xml.xml
+m/mscc-vstest 18.3.0 -static mscc-xml → cobertura.xml
+m/msccio-netsdk 10.0.403 --, mscc-vstest 18.3.0 -- mscc-xml → mscc-xml.xml
+m/rpg 5.5.4 --, coverlet-vstest 8.0.1 -- cobertura → cobertura.xml
+m/rpg 5.5.4 --, mscc-vstest 18.3.0 -- cobertura → cobertura.xml
+m/rpg 5.5.4 --, mscc-vstest 18.3.0 -- mscc-xml → cobertura.xml
+m/rpg 5.5.4 -raw, coverlet-vstest 8.0.1 -singlehit cobertura → cobertura.xml
+m/rpg 5.5.4 -raw, mscc-vstest 18.3.0 -- cobertura → cobertura.xml
+
+- Omit the '.xml' extension in comparison report?
+- Use the c/m subdirs for report artifacts.
+
+------------------------------------------------------------
+
+PackageMoniker          # required
+PackageVersion          # required
+Options                 -singlehit -static -- (-instrument)
+ReportFormat            cobertura mscc-xml mscc-bin null # null no report?
+MergePackageMoniker     rpg msccio-netsdk <same> null
+MergePackageVersion
+MergeOptions            -raw --
+MergeFormat             cobertura mscc-xml
+ArtifactType            report other
+                        # We need this because a logfile artifact name may contain the ReportFormat, but isn't actually a report.
+DirectoryPath           # Directory of the artifact. Config handling?
+                        # Should config be part of the artifact name and be removed from the path?
+Suffix                  # Remaining part of file name and extension after separating space.
+                        # For a report, this is empty? ReportFormat/MergeFormat determines extension
+                        # For instrumented DLLs, this is 'dllname.dll'.
+                        # For logs, this can be just '.log'
+
+ArtifactName functionality:
+- Properties can be initialized freely.
+- Clone(), maybe some fluent methods like WithMerge() or WithoutMerge(). The latter essentially gets the source artifact.
+- Parse(), TryParse() from path.
+- ToString() creates the path.
